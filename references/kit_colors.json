@@ -1,0 +1,26 @@
+{
+  "_poznamka": "Sloty globálneho Elementor kitu (master 'Výchozí sada') + pravidlo, ako sa každý odvodí zo značkových farieb briefu. build_palette.py podľa toho vyrobí payload pre update-global-colors. Štruktúra kitu (počet a _id slotov) sa nemení — menia sa len hodnoty.",
+  "system": [
+    { "_id": "primary",   "title": "Primární",   "derive": { "from": "primary" } },
+    { "_id": "secondary", "title": "Sekundární", "derive": { "from": "secondary" } },
+    { "_id": "text",      "title": "HTML",        "derive": { "keep": "#000000" } },
+    { "_id": "accent",    "title": "Akcent",      "derive": { "from": "accent" } }
+  ],
+  "custom": [
+    { "_id": "d260eac", "title": "Primary-transparent", "derive": { "from": "primary",   "op": "alpha",  "amt": 0.59 } },
+    { "_id": "1d30183", "title": "Primary-light",       "derive": { "from": "primary",   "op": "lighten","amt": 0.30 } },
+    { "_id": "85dceff", "title": "Primary-dark",        "derive": { "from": "primary",   "op": "darken", "amt": 0.35 } },
+    { "_id": "57941f5", "title": "Grey-background",     "derive": { "keep": "#F2F2F2" } },
+    { "_id": "0580233", "title": "Secondary - light",  "derive": { "from": "secondary", "op": "lighten","amt": 0.30 } },
+    { "_id": "8a8e21b", "title": "Secondary - dark",   "derive": { "from": "secondary", "op": "darken", "amt": 0.20 } },
+    { "_id": "5840c11", "title": "Oddělovač",          "derive": { "from": "primary" } },
+    { "_id": "527e09a", "title": "Dark-heading",       "derive": { "from": "secondary", "op": "darken", "amt": 0.25 } },
+    { "_id": "c38b7a3", "title": "Paragraf",           "derive": { "keep": "#1C2625" } },
+    { "_id": "dae4ba7", "title": "Light text",         "derive": { "keep": "#EEEEEE" } },
+    { "_id": "59dadab", "title": "Form background",    "derive": { "from": "primary" } },
+    { "_id": "1a50496", "title": "Form font 1 ",       "derive": { "keep": "#1E312F" } },
+    { "_id": "53c9022", "title": "Form font 2 ",       "derive": { "keep": "#FFFFFF" } },
+    { "_id": "3c190ce", "title": "Form button",        "derive": { "from": "secondary", "op": "darken", "amt": 0.15 } },
+    { "_id": "05f080d", "title": "Form button font",   "derive": { "keep": "#FFFFFF" } }
+  ]
+}

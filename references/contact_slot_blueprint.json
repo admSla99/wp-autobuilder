@@ -1,0 +1,200 @@
+{
+ "_poznamka": "Blueprint Kontakt. VŠETKY údaje sú tvrdé fakty klienta (dotazník) — prenášať 1:1, NIČ nevymýšľať (invariant: nevymýšľať mená/kontakty). HTML bloky (person/billing/office) skladá intake z polí dotazníka. 'setting':'link.url' = zápis do link objektu widgetu.",
+ "page": "contact",
+ "source_sample_post": 13359,
+ "page_title_candidates": [
+  "Kontakt",
+  "Contact",
+  "Kontakty"
+ ],
+ "slots": [
+  {
+   "slot_id": "contact.heading",
+   "path": [
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.contact.heading"
+  },
+  {
+   "slot_id": "contact.person",
+   "path": [
+    0,
+    0,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.contact.person_html"
+  },
+  {
+   "slot_id": "contact.phone.text",
+   "path": [
+    0,
+    1,
+    0,
+    1
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.contact.phone"
+  },
+  {
+   "slot_id": "contact.phone.link",
+   "path": [
+    0,
+    1,
+    0,
+    1
+   ],
+   "widget": "heading",
+   "setting": "link.url",
+   "brief": "content.contact.phone_link",
+   "optional": true
+  },
+  {
+   "slot_id": "contact.email.text",
+   "path": [
+    0,
+    1,
+    0,
+    2
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.contact.email"
+  },
+  {
+   "slot_id": "contact.email.link",
+   "path": [
+    0,
+    1,
+    0,
+    2
+   ],
+   "widget": "heading",
+   "setting": "link.url",
+   "brief": "content.contact.email_link",
+   "optional": true
+  },
+  {
+   "slot_id": "contact.cta",
+   "path": [
+    0,
+    1,
+    0,
+    3,
+    0
+   ],
+   "widget": "button",
+   "setting": "text",
+   "brief": "content.contact.cta",
+   "rule": "cta_max_21",
+   "optional": true
+  },
+  {
+   "slot_id": "contact.map.address",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "widget": "google_maps",
+   "setting": "address",
+   "brief": "content.contact.map_query",
+   "hide_element_if_missing": true
+  },
+  {
+   "slot_id": "contact.map.directions",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    1
+   ],
+   "widget": "button",
+   "setting": "link.url",
+   "brief": "content.contact.map_directions_url",
+   "optional": true,
+   "link_extra": {
+    "is_external": "on"
+   }
+  },
+  {
+   "slot_id": "contact.billing",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    0,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.contact.billing_html"
+  },
+  {
+   "slot_id": "contact.office.country",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.contact.office_country",
+   "optional": true
+  },
+  {
+   "slot_id": "contact.office.address",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    1,
+    2
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.contact.office_html"
+  }
+ ],
+ "do_not_touch": {
+  "icon_list": "icon-list [1,1,0,1,1,1] (kontaktné ikony) – needitovať batchom.",
+  "billing_label": "Nadpis 'Fakturačné údaje' [1,1,0,1,0,0] – statický label, nemeniť.",
+  "no_invented_people": "Fotka aj meno kontaktnej osoby LEN od klienta. NIKDY negenerovať tvár/meno osoby."
+ },
+ "image_slots": [
+  {
+   "slot_id": "contact.person.photo",
+   "path": [
+    0,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.contact.person_html",
+   "shot_type": "person",
+   "aspect_ratio": "1:1",
+   "seo_hint": "kontakt-{person}",
+   "optional": true,
+   "source_policy": "client_only",
+   "fallback": "neutral_avatar",
+   "_pozn": "LEN klientova fotka (mode upload/enhance). Ak klient fotku nedodal, vlož jednoduchý NEUTRÁLNY avatar/placeholder (ikona/silueta bez identity) — NEgeneruj fotorealistickú osobu a NIKDY nenechaj agentúrnu fotku z masteru."
+  }
+ ]
+}

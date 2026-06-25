@@ -1,0 +1,18 @@
+{
+  "_poznamka": "Agentúrne tokeny, ktoré sa v GLOBÁLNYCH prvkoch (footer, CTA bublina, popup) a na PRÁVNYCH stránkach (GDPR 'Ochrana osobných údajov' 14065, cookies 'Zásady cookies (EU)' 10840) musia nahradiť údajmi KLIENTA. Tokeny sú prebraté z masteru (Netova pomoc s.r.o. = agentúra). fill_globals.py ich nahrádza zostupne podľa dĺžky (najdlhší prvý), aby sa nezamenili čiastočné výskyty (napr. 'www.netovapomoc.sk' pred 'netovapomoc.sk'). 'brief' = cesta v brief.json; ak pole chýba, token sa preskočí a zapíše do reportu (nikdy nevymýšľať).",
+  "tokens": [
+    { "agency": "Netova pomoc s. r. o.", "brief": "content.legal.company_name" },
+    { "agency": "Karpatské námestie 7770/10A, Bratislava – mestská časť Rača 831 06", "brief": "content.legal.address" },
+    { "agency": "Obchodného registra Mestského súdu Bratislava III, oddiel: Sro, vložka č. :161114/B", "brief": "content.legal.register" },
+    { "agency": "54 630 649", "brief": "content.legal.ico" },
+    { "agency": "2121741941", "brief": "content.legal.dic" },
+    { "agency": "www.netovapomoc.sk", "brief": "content.legal.domain" },
+    { "agency": "jan@netovapomoc.sk", "brief": "content.legal.email" },
+    { "agency": "info@fajne-weby.cz", "brief": "content.legal.email" },
+    { "agency": "+421 950 555 7777", "brief": "content.legal.phone" },
+    { "agency": "Netovapomoc.sk", "brief": "content.legal.brand_label" },
+    { "agency": "Netova pomoc", "brief": "content.legal.company_short" }
+  ],
+  "leftover_markers": ["netovapomoc", "fajne-weby"],
+  "_pozn_leftover": "Ak po substitúcii ostane v hodnote ktorýkoľvek z týchto reťazcov, je to NEnahradený agentúrny zvyšok → chyba/varovanie (zhoduje sa s qa_check AGENCY_LEFTOVERS)."
+}

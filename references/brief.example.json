@@ -1,0 +1,273 @@
+{
+  "_poznamka": "UKÁŽKOVÝ brief (fiktívny klient) — pokrýva HP aj ďalšie stránky (about/services/contact/pricing). Toto pole nahradí reálny dotazník + podklady z GDrive.",
+  "client": {
+    "name": "Podlahy Novák",
+    "domain": "podlahy-novak.sk",
+    "segment": "remeslá / podlahárstvo",
+    "tone_of_voice": "dôveryhodný, odborný, bez prikrášľovania"
+  },
+  "brand": {
+    "logo_url": null,
+    "primary_color": "#7A4B2B",
+    "secondary_color": "#2B2B2B",
+    "fonts": "podľa master kitu (Lexend / Inter)"
+  },
+  "content": {
+    "claim": "Podlahy, ktoré vydržia generácie.",
+    "kpis": [
+      {
+        "number": "15+",
+        "label": "rokov praxe"
+      },
+      {
+        "number": "1 200+",
+        "label": "spokojných domácností"
+      },
+      {
+        "number": "4,9 ★",
+        "label": "hodnotenie zákazníkov"
+      }
+    ],
+    "cta_primary": "Chcem cenovú ponuku",
+    "cta_secondary": "Zavolajte nám",
+    "services": [
+      {
+        "title": "Montáž podláh",
+        "text": "Plávajúce aj lepené podlahy — laminát, vinyl, drevo. Presná montáž s čistým výsledkom a zárukou."
+      },
+      {
+        "title": "Renovácia parkiet",
+        "text": "Vrátime život starým parketám: brúsenie, tmelenie a nový povrch bez prachu a neporiadku."
+      },
+      {
+        "title": "Brúsenie a lakovanie",
+        "text": "Profesionálne prebrúsenie a lakovanie drevených podláh pre dlhú životnosť a krásny vzhľad."
+      }
+    ],
+    "value_props": [
+      {
+        "title": "Remeselná presnosť v každom detaile.",
+        "text": "Každá podlaha je iná. Premeriame priestor, pripravíme podklad a montujeme tak, aby výsledok vydržal roky bez škár a vrzania."
+      },
+      {
+        "title": "Materiály, ktoré roky vyzerajú ako nové.",
+        "text": "Pracujeme len s overenými značkami podláh a lepidiel. Poradíme vám materiál, ktorý sadne na vaše priestory aj rozpočet."
+      },
+      {
+        "title": "Termín, na ktorý sa dá spoľahnúť.",
+        "text": "Dohodnutý termín platí. Prídeme načas, po sebe upraceme a podlahu odovzdáme pripravenú na používanie."
+      }
+    ],
+    "video_section": {
+      "title": "Pozrite si naše realizácie",
+      "text": "Skutočné podlahy v skutočných domovoch — bez prikrášľovania."
+    },
+    "sections": {
+      "services_eyebrow": "NAŠE SLUŽBY",
+      "services_heading": "Čo pre vás spravíme",
+      "cards_eyebrow": "NAŠE SLUŽBY",
+      "cards_heading": "Čomu sa venujeme",
+      "gallery_eyebrow": "NAŠE REALIZÁCIE",
+      "gallery_heading": "Galéria",
+      "blog_eyebrow": "NÁŠ BLOG",
+      "blog_heading": "Najnovšie články",
+      "blog_button": "Všetky články"
+    },
+    "about": {
+      "hero": {
+        "title": "Podlahárstvo s rodinnou tradíciou",
+        "text": "Od roku 2010 pokladáme podlahy po celom západnom Slovensku. Začínali sme ako dvojčlenná partia, dnes nás je osem — a každú podlahu stále odovzdávame, ako keby bola u nás doma."
+      },
+      "stats": [
+        {
+          "number": "15",
+          "suffix": "+",
+          "label": "rokov praxe s podlahami všetkých typov."
+        },
+        {
+          "number": "1200",
+          "suffix": "+",
+          "label": "spokojných domácností po celom Slovensku."
+        },
+        {
+          "number": "8",
+          "suffix": null,
+          "label": "členný tím vyučených podlahárov."
+        },
+        {
+          "number": "5",
+          "suffix": "r.",
+          "label": "záruka na každú položenú podlahu."
+        }
+      ],
+      "blocks": [
+        {
+          "title": "Špecializujeme sa na domácnosti aj firmy",
+          "text": "Byty, domy, kancelárie aj prevádzky. Premeriame, poradíme materiál a navrhneme riešenie presne pre váš priestor a rozpočet."
+        },
+        {
+          "title": "Sme spoľahliví — termín u nás platí",
+          "text": "Dohodnutý dátum dodržíme, pracujeme čisto a po sebe vždy upraceme. Klienti oceňujú, že spolupráca s nami je bez stresu."
+        },
+        {
+          "title": "Pracujeme rýchlo a presne",
+          "text": "Bežný byt zvládneme do dvoch dní. Rýchlosť ale nikdy nejde na úkor detailu — preto dávame 5-ročnú záruku."
+        }
+      ],
+      "faq": {
+        "eyebrow": "Často kladené otázky",
+        "heading": "Máte otázky? My máme odpovede",
+        "intro": "Nová podlaha nemusí byť veda. Tu sú odpovede na otázky, ktoré od klientov počujeme najčastejšie.",
+        "items": [
+          {
+            "q": "Robíte obhliadku a cenovú ponuku zadarmo?",
+            "a": "Áno. Prídeme, premeriame priestor a do 48 hodín pošleme nezáväznú cenovú ponuku."
+          },
+          {
+            "q": "Aké podlahy montujete?",
+            "a": "Laminátové, vinylové aj drevené — plávajúce aj lepené. Renovujeme tiež staré parkety."
+          },
+          {
+            "q": "Ako dlho trvá montáž?",
+            "a": "Bežný byt do 60 m² zvládneme spravidla do dvoch pracovných dní vrátane prípravy podkladu."
+          },
+          {
+            "q": "Dostanem záruku?",
+            "a": "Áno, na každú položenú podlahu dávame 5-ročnú záruku na montáž."
+          }
+        ]
+      }
+    },
+    "services_page": {
+      "hero": {
+        "title": "Podlahy na mieru — od merania po záruku",
+        "text": "Jedna partia, celý proces: premeriame, poradíme materiál, namontujeme a po sebe upraceme. Vy len bývate.",
+        "cta": "Chcem cenovú ponuku"
+      },
+      "blocks": [
+        {
+          "title": "Montáž plávajúcich a lepených podláh",
+          "text": "Laminát, vinyl aj drevo. Presná montáž s prípravou podkladu a čistým odovzdaním."
+        },
+        {
+          "title": "Renovácia starých parkiet",
+          "text": "Brúsenie bez prachu, tmelenie a nový povrch. Staré parkety vyzerajú opäť ako nové."
+        },
+        {
+          "title": "Brúsenie a lakovanie",
+          "text": "Profesionálne prebrúsenie a viacvrstvové lakovanie pre dlhú životnosť podlahy."
+        },
+        {
+          "title": "Poradenstvo a výber materiálu",
+          "text": "Pomôžeme vybrať podlahu, ktorá sadne na váš priestor, prevádzku aj rozpočet."
+        },
+        {
+          "title": "Servis a opravy podláh",
+          "text": "Vŕzgajúce dosky, poškodené lamely či škáry — opravíme aj podlahy, ktoré sme nemontovali my."
+        }
+      ]
+    },
+    "contact": {
+      "heading": "Zaujali sme vás? Kontaktujte nás",
+      "person_html": "<strong>Peter Novák - konateľ</strong><br /><a href=\"mailto:novak@podlahy-novak.sk\">novak@podlahy-novak.sk</a><br /><a href=\"tel:+421900111222\">+421 900 111 222</a>",
+      "phone": "+421 900 111 222",
+      "phone_link": "tel:+421900111222",
+      "email": "info@podlahy-novak.sk",
+      "email_link": "mailto:info@podlahy-novak.sk",
+      "cta": "Chcem 30 min. hovor",
+      "map_query": "Hlavná 12, Trnava",
+      "map_directions_url": "https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=Hlavna+12,+Trnava&travelmode=driving",
+      "billing_html": "<p>Podlahy Novák s. r. o.,<br />Hlavná 12, 917 01 Trnava<br />IČO: 12 345 678<br />DIČ: 2120000000</p>",
+      "office_country": "Slovensko",
+      "office_html": "<p>Podlahy Novák<br />prevádzka Trnava<br />Hlavná 12<br />Trnava</p>"
+    },
+    "pricing": {
+      "title": "Cenník podlahárskych prác",
+      "benefits": [
+        "Transparentné ceny",
+        "Obhliadka zadarmo",
+        "5-ročná záruka"
+      ],
+      "packages": [
+        {
+          "name": "Montáž na kľúč",
+          "desc": "meranie, podklad, montáž, lišty",
+          "price": "od 12 €/m²"
+        },
+        {
+          "name": "Renovácia parkiet",
+          "desc": "brúsenie, tmelenie, 3× lak",
+          "price": "od 18 €/m²"
+        },
+        {
+          "name": "Vinyl komplet",
+          "desc": "vinylová podlaha vrátane materiálu",
+          "price": "od 35 €/m²"
+        }
+      ],
+      "items": [
+        {
+          "name": "Obhliadka a meranie",
+          "desc": "do 30 km od Trnavy",
+          "price": "0 €"
+        },
+        {
+          "name": "Demontáž starej podlahy",
+          "desc": "vrátane odvozu",
+          "price": "od 3 €/m²"
+        },
+        {
+          "name": "Vyrovnanie podkladu",
+          "desc": "nivelačná stierka",
+          "price": "od 6 €/m²"
+        },
+        {
+          "name": "Montáž líšt",
+          "desc": "obvodové lišty",
+          "price": "od 2,5 €/bm"
+        }
+      ]
+    },
+    "gallery": {
+      "title": "Naše realizácie",
+      "section_labels": [
+        "Položené podlahy",
+        "Renovácie parkiet",
+        "Detaily našej práce"
+      ],
+      "categories": [
+        {
+          "name": "Všetky",
+          "photos": []
+        }
+      ],
+      "cards": [
+        {
+          "title": "Dubová podlaha — rodinný dom",
+          "text": "Lepený dub, 120 m², vrátane prípravy podkladu."
+        },
+        {
+          "title": "Renovácia parkiet — staromestský byt",
+          "text": "Brúsenie bez prachu a trojvrstvové lakovanie."
+        },
+        {
+          "title": "Vinyl v kancelárii",
+          "text": "Záťažový vinyl pre prevádzku s vysokou frekvenciou."
+        }
+      ]
+    }
+  },
+  "media": {
+    "source": "placeholder",
+    "client_folder_url": null,
+    "video_required": true
+  },
+  "pages": [
+    "hp",
+    "about",
+    "services",
+    "contact",
+    "pricing",
+    "gallery"
+  ]
+}

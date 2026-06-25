@@ -1,0 +1,321 @@
+{
+ "_poznamka": "Blueprint stránky Služby. Hero + 5 striedavých blokov služieb. CTA v blokoch sú GLOBAL widgety (needitovať) — editovateľné je iba hero CTA (button). Video widgety = Runway (sesterský workflow), needitovať v Image fáze.",
+ "page": "services",
+ "source_sample_post": 12842,
+ "page_title_candidates": [
+  "Služby",
+  "Sluzby",
+  "Services"
+ ],
+ "slots": [
+  {
+   "slot_id": "services.hero.title",
+   "path": [
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.services_page.hero.title"
+  },
+  {
+   "slot_id": "services.hero.text",
+   "path": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.services_page.hero.text"
+  },
+  {
+   "slot_id": "services.hero.cta",
+   "path": [
+    0,
+    0,
+    1,
+    2
+   ],
+   "widget": "button",
+   "setting": "text",
+   "brief": "content.services_page.hero.cta",
+   "rule": "cta_max_21"
+  },
+  {
+   "slot_id": "services.block1.title",
+   "path": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.services_page.blocks[0].title"
+  },
+  {
+   "slot_id": "services.block1.text",
+   "path": [
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.services_page.blocks[0].text"
+  },
+  {
+   "slot_id": "services.block2.title",
+   "path": [
+    2,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.services_page.blocks[1].title"
+  },
+  {
+   "slot_id": "services.block2.text",
+   "path": [
+    2,
+    0,
+    1,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.services_page.blocks[1].text"
+  },
+  {
+   "slot_id": "services.block3.title",
+   "path": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.services_page.blocks[2].title"
+  },
+  {
+   "slot_id": "services.block3.text",
+   "path": [
+    3,
+    0,
+    0,
+    0,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.services_page.blocks[2].text"
+  },
+  {
+   "slot_id": "services.block4.title",
+   "path": [
+    4,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.services_page.blocks[3].title"
+  },
+  {
+   "slot_id": "services.block4.text",
+   "path": [
+    4,
+    0,
+    1,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.services_page.blocks[3].text"
+  },
+  {
+   "slot_id": "services.block5.title",
+   "path": [
+    5,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.services_page.blocks[4].title"
+  },
+  {
+   "slot_id": "services.block5.text",
+   "path": [
+    5,
+    0,
+    0,
+    0,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.services_page.blocks[4].text"
+  }
+ ],
+ "do_not_touch": {
+  "global_ctas": "CTA v blokoch 1–5 sú GLOBAL widgety – needitovať.",
+  "videos": "Video widgety (bloky 2–5) – Runway fáza, nie Image.",
+  "xpro_templates": "Eyebrow šablóny a footer (top-level [6]) – needitovať."
+ },
+ "image_slots": [
+  {
+   "slot_id": "services.hero.image_a",
+   "path": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.services_page.hero",
+   "shot_type": "person",
+   "aspect_ratio": "4:3",
+   "seo_hint": "sluzby-{segment}",
+   "optional": false
+  },
+  {
+   "slot_id": "services.hero.image_b",
+   "path": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.services_page.hero",
+   "shot_type": "wide",
+   "aspect_ratio": "4:3",
+   "seo_hint": "sluzby-{segment}-tim",
+   "optional": true
+  },
+  {
+   "slot_id": "services.block1.image_a",
+   "path": [
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.services_page.blocks[0]",
+   "shot_type": "person",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-sluzba-1",
+   "optional": false
+  },
+  {
+   "slot_id": "services.block1.image_b",
+   "path": [
+    1,
+    0,
+    1,
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.services_page.blocks[0]",
+   "shot_type": "detail",
+   "aspect_ratio": "1:1",
+   "seo_hint": "{segment}-sluzba-1-detail",
+   "optional": true
+  },
+  {
+   "slot_id": "services.block2.image",
+   "path": [
+    2,
+    0,
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.services_page.blocks[1]",
+   "shot_type": "detail",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-sluzba-2",
+   "optional": false
+  },
+  {
+   "slot_id": "services.block3.image",
+   "path": [
+    3,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.services_page.blocks[2]",
+   "shot_type": "wide",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-sluzba-3",
+   "optional": false
+  },
+  {
+   "slot_id": "services.block4.image",
+   "path": [
+    4,
+    0,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.services_page.blocks[3]",
+   "shot_type": "person",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-sluzba-4",
+   "optional": false
+  },
+  {
+   "slot_id": "services.block5.image",
+   "path": [
+    5,
+    0,
+    1,
+    0,
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.services_page.blocks[4]",
+   "shot_type": "detail",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-sluzba-5",
+   "optional": false
+  }
+ ]
+}

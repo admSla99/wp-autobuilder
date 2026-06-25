@@ -1,0 +1,4192 @@
+{
+  "$schema": "./rules.schema.json",
+  "version": "2.0",
+  "source_file": "01_SABLONA_v2.xlsx",
+  "generated_at": "2026-06-02T20:07:54",
+  "global_invariants": [
+    "Nevymýšľať ceny — vždy ich dodá klient.",
+    "Nevymýšľať recenzie, mená ani hodnotenia.",
+    "Nemeniť fakty, čísla, legislatívu, technické parametre ani poradie fotiek.",
+    "Nemeniť brand farby, fonty, layout ani štruktúru menu.",
+    "CTA default max 21 znakov; nepoužívať „Kliknite sem / Viac / Tu / Kúpte hneď\"."
+  ],
+  "tool_routing": {
+    "foto": "Image 2.0 (cez n8n)",
+    "video": "Runway (cez n8n)",
+    "text": "Claude",
+    "recenzie": "Google Reviews API",
+    "podklady_klienta": "Google Drive"
+  },
+  "pages": {
+    "hp": {
+      "sheet": "HP",
+      "elementor_target": "Hp",
+      "intro_notes": [],
+      "sections": [
+        {
+          "order": "1",
+          "slot_id": "hp.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigacia",
+          "element_types": "Logo, menu, CTA",
+          "item_count": {
+            "raw": "1 logo, variabilne menu, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "CTA text",
+            "menu polozky"
+          ],
+          "ai_cannot_edit": [
+            "Struktura menu",
+            "farby"
+          ],
+          "data_source": [
+            "Formular klienta - Zoznam stranok webu"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "hp.hero_sekcia",
+          "stav": "POVINNÁ",
+          "name": "Hero sekcia",
+          "element_types": "H1 nadpis, CTA, statistiky, hlavny vizual",
+          "item_count": {
+            "raw": "1 H1, 1 podnadpis, 1 CTA, 3 statistiky",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "1 hlavny vizual",
+          "ai_can_edit": [
+            "H1",
+            "podnadpis",
+            "CTA",
+            "statistiky",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie",
+            "farby",
+            "fonty"
+          ],
+          "data_source": [
+            "Claude",
+            "Runway alebo klientove foto"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "hp.nase_sluzby_karty",
+          "stav": "POVINNÁ",
+          "name": "Nase sluzby (karty)",
+          "element_types": "Nadpis sekcie, podnadpis, karty sluzieb",
+          "item_count": {
+            "raw": "1 nadpis, 1 podnadpis, min. 2 max. 8 kariet",
+            "min": 2,
+            "max": 8,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo IKONA",
+          "visual_count": "1 vizual na kartu",
+          "ai_can_edit": [
+            "Nazov sluzby",
+            "popis",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Pocet kariet",
+            "layout"
+          ],
+          "data_source": [
+            "Claude",
+            "klientove podklady"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "hp.sluzba_blok_1_vpravo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 1 (vpravo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "5",
+          "slot_id": "hp.sluzba_blok_2_vlavo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 2 (vlavo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "6",
+          "slot_id": "hp.sluzba_blok_3_vpravo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 3 (vpravo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "7",
+          "slot_id": "hp.sluzba_blok_4_vlavo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 4 (vlavo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "8",
+          "slot_id": "hp.sluzba_blok_5_vpravo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 5 (vpravo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "9",
+          "slot_id": "hp.sluzba_blok_6_vlavo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 6 (vlavo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "10",
+          "slot_id": "hp.video_sekcia",
+          "stav": "POVINNÁ",
+          "name": "Video sekcia",
+          "element_types": "H2, podnadpis, video",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 video",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "VIDEO",
+          "visual_count": "1 video",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "video"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie playera",
+            "farby"
+          ],
+          "data_source": [
+            "Runway",
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "11",
+          "slot_id": "hp.galeria",
+          "stav": "POVINNÁ",
+          "name": "Galeria",
+          "element_types": "Nadpis sekcie, fotky",
+          "item_count": {
+            "raw": "1 nadpis, 3-12 fotiek",
+            "min": 3,
+            "max": 12,
+            "unlimited": false
+          },
+          "visual_type": "FOTO",
+          "visual_count": "3-12 fotiek",
+          "ai_can_edit": [
+            "Nadpis",
+            "titulky fotiek"
+          ],
+          "ai_cannot_edit": [
+            "Grid galerie",
+            "layout"
+          ],
+          "data_source": [
+            "GDrive",
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "12",
+          "slot_id": "hp.referencie_loga",
+          "stav": "POVINNÁ",
+          "name": "Referencie (loga)",
+          "element_types": "Nadpis, loga klientov",
+          "item_count": {
+            "raw": "1 nadpis, 4-20 log",
+            "min": 4,
+            "max": 20,
+            "unlimited": false
+          },
+          "visual_type": "LOGO",
+          "visual_count": "4-20 log",
+          "ai_can_edit": [
+            "Nadpis"
+          ],
+          "ai_cannot_edit": [
+            "Loga",
+            "layout"
+          ],
+          "data_source": [
+            "Klient doda loga"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "13",
+          "slot_id": "hp.google_recenzie",
+          "stav": "POVINNÁ",
+          "name": "Google recenzie",
+          "element_types": "Nadpis, hodnotenie, recenzie",
+          "item_count": {
+            "raw": "1 nadpis, 3-6 recenzii",
+            "min": 3,
+            "max": 6,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "mena",
+            "texty recenzii"
+          ],
+          "ai_cannot_edit": [
+            "Widget",
+            "hviezdicky"
+          ],
+          "data_source": [
+            "Google Reviews API"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "14",
+          "slot_id": "hp.blog_sekcia",
+          "stav": "POVINNÁ",
+          "name": "Blog sekcia",
+          "element_types": "Nadpis, zoznam clankov",
+          "item_count": {
+            "raw": "1 nadpis, 1-6 clankov",
+            "min": 1,
+            "max": 6,
+            "unlimited": false
+          },
+          "visual_type": "FOTO",
+          "visual_count": "1 foto ku clanku",
+          "ai_can_edit": [
+            "Nadpisy clankov",
+            "perexy"
+          ],
+          "ai_cannot_edit": [
+            "Layout blogu"
+          ],
+          "data_source": [
+            "Blog databaza"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "15",
+          "slot_id": "hp.cta_banner_tmavy",
+          "stav": "POVINNÁ",
+          "name": "CTA banner (tmavy)",
+          "element_types": "H2, podnadpis, CTA",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "styl tlacidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "16",
+          "slot_id": "hp.newsletter",
+          "stav": "POVINNÁ",
+          "name": "Newsletter",
+          "element_types": "Nadpis, podnadpis, 2 inputy, tlacidlo",
+          "item_count": {
+            "raw": "1 nadpis, 1 podnadpis, email, meno, tlacidlo",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "podnadpis",
+            "text tlacidla"
+          ],
+          "ai_cannot_edit": [
+            "Formularove polia",
+            "integracia"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "17",
+          "slot_id": "hp.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Pata (footer)",
+          "element_types": "Logo, menu, socialne siete, kontakt",
+          "item_count": {
+            "raw": "1 logo, variabilne menu, socialne siete, kontakt",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "copyright",
+            "menu polozky",
+            "kontakty"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie",
+            "farby"
+          ],
+          "data_source": [
+            "Formular",
+            "logo z GDrive"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "18",
+          "slot_id": "hp.poznamka_pravidlo_pre_sluzby",
+          "stav": "POVINNÁ",
+          "name": "POZNAMKA - pravidlo pre sluzby",
+          "element_types": "Pocet blokov sluzieb je dynamicky podla poctu sluzieb klienta",
+          "item_count": {
+            "raw": "min. 2, max. 8 blokov",
+            "min": 2,
+            "max": 8,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "2 sloty na kazdy blok",
+          "ai_can_edit": [
+            "Vsetky H2",
+            "texty",
+            "CTA",
+            "vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Striedanie layoutu",
+            "fonty",
+            "farby"
+          ],
+          "data_source": [
+            "Formular klienta",
+            "GDrive",
+            "n8n konfiguracia"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        }
+      ]
+    },
+    "blog": {
+      "sheet": "blogový článok",
+      "elementor_target": "Blog – článok",
+      "intro_notes": [],
+      "sections": [
+        {
+          "order": "1",
+          "slot_id": "blog.header_clanku",
+          "stav": "POVINNÁ",
+          "name": "Header článku  (tmavý banner)",
+          "element_types": "H1 – názov článku, perex, autor (foto + meno + popis), dátum",
+          "item_count": {
+            "raw": "1× H1, 1× perex (2–4 vety), 1× autor blok, 1× dátum",
+            "min": 2,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "Foto autora  (portrét / avatar)",
+          "visual_count": "1× foto autora\n (klient dodá alebo placeholder)",
+          "ai_can_edit": [
+            "H1 – názov článku",
+            "perex",
+            "popis autora"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia bannera",
+            "rozloženie",
+            "dátum",
+            "formát autora"
+          ],
+          "data_source": [
+            "Claude (text)",
+            "klient dodá foto autora"
+          ],
+          "rules_text": "H1 = názov článku: musí obsahovať hlavné kľúčové slovo témy.  Perex: 2–4 vety, vystihuje o čom článok je, láka čitateľa.  Autor: meno + krátky popis (1 veta).  Foto: klient dodá, inak placeholder.  Dátum: vkladá systém automaticky.  Nevymýšľať meno autora ani jeho popis.",
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "blog.uvodny_text_clanku",
+          "stav": "POVINNÁ",
+          "name": "Úvodný text článku  (pred prvou fotkou)",
+          "element_types": "Súvislý text – úvod do témy článku",
+          "item_count": {
+            "raw": "2–4 odseky (cca 150–300 slov)",
+            "min": 2,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Text odsekov",
+            "štruktúra odsekov"
+          ],
+          "ai_cannot_edit": [
+            "Fakty",
+            "čísla",
+            "konkrétne miesta",
+            "názvy",
+            "odborné formulácie"
+          ],
+          "data_source": [
+            "Claude podľa témy a podkladov od klienta"
+          ],
+          "rules_text": "Text nadväzuje na perex z headera.  Obsahuje hlavné kľúčové slovo a 1–2 vedľajšie kľúčové slová.  Nevymýšľať konkrétne fakty, čísla, miesta ani názvy.  Tón: informačný, čitateľský, bez preháňania.",
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "blog.obsahovy_blok",
+          "stav": "POVINNÁ",
+          "name": "Obsahový blok  (H2/H3 + text + fotka + popisok)  ⚠️ OPAKUJE SA 2–5×",
+          "element_types": "H2 alebo H3 nadpis, súvislý text, 1× fotka, 1× popisok pod fotkou",
+          "item_count": {
+            "raw": "1× H2/H3, 2–5 odsekov textu, 1× fotka, 1× popisok (1–2 vety)",
+            "min": 2,
+            "max": 5,
+            "unlimited": false
+          },
+          "visual_type": "FOTO  (klient dodá alebo Image 2.0)",
+          "visual_count": "1× fotka na každý blok\n (+ popisok pod ňou)",
+          "ai_can_edit": [
+            "H2",
+            "H3 nadpis",
+            "text odsekov",
+            "popisok pod fotkou"
+          ],
+          "ai_cannot_edit": [
+            "Výber a poradie fotiek",
+            "rozloženie\n (foto hore",
+            "dole",
+            "vedľa textu)"
+          ],
+          "data_source": [
+            "Claude (text",
+            "popisok)",
+            "klient dodá fotky",
+            "Image 2.0"
+          ],
+          "rules_text": "Sekcia sa OPAKUJE podľa počtu tém / podkapitol (bežne 2–5×).  Každý blok = 1 téma / podkapitola.  Nadpis H2/H3: vedľajšie kľúčové slovo + konkrétny prínos.  Popisok pod fotkou: 1–2 vety.  Ak klient fotku nedodá → použiť alternatívu nižšie (blok 3A).  Nevymýšľať konkrétne miesta, trasy, čísla ani fakty.",
+          "constraints": {}
+        },
+        {
+          "order": "3A",
+          "slot_id": "blog.alternativa_k_bloku_3",
+          "stav": "ALTERNATÍVA",
+          "name": "Alternatíva k bloku 3  (iba text, bez fotky)",
+          "element_types": "H2 alebo H3 nadpis, súvislý text bez vizuálu",
+          "item_count": {
+            "raw": "1× H2/H3 nadpis, 2–4 odseky textu",
+            "min": 2,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "H3 nadpis",
+            "text odsekov"
+          ],
+          "ai_cannot_edit": [
+            "Fakty",
+            "čísla",
+            "konkrétne miesta",
+            "odborné formulácie"
+          ],
+          "data_source": [
+            "Claude podľa podkladov od klienta"
+          ],
+          "rules_text": "POUŽIŤ namiesto bloku 3 ak klient pre daný úsek nemá fotku.  Text musí byť rovnako konkrétny ako blok s fotkou.  Nevymýšľať fakty, miesta, čísla.",
+          "constraints": {}
+        },
+        {
+          "order": "3B",
+          "slot_id": "blog.alternativa_k_bloku_3_2",
+          "stav": "ALTERNATÍVA",
+          "name": "Alternatíva k bloku 3  (zvýraznený citát / tip / kľúčová myšlienka)",
+          "element_types": "1× krátky text vo vizuálne odlíšenom bloku",
+          "item_count": {
+            "raw": "1× text (1–3 vety)",
+            "min": 1,
+            "max": 3,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Text citátu",
+            "tipu"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia bloku",
+            "typografia"
+          ],
+          "data_source": [
+            "Claude (text) alebo klient dodá presné znenie"
+          ],
+          "rules_text": "POUŽIŤ namiesto bloku 3 ak chce klient zvýrazniť kľúčovú myšlienku alebo tip.  Text: max. 3 vety.  Ak ide o citát skutočnej osoby → text NESMIE byť zmenený, iba gramatika.",
+          "constraints": {}
+        },
+        {
+          "order": "3C",
+          "slot_id": "blog.alternativa_k_bloku_3_3",
+          "stav": "ALTERNATÍVA",
+          "name": "Alternatíva k bloku 3  (zoznam / tipy / odrážky / kroky)",
+          "element_types": "H2 alebo H3 nadpis, zoznam položiek (odrážky alebo čísla)",
+          "item_count": {
+            "raw": "1× H2/H3 nadpis, 3–10 položiek zoznamu",
+            "min": 3,
+            "max": 10,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "texty položiek zoznamu"
+          ],
+          "ai_cannot_edit": [
+            "Poradie položiek",
+            "počet položiek"
+          ],
+          "data_source": [
+            "Claude podľa podkladov od klienta"
+          ],
+          "rules_text": "POUŽIŤ namiesto bloku 3 ak téma obsahuje postup, tipy alebo odporúčania.  Každá položka: 1–2 vety.  Ak ide o postup → zachovať poradie krokov.  Nevymýšľať kroky ani tipy, ktoré klient nedodal.",
+          "constraints": {}
+        },
+        {
+          "order": "3D",
+          "slot_id": "blog.alternativa_k_bloku_3_4",
+          "stav": "ALTERNATÍVA",
+          "name": "Alternatíva k bloku 3  (akordeón / FAQ)",
+          "element_types": "Nadpis sekcie + N× akordeónová položka (otázka + odpoveď)",
+          "item_count": {
+            "raw": "1× nadpis, 3–8 položiek",
+            "min": 3,
+            "max": 8,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpisy (otázky) akordeónových položiek"
+          ],
+          "ai_cannot_edit": [
+            "Obsah odpovedí (fakty",
+            "presné inštrukcie)"
+          ],
+          "data_source": [
+            "Claude (otázky",
+            "odpovede) alebo klient dodá FAQ"
+          ],
+          "rules_text": "POUŽIŤ namiesto bloku 3 ak článok obsahuje FAQ alebo časté otázky.  Odpovede: vecné, konkrétne, max. 3–5 viet.  Nevymýšľať otázky ani odpovede bez podkladov od klienta.",
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "blog.cta_banner_zaverecny",
+          "stav": "POVINNÁ",
+          "name": "CTA banner – záverečný  (tmavé pozadie)",
+          "element_types": "H2, podnadpis, 1× CTA tlačidlo",
+          "item_count": {
+            "raw": "1× H2, 1× podnadpis, 1× CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2 text",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia (tmavá)",
+            "štýl tlačidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": "CTA: MAX. 21 znakov.  Nadpis motivuje k akcii – konkrétny prínos.  NEPOUŽIŤ: Kliknite sem / Viac / Tu / Kúpte hneď.  CTA tematicky nadväzuje na obsah článku.",
+          "constraints": {
+            "cta_max_chars": 21
+          }
+        },
+        {
+          "order": "5",
+          "slot_id": "blog.newsletter",
+          "stav": "POVINNÁ",
+          "name": "Newsletter  (systémová sekcia)",
+          "element_types": "Nadpis, podnadpis, 2× input pole, tlačidlo",
+          "item_count": {
+            "raw": "1× nadpis, 1× podnadpis, 2× pole, 1× tlačidlo",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "podnadpis",
+            "text tlačidla"
+          ],
+          "ai_cannot_edit": [
+            "Formulárové polia",
+            "farba",
+            "backend"
+          ],
+          "data_source": [
+            "Claude (text)",
+            "systém (formulár)"
+          ],
+          "rules_text": "AI generuje iba text (nadpis, podnadpis).  Formulárové polia generuje programátor.",
+          "constraints": {}
+        },
+        {
+          "order": "6",
+          "slot_id": "blog.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Päta – footer  (systémová sekcia)",
+          "element_types": "Logo, soc. siete, menu, copyright, GDPR",
+          "item_count": {
+            "raw": "1× logo, variabilné položky, copyright",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1× logo",
+          "ai_can_edit": [
+            "Copyright text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "rozloženie",
+            "soc. ikony",
+            "menu štruktúra"
+          ],
+          "data_source": [
+            "Formulár klienta",
+            "logo súbor z GDrive"
+          ],
+          "rules_text": "Systémová sekcia. AI negeneruje copywriting.  Pracovník vyberá logo, vypĺňa menu.",
+          "constraints": {}
+        }
+      ]
+    },
+    "gallery": {
+      "sheet": "galeria",
+      "elementor_target": "Jednoúrovňová galéria",
+      "intro_notes": [
+        "CONTENT MAPPING – Samostatná stránka: GALÉRIA",
+        "▶ AI ROZHODOVANIE – aké rozloženie galérie použiť podľa počtu fotiek",
+        "Počet fotiek | Rozloženie | Popis rozloženia | Príklad / vizuál | AI pravidlo | 4+",
+        "4+ | MRIEŽKA 4 stĺpce | Fotky v 4 stĺpcoch, kompaktná galéria.\n Vhodné pre veľké portfólio (ako Tinamo). | □ □ □ □\n □ □ □ □\n □ □ □ □ | 17–40 → 4 stĺpce",
+        "ℹ Ak klient dodá fotky viacerých kategórií (exteriér / interiér / detaily) → AI pridá FILTROVACIE ZÁLOŽKY nad galériu (napr. Všetky | Exteriér | Interiér)",
+        "★ SEKCIE STRÁNKY – platí pre všetky varianty galérie"
+      ],
+      "sections": [
+        {
+          "order": "1",
+          "slot_id": "gallery.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigácia",
+          "element_types": "Logo, menu, CTA tlačidlo",
+          "item_count": {
+            "raw": "1 logo, variabilné menu",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": null,
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "CTA text",
+            "menu položky"
+          ],
+          "ai_cannot_edit": [
+            "Štruktúra menu",
+            "farby (brand)"
+          ],
+          "data_source": [
+            "Formulár klienta – zoznam stránok webu"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "gallery.nadpis_stranky",
+          "stav": "POVINNÁ",
+          "name": "Nadpis stránky",
+          "element_types": "H1 nadpis + podnadpis (1–2 vety)  Stručný popis čo galéria zobrazuje",
+          "item_count": {
+            "raw": "1 H1, 1 podnadpis",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": null,
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H1 text",
+            "podnadpis – AI generuje podľa zamerania klienta"
+          ],
+          "ai_cannot_edit": [
+            "Farba nadpisu (brand)",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Claude zo zadania klienta (typ prác",
+            "zameranie)"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "gallery.filtrovacie_zalozky",
+          "stav": "POVINNÁ",
+          "name": "Filtrovacie záložky  (voliteľné – ak viac kategórií)",
+          "element_types": "Záložky / tabs nad galériou  (napr. Všetky | Exteriér | Interiér | Detaily)",
+          "item_count": {
+            "raw": "2–5 záložiek (podľa počtu kategórií)",
+            "min": 2,
+            "max": 5,
+            "unlimited": false
+          },
+          "visual_type": null,
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Názvy záložiek (AI navrhne podľa dodaných kategórií)"
+          ],
+          "ai_cannot_edit": [
+            "Počet záložiek (závisí od kategórií klienta)"
+          ],
+          "data_source": [
+            "Klient dodá kategórie fotiek → Claude pomenuje záložky"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "gallery.galeria_fotiek",
+          "stav": "POVINNÁ",
+          "name": "GALÉRIA FOTIEK  – hlavná sekcia",
+          "element_types": "Mriežka fotiek (2 / 3 / 4 stĺpce alebo Masonry)  AI vyberie rozloženie podľa počtu fotiek (viď tabuľka vyššie)",
+          "item_count": {
+            "raw": "Podľa klienta:\n 4–8 → 2 stĺpce\n 9–16 → 3 stĺpce\n 17–40 → 4 stĺpce\n 41+ → Masonry",
+            "min": 4,
+            "max": 8,
+            "unlimited": false
+          },
+          "visual_type": null,
+          "visual_count": "Všetky fotky klienta\n (bez obmedzenia počtu)",
+          "ai_can_edit": [
+            "Rozloženie (počet stĺpcov)",
+            "filter záložky ak viac kategórií"
+          ],
+          "ai_cannot_edit": [
+            "Fotografie (obsah",
+            "poradie)\n AI NESMIE meniť fotky ani ich poradie"
+          ],
+          "data_source": [
+            "Klient dodá všetky fotky (GDrive",
+            "upload)\n Klient určí poradie ak je dôležité"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "5",
+          "slot_id": "gallery.newsletter_dolny_banner",
+          "stav": "POVINNÁ",
+          "name": "Newsletter / dolný banner",
+          "element_types": "Nadpis, bullets (2–3), 2x input (email, meno), tlačidlo",
+          "item_count": {
+            "raw": "1 nadpis, 2–3 bullets, 2 inputy, 1 tlačidlo",
+            "min": 2,
+            "max": 3,
+            "unlimited": false
+          },
+          "visual_type": null,
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "bullets",
+            "text tlačidla"
+          ],
+          "ai_cannot_edit": [
+            "Formulárové polia",
+            "farba tlačidla"
+          ],
+          "data_source": [
+            "Claude",
+            "formulár klienta"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "6",
+          "slot_id": "gallery.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Pata (footer)",
+          "element_types": "Logo, soc. siete, menu, copyright, GDPR",
+          "item_count": {
+            "raw": "1 logo, menu, soc. siete, copyright",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": null,
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Copyright text",
+            "menu položky"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "rozloženie",
+            "GDPR odkaz"
+          ],
+          "data_source": [
+            "Formulár",
+            "logo súbor z GDrive"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        }
+      ]
+    },
+    "team_refs": {
+      "sheet": "vizitka,vlastné referenice",
+      "elementor_target": "Referencie / Tím",
+      "intro_notes": [
+        "CONTENT MAPPING – Stránka: Vizitky / Tím / Referencie (kartičky ľudí)",
+        "▶ AI ROZHODOVANIE – ktorú šablónu kariet použiť",
+        "Podmienka | ŠABLÓNA 1 – Tím / Lektori (Encián štýl) | ŠABLÓNA 2 – Referencie / Zákazníci (La Pavona štýl) | AI pravidlo",
+        "Účel stránky / klienta | Predstavenie tímu, lektorov, odborníkov, autorov\n → dôraz na kompetencie a skúsenosti | Referencie, hodnotenia, zákazníci\n → dôraz na osobný zážitok a emóciu | Tím/lektori → Š1\n Referencie → Š2",
+        "Dĺžka textu na kartičku | Dlhý bio text (3–10 viet)\n → rozsiahle skúsenosti, výpravy, tituly | Krátky citát / recenzia (1–4 vety)\n → stručná osobná skúsenosť | Dlhý text → Š1\n Krátky citát → Š2",
+        "Titul / rola osoby | Áno – klient dodá titul/rolu pod menom\n (napr. Inštruktor horolezectva, lektor skialpinizmu) | Nie – iba meno a mesto/krajina\n (napr. Romana, Trenčín) | Titul dodaný → Š1\n Iba meno+mesto → Š2",
+        "Fotografia osoby | Povinná – portrét vpravo (kruh alebo štvorec)\n Bez foto → avatar / placeholder | Voliteľná – foto vpravo (kruh)\n Bez foto → karta bez foto (iba text) | Foto povinné → Š1\n Foto voliteľné → Š2",
+        "Farebné pozadie karty | Tmavé karty (tmavá navy/modrá)\n Alebo svetlé s farebným akcentom mena | Svetlé karty (biela / krémová)\n Jemné tiene, žiadne tmavé pozadie | Tmavé karty → Š1\n Svetlé karty → Š2",
+        "Počet kariet / osôb | 4–15 kariet (tím zvyčajne menší)\n Karty za sebou vertikálne | 5–30+ kariet (referencií býva viac)\n Karty za sebou vertikálne | Tím (≤15) → Š1\n Ref. (bez limitu) → Š2",
+        "★ | ŠABLÓNA 1 ak: tím / lektori / odborníci · dlhý bio · titul · tmavé karty | ŠABLÓNA 2 ak: referencie / zákazníci · krátky citát · iba meno+mesto · svetlé karty | Väčšina podmienok rozhodne → AI vyberie jednu šablónu",
+        "★ SPOLOČNÉ SEKCIE – rovnaké v oboch šablónach"
+      ],
+      "sections": [
+        {
+          "order": "S",
+          "slot_id": "team_refs.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigácia",
+          "element_types": "Logo, menu, CTA tlačidlo",
+          "item_count": {
+            "raw": "1 logo, variabilné menu",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "LOGO KLIENTA",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "CTA text",
+            "menu položky"
+          ],
+          "ai_cannot_edit": [
+            "Štruktúra menu",
+            "farby (brand)"
+          ],
+          "data_source": [
+            "Formulár klienta – zoznam stránok webu"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "S",
+          "slot_id": "team_refs.nadpis_stranky_podnadpis",
+          "stav": "POVINNÁ",
+          "name": "Nadpis stránky + podnadpis",
+          "element_types": "H1, podnadpis (1–2 vety)",
+          "item_count": {
+            "raw": "1 H1, 1 podnadpis",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H1 text",
+            "podnadpis – Claude generuje zo zadania"
+          ],
+          "ai_cannot_edit": [
+            "Farba nadpisu (brand)",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Claude zo zadania klienta"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "S",
+          "slot_id": "team_refs.cta_banner_tmavy",
+          "stav": "POVINNÁ",
+          "name": "CTA banner (tmavý)",
+          "element_types": "H2, podnadpis, 1x CTA tlačidlo",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia (brand)",
+            "štýl tlačidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "S",
+          "slot_id": "team_refs.newsletter_dolny_banner",
+          "stav": "POVINNÁ",
+          "name": "Newsletter / dolný banner",
+          "element_types": "Nadpis, bullets, 2x input, tlačidlo",
+          "item_count": {
+            "raw": "1 nadpis, 2–3 bullets, 2 inputy",
+            "min": 2,
+            "max": 3,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "bullets",
+            "text tlačidla"
+          ],
+          "ai_cannot_edit": [
+            "Formulárové polia",
+            "farba tlačidla"
+          ],
+          "data_source": [
+            "Claude",
+            "formulár klienta"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "S",
+          "slot_id": "team_refs.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Pata (footer)",
+          "element_types": "Logo, soc. siete, menu, copyright",
+          "item_count": {
+            "raw": "1 logo, menu, soc. siete",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "LOGO KLIENTA",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Copyright text",
+            "menu položky"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Formulár",
+            "logo súbor z GDrive"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "1",
+          "slot_id": "team_refs.karta_osoby_struktura",
+          "stav": "POVINNÁ",
+          "name": "KARTA OSOBY – štruktúra  (opakuje sa N-krát)",
+          "element_types": "Karta s tmavým alebo svetlým pozadím:  • Meno (H3, farebné – brand)  • Titul / rola (kurzíva pod menom)  • Bio text (3–10 viet)  • Foto vpravo (kruh alebo štvorec)  • Bez CTA tlačidla na karte",
+          "item_count": {
+            "raw": "1 karta = 1 osoba\n Počet kariet = počet členov tímu\n (bez obmedzenia, min. 2)",
+            "min": null,
+            "max": null,
+            "unlimited": true
+          },
+          "visual_type": "FOTO OSOBY  (portrét – kruh/štvorec, vpravo)",
+          "visual_count": "1x foto na kartu\n Bez foto → avatar / placeholder",
+          "ai_can_edit": [
+            "Bio text",
+            "formuláciu titulov (ak sú príliš dlhé)\n Môže skrátiť text ak je >10 viet"
+          ],
+          "ai_cannot_edit": [
+            "Meno osoby",
+            "titul",
+            "rola",
+            "fakty a výsledky (výpravy",
+            "výšky",
+            "roky)\n Poradie kariet (určuje klient!)"
+          ],
+          "data_source": [
+            "Klient dodá: meno",
+            "titul",
+            "bio text",
+            "foto každej osoby\n Foto: min. 300×300px",
+            "portrét"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "team_refs.varianta_a_bez_fotografie",
+          "stav": "POVINNÁ",
+          "name": "Varianta A – bez fotografie",
+          "element_types": "Rovnaká karta ale BEZ fotografie:  • Meno (H3)  • Titul / rola  • Bio text  • Namiesto foto → avatar ikona alebo prázdne miesto  → AI použije ak klient foto nedodá",
+          "item_count": {
+            "raw": "Rovnaký počet kariet ako osôb\n AI automaticky prepne na variantu bez foto",
+            "min": null,
+            "max": null,
+            "unlimited": false
+          },
+          "visual_type": "AVATAR / PLACEHOLDER",
+          "visual_count": "1x avatar ikona na kartu",
+          "ai_can_edit": [
+            "Bio text",
+            "formuláciu"
+          ],
+          "ai_cannot_edit": [
+            "Meno",
+            "titul",
+            "fakty"
+          ],
+          "data_source": [
+            "Ak klient nedodá foto → AI použije avatara automaticky"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "1",
+          "slot_id": "team_refs.karta_referencie_struktura",
+          "stav": "POVINNÁ",
+          "name": "KARTA REFERENCIE – štruktúra  (opakuje sa N-krát)",
+          "element_types": "Karta so svetlým pozadím:  • Meno + mesto / krajina (H3, tučné)  • Krátky citát / recenzia (1–4 vety, kurzíva)  • Foto vpravo (kruh, menšie)  • Bez titulu / roly  • Bez CTA na karte",
+          "item_count": {
+            "raw": "1 karta = 1 referencia\n Počet kariet = počet referencií\n (bez obmedzenia, min. 3 odporúčané)",
+            "min": null,
+            "max": null,
+            "unlimited": true
+          },
+          "visual_type": "FOTO ZÁKAZNÍKA  (portrét – kruh, vpravo)  → VOLITEĽNÉ",
+          "visual_count": "0 alebo 1x foto na kartu\n Bez foto → karta iba s textom (OK)",
+          "ai_can_edit": [
+            "Formuláciu citátu (ak je príliš dlhý >4 vety",
+            "AI skráti)\n Môže pridať ... ak skracuje"
+          ],
+          "ai_cannot_edit": [
+            "Meno",
+            "mesto",
+            "krajina",
+            "obsah citátu\n Poradie kariet (určuje klient!)\n Hviezdy",
+            "hodnotenie (ak klient dodal)"
+          ],
+          "data_source": [
+            "Klient dodá: meno",
+            "mesto",
+            "text recenzie",
+            "(voliteľne) foto\n Foto: min. 200×200px",
+            "portrét"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "team_refs.varianta_s_hviezdickovym_hodnote",
+          "stav": "POVINNÁ",
+          "name": "Varianta – s hviezdičkovým hodnotením",
+          "element_types": "Rovnaká karta ale S hodnotením:  • Meno + mesto  • ★★★★★ (1–5 hviezd)  • Citát / text recenzie  • Foto vpravo (voliteľné)  → AI použije ak klient dodá hviezdy",
+          "item_count": {
+            "raw": "Rovnaký počet kariet\n AI pridá hviezdy ak klient uviedol hodnotenie",
+            "min": null,
+            "max": null,
+            "unlimited": false
+          },
+          "visual_type": "FOTO + HVIEZDY  (voliteľné)",
+          "visual_count": "Hviezdy: 1–5 ★\n Foto: voliteľné",
+          "ai_can_edit": [
+            "Formuláciu citátu"
+          ],
+          "ai_cannot_edit": [
+            "Počet hviezd",
+            "meno",
+            "mesto",
+            "obsah recenzie"
+          ],
+          "data_source": [
+            "Klient dodá: meno",
+            "mesto",
+            "hodnotenie (1–5★)",
+            "text",
+            "(voliteľne) foto"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "team_refs.varianta_bez_fotografie_iba_text",
+          "stav": "POVINNÁ",
+          "name": "Varianta – bez fotografie (iba text)",
+          "element_types": "Karta iba s textom – BEZ fotografie:  • Meno + mesto  • Citát / text recenzie  • Prípadne hviezdy  → AI použije automaticky ak klient foto nedodá",
+          "item_count": {
+            "raw": "Rovnaký počet kariet",
+            "min": null,
+            "max": null,
+            "unlimited": false
+          },
+          "visual_type": "NIE – iba text",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Formuláciu citátu (skrátenie ak >4 vety)"
+          ],
+          "ai_cannot_edit": [
+            "Meno",
+            "mesto",
+            "obsah citátu"
+          ],
+          "data_source": [
+            "Ak klient nedodá foto → AI použije variantu bez foto"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        }
+      ]
+    },
+    "products": {
+      "sheet": "produkty",
+      "elementor_target": "Produktova stránka",
+      "intro_notes": [],
+      "sections": [
+        {
+          "order": "1",
+          "slot_id": "products.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigácia",
+          "element_types": "Logo, menu, CTA tlačidlo",
+          "item_count": {
+            "raw": "1 logo, variabilné menu, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1× logo",
+          "ai_can_edit": [
+            "CTA text",
+            "menu položky"
+          ],
+          "ai_cannot_edit": [
+            "Štruktúra menu",
+            "farby",
+            "poradie"
+          ],
+          "data_source": [
+            "Formulár klienta – zoznam stránok webu"
+          ],
+          "rules_text": "Systémová sekcia. AI negeneruje copywriting.  Pracovník vyberá logo zo súborov klienta.",
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "products.hero_produkt_sluzba",
+          "stav": "POVINNÁ",
+          "name": "Hero – produkt / služba  (H1 + popis + foto produktu)",
+          "element_types": "Nadpis nad H1 (kategória), H1, popis produktu (3–5 odsekov), cena, 1× CTA, 1× foto produktu",
+          "item_count": {
+            "raw": "1× nadpis kategórie, 1× H1, 3–5 odsekov, 1× cena (bez DPH + s DPH), 1× poznámka k cene, 1× CTA, 1× foto",
+            "min": 3,
+            "max": 5,
+            "unlimited": false
+          },
+          "visual_type": "FOTO produktu  (klient dodá)",
+          "visual_count": "1× foto produktu\n (klient dodá – nie Image 2.0)",
+          "ai_can_edit": [
+            "H1",
+            "popis produktu (odseky)",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Cena (bez DPH",
+            "s DPH",
+            "poznámka)",
+            "foto produktu",
+            "názov produktu",
+            "technické parametre"
+          ],
+          "data_source": [
+            "Claude (text)",
+            "klient dodá foto produktu a cenu"
+          ],
+          "rules_text": "H1 musí obsahovať primárne kľúčové slovo + konkrétny prínos.  Popis: 3–5 odsekov – čo produkt robí, pre koho je, výhody v praxi.  Cena: NESMIE byť vymyslená – klient MUSÍ dodať.  Poznámka k cene (napr. cena za 1 kg): klient dodá.  CTA: max. 21 znakov.  Foto: klient dodá vlastné – nepoužívať Image 2.0.  Nevymýšľať technické parametre, zloženie ani výsledky.",
+          "constraints": {
+            "cta_max_chars": 21,
+            "price_client_required": true
+          }
+        },
+        {
+          "order": "2A",
+          "slot_id": "products.alternativa_k_sekcia_2",
+          "stav": "ALTERNATÍVA",
+          "name": "Alternatíva k sekcia 2  (Hero s galériou namiesto ceny)",
+          "element_types": "Nadpis kategórie, H1, popis (2–4 odseky), galéria fotiek (max. 12 ks)",
+          "item_count": {
+            "raw": "1× nadpis kategórie, 1× H1, 2–4 odseky, galéria max. 12 fotiek, 1× foto hlavná",
+            "min": 2,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "FOTO – hlavná + galéria  (klient dodá všetky fotky)",
+          "visual_count": "1× hlavná foto + galéria\n max. 12 fotiek\n (klient dodá)",
+          "ai_can_edit": [
+            "H1",
+            "popis (odseky)"
+          ],
+          "ai_cannot_edit": [
+            "Fotky (výber",
+            "poradie",
+            "popis)",
+            "názov produktu",
+            "služby",
+            "technické detaily"
+          ],
+          "data_source": [
+            "Claude (text)",
+            "klient dodá všetky fotky do GDrive"
+          ],
+          "rules_text": "POUŽIŤ namiesto sekcie 2 ak:  • produkt / služba nemá pevnú cenu (napr. ubytovanie, realizácie, interiéry)  • klient chce namiesto ceny ukázať galériu priestorov / výsledkov  Galéria: max. 12 fotiek – klient dodá všetky, AI nevyberá ani negeneruje.  H1 musí obsahovať primárne kľúčové slovo + konkrétny prínos.  CTA nie je povinné – závisí od klienta.  Nevymýšľať technické detaily ani popis priestorov.",
+          "constraints": {
+            "price_client_required": true
+          }
+        },
+        {
+          "order": "3",
+          "slot_id": "products.sekcia_benefitov",
+          "stav": "POVINNÁ",
+          "name": "Sekcia benefitov  (3× ikona + text, farebné pozadie, CTA)",
+          "element_types": "3× ikona + nadpis + text (2–3 vety), 1× CTA tlačidlo sekcie",
+          "item_count": {
+            "raw": "3× ikona, 3× nadpis, 3× text, 1× CTA",
+            "min": 3,
+            "max": 3,
+            "unlimited": false
+          },
+          "visual_type": "Fixná ikona  (z knižnice systému)",
+          "visual_count": "3× fixná ikona",
+          "ai_can_edit": [
+            "Všetky nadpisy",
+            "texty ikoniek",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia sekcie",
+            "ikony (fixné)",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Claude z výhod produktu",
+            "služby od klienta"
+          ],
+          "rules_text": "3 ikonky = 3 hlavné výhody produktu.  Každá ikonka: 2–3 vety – konkrétny praktický úžitok.  CTA sekcie: max. 21 znakov.  Nevymýšľať výhody, ktoré klient nedodal.",
+          "constraints": {
+            "cta_max_chars": 21
+          }
+        },
+        {
+          "order": "4",
+          "slot_id": "products.dovera_klientov_recenzie",
+          "stav": "POVINNÁ",
+          "name": "Dôvera klientov – recenzie  (Kvalita, ktorú potvrdzujú reálne výsledky)",
+          "element_types": "H2, podnadpis / popisný text, Google odkaz, 3× recenzia (karta)",
+          "item_count": {
+            "raw": "1× H2, 1× text (2–4 vety), 1× Google odkaz, 3× recenzia",
+            "min": 2,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "text nad recenziami"
+          ],
+          "ai_cannot_edit": [
+            "Texty recenzií",
+            "mená",
+            "hviezdičky",
+            "Google odkaz (fixný)"
+          ],
+          "data_source": [
+            "Claude (H2",
+            "text)",
+            "klient dodá Google odkaz a recenzie"
+          ],
+          "rules_text": "Ak klient dodá recenzie: uprednostniť 5★, vybrať s textom.  NEVYMÝŠĽAŤ mená, hodnotenia ani texty recenzií.  Text recenzie: opraviť IBA gramaticky.  Ak klient recenzie nedodá: dôveryhodný text bez vymyslených recenzií.",
+          "constraints": {
+            "price_client_required": true,
+            "no_invented_reviews": true
+          }
+        },
+        {
+          "order": "5",
+          "slot_id": "products.cta_banner_zaverecny",
+          "stav": "POVINNÁ",
+          "name": "CTA banner – záverečný  (tmavé pozadie)",
+          "element_types": "H2, podnadpis, 1× CTA tlačidlo",
+          "item_count": {
+            "raw": "1× H2, 1× podnadpis, 1× CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2 text",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia (tmavá",
+            "brand)",
+            "štýl tlačidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": "CTA: MAX. 21 znakov.  Nadpis motivuje k akcii – konkrétny prínos.  NEPOUŽIŤ: Kliknite sem / Viac / Tu / Kúpte hneď.",
+          "constraints": {
+            "cta_max_chars": 21
+          }
+        },
+        {
+          "order": "6",
+          "slot_id": "products.newsletter",
+          "stav": "POVINNÁ",
+          "name": "Newsletter  (systémová sekcia)",
+          "element_types": "Nadpis, podnadpis, 2× input pole, tlačidlo",
+          "item_count": {
+            "raw": "1× nadpis, 1× podnadpis, 2× pole, 1× tlačidlo",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "podnadpis",
+            "text tlačidla"
+          ],
+          "ai_cannot_edit": [
+            "Formulárové polia",
+            "farba",
+            "backend"
+          ],
+          "data_source": [
+            "Claude (text)",
+            "systém (formulár)"
+          ],
+          "rules_text": "AI generuje iba text (nadpis, podnadpis).  Formulárové polia generuje programátor.",
+          "constraints": {}
+        },
+        {
+          "order": "7",
+          "slot_id": "products.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Päta – footer  (systémová sekcia)",
+          "element_types": "Logo, soc. siete, menu, copyright, GDPR",
+          "item_count": {
+            "raw": "1× logo, variabilné položky, copyright",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1× logo",
+          "ai_can_edit": [
+            "Copyright text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "rozloženie",
+            "soc. ikony",
+            "menu štruktúra"
+          ],
+          "data_source": [
+            "Formulár klienta",
+            "logo súbor z GDrive"
+          ],
+          "rules_text": "Systémová sekcia. AI negeneruje copywriting.  Pracovník vyberá logo, vypĺňa menu.",
+          "constraints": {}
+        }
+      ]
+    },
+    "product_page": {
+      "sheet": "PRODUKTOVA STRANKA",
+      "elementor_target": "Produktova stránka",
+      "intro_notes": [],
+      "sections": [
+        {
+          "order": "1",
+          "slot_id": "product_page.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigácia",
+          "element_types": "Logo, menu, CTA tlačidlo",
+          "item_count": {
+            "raw": "1 logo, variabilné menu, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1× logo",
+          "ai_can_edit": [
+            "CTA text",
+            "menu položky"
+          ],
+          "ai_cannot_edit": [
+            "Štruktúra menu",
+            "farby",
+            "poradie"
+          ],
+          "data_source": [
+            "Formulár klienta – zoznam stránok webu"
+          ],
+          "rules_text": "Systémová sekcia. AI negeneruje copywriting.  Pracovník vyberá logo zo súborov klienta.",
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "product_page.hero_h1_hlavny_vizual",
+          "stav": "POVINNÁ",
+          "name": "Hero – H1 + hlavný vizuál",
+          "element_types": "H1 nadpis, podnadpis, 1× CTA tlačidlo, 1× hlavný vizuál",
+          "item_count": {
+            "raw": "1× H1, 1× podnadpis, 1× CTA, 1× vizuál",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO  (pracovník vyberá pri každej podstránke)",
+          "visual_count": "1× vizuál\n • Foto → Image 2.0\n • Video → Runway",
+          "ai_can_edit": [
+            "H1 text",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba nadpisu (brand)",
+            "rozloženie hero bloku"
+          ],
+          "data_source": [
+            "Claude (text)",
+            "Image 2.0",
+            "Runway (vizuál)"
+          ],
+          "rules_text": "H1 MUSÍ obsahovať primárne kľúčové slovo + konkrétny prínos.  Podnadpis: 1 veta, max. 160 znakov.  CTA: max. 21 znakov.  Ak VIDEO → Runway. Ak FOTO → Image 2.0.",
+          "constraints": {
+            "cta_max_chars": 21
+          }
+        },
+        {
+          "order": "3",
+          "slot_id": "product_page.popis_pod_hero",
+          "stav": "POVINNÁ",
+          "name": "Popis pod hero  (3 stĺpce – benefity)",
+          "element_types": "Nadpis sekcie, 3× stĺpec (nadpis + text alebo odrážky)",
+          "item_count": {
+            "raw": "1× nadpis sekcie, 3× nadpis, 3× text (1 veta alebo 2–4 odrážky)",
+            "min": 2,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis sekcie",
+            "nadpisy benefitov",
+            "texty"
+          ],
+          "ai_cannot_edit": [
+            "Počet stĺpcov (vždy 3)",
+            "rozloženie",
+            "štýl"
+          ],
+          "data_source": [
+            "Claude zo zoznamu výhod",
+            "krokov klienta"
+          ],
+          "rules_text": "Každý benefit = 1 veta, 100–150 znakov.  Ak klient dodal postup / kroky → použiť odrážky.  Nadpis sekcie: kľúčové slovo + konkrétny prínos.  Bez vágnych klišé ako samotný nadpis.",
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "product_page.featured_stories",
+          "stav": "POVINNÁ",
+          "name": "Featured stories  (2 obsahové bloky vedľa seba)",
+          "element_types": "Nadpis sekcie, 2× karta (vizuál + H3 + text + CTA)",
+          "item_count": {
+            "raw": "1× nadpis, 2× H3, 2× text (2–9 viet), 2× CTA",
+            "min": 2,
+            "max": 9,
+            "unlimited": false
+          },
+          "visual_type": "⚠️ POVINNÉ PRAVIDLO:  VĽAVO = FOTO  VPRAVO = VIDEO  (alebo opačne — vždy 1 FOTO + 1 VIDEO,  nikdy 2× foto ani 2× video)",
+          "visual_count": "2× vizuál:\n • 1× foto (Image 2.0)\n • 1× video (Runway)",
+          "ai_can_edit": [
+            "H3 titulky",
+            "texty kariet",
+            "CTA texty"
+          ],
+          "ai_cannot_edit": [
+            "Rozloženie kariet",
+            "farba pozadia",
+            "farba okrajov"
+          ],
+          "data_source": [
+            "Claude (text)",
+            "Image 2.0 (foto)",
+            "Runway (video)"
+          ],
+          "rules_text": "⚠️ VŽDY: ľavá karta = FOTO, pravá = VIDEO (alebo opačne).  NIKDY 2× foto ani 2× video vedľa seba.  Text: bežne 2–3 vety, max. 6–9 viet.  CTA vľavo a vpravo musia byť ODLIŠNÉ.  CTA: max. 21 znakov každé.",
+          "constraints": {
+            "cta_max_chars": 21
+          }
+        },
+        {
+          "order": "V1",
+          "slot_id": "product_page.tretia_prehladova_sekcia",
+          "stav": "VOLITEĽNÁ",
+          "name": "Tretia prehľadová sekcia  (služby / značky / postup / kategórie / odkazy)",
+          "element_types": "Nadpis + zoznam (Variant A/B/C/D) + vysvetľujúci text vedľa",
+          "item_count": {
+            "raw": "1× nadpis, 5–15 položiek, 1× text blok (80–180 slov)",
+            "min": 5,
+            "max": 15,
+            "unlimited": false
+          },
+          "visual_type": "Fixná ikona (voliteľne)",
+          "visual_count": "0–6 ikon podľa vstupu",
+          "ai_can_edit": [
+            "Nadpisy",
+            "texty zoznamu",
+            "vysvetľujúci text"
+          ],
+          "ai_cannot_edit": [
+            "Počet stĺpcov",
+            "variant (A",
+            "B",
+            "C",
+            "D)",
+            "poradie položiek"
+          ],
+          "data_source": [
+            "Claude podľa vstupu klienta"
+          ],
+          "rules_text": "POUŽIŤ ak klient dodal veľa položiek:  • Variant A = zoznam služieb  • Variant B = zoznam značiek  • Variant C = pracovný postup  • Variant D = zoznam odkazov / kategórií  Ak > 15 položiek → použiť AKORDEÓN (V3).  Nevymýšľať nové položky.",
+          "constraints": {
+            "preserve_verbatim": true
+          }
+        },
+        {
+          "order": "V2",
+          "slot_id": "product_page.galeria_vizualna_sekcia",
+          "stav": "VOLITEĽNÁ",
+          "name": "Galéria / vizuálna sekcia  (ukážky práce / realizácie / produkty)",
+          "element_types": "Nadpis, 1–2 odseky, galéria fotiek",
+          "item_count": {
+            "raw": "1× nadpis, 1–2 odseky, 4–12 fotiek",
+            "min": 1,
+            "max": 2,
+            "unlimited": false
+          },
+          "visual_type": "FOTO (galéria)  (klient dodá alebo Image 2.0)",
+          "visual_count": "4–12 fotiek",
+          "ai_can_edit": [
+            "Nadpis",
+            "texty odsekov"
+          ],
+          "ai_cannot_edit": [
+            "Výber fotiek",
+            "poradie",
+            "rozloženie galérie"
+          ],
+          "data_source": [
+            "Klient dodá fotky do GDrive",
+            "pracovník uploaduje"
+          ],
+          "rules_text": "POUŽIŤ ak klient dodal fotografie, ukážky práce alebo realizácie.  NEVYMYŠĽAŤ fotografie ani popisy.  Ak klient fotky nedodal → sekciu NEVKLADAŤ.",
+          "constraints": {}
+        },
+        {
+          "order": "5",
+          "slot_id": "product_page.sekcia_ikoniek_benefitov",
+          "stav": "POVINNÁ",
+          "name": "Sekcia ikoniek / benefitov  (3 ikonky, farebné pozadie)",
+          "element_types": "3× ikona + nadpis + text (2–3 vety), 1× CTA tlačidlo sekcie",
+          "item_count": {
+            "raw": "3× ikona, 3× nadpis, 3× text, 1× CTA",
+            "min": 3,
+            "max": 3,
+            "unlimited": false
+          },
+          "visual_type": "Fixná ikona  (z knižnice systému)",
+          "visual_count": "3× fixná ikona",
+          "ai_can_edit": [
+            "Všetky nadpisy",
+            "texty ikoniek",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "ikony (fixné)",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Claude z výhod",
+            "benefitov klienta"
+          ],
+          "rules_text": "3 ikonky = 3 výhody klienta.  Každá ikonka: 2–3 vety – praktický úžitok.  CTA sekcie: max. 21 znakov.  Nevymýšľať výhody, ktoré klient nedodal.",
+          "constraints": {
+            "cta_max_chars": 21
+          }
+        },
+        {
+          "order": "V3",
+          "slot_id": "product_page.akordeon",
+          "stav": "VOLITEĽNÁ",
+          "name": "Akordeón  (zachovaný dlhý obsah)",
+          "element_types": "Nadpis sekcie + N× akordeónová položka (nadpis + obsah)",
+          "item_count": {
+            "raw": "1× nadpis, 3–15 akordeónových položiek",
+            "min": 3,
+            "max": 15,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpisy akordeónových položiek"
+          ],
+          "ai_cannot_edit": [
+            "Obsah položiek (legislatíva",
+            "postup",
+            "presné texty",
+            "fakty",
+            "čísla)"
+          ],
+          "data_source": [
+            "Klient dodá texty (vyhlášky",
+            "postupy",
+            "FAQ",
+            "produkty",
+            "podmienky)"
+          ],
+          "rules_text": "POVINNÝ ak klient dodal:  • Legislatívne texty / vyhlášky / paragrafy  • Pracovné / technologické postupy  • Dlhý zoznam produktov alebo značiek  • Obchodné podmienky / technické špecifikácie  • FAQ / návody / presné inštrukcie  Obsah NESMIE byť obsahovo zmenený.  Opraviť môžeš IBA: gramatiku, preklepy, interpunkciu.  NEMENIŤ: význam, poradie, čísla, legislatívu, názvy, odkazy.",
+          "constraints": {
+            "preserve_verbatim": true
+          }
+        },
+        {
+          "order": "V4",
+          "slot_id": "product_page.dlhsi_obsahovy_blok",
+          "stav": "VOLITEĽNÁ",
+          "name": "Dlhší obsahový blok  (rozšírený popis služby / produktu)",
+          "element_types": "Nadpis + dlhší text + voliteľne 1× foto vedľa",
+          "item_count": {
+            "raw": "1× nadpis, 2–4 odseky, 0–1 foto",
+            "min": 2,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "FOTO (voliteľne)  (klient dodá alebo Image 2.0)",
+          "visual_count": "0–1× foto",
+          "ai_can_edit": [
+            "Nadpis",
+            "text odsekov"
+          ],
+          "ai_cannot_edit": [
+            "Obsah",
+            "fakty",
+            "čísla",
+            "odborné formulácie",
+            "poradie informácií"
+          ],
+          "data_source": [
+            "Klient dodá text z pôvodného webu alebo vlastný popis"
+          ],
+          "rules_text": "POUŽIŤ ak klient dodal dôležitý dlhší text, ktorý nepatrí do úvodu.  Text upraviť IBA jazykovo a štrukturálne.  Obsah, čísla, odborné formulácie NESMÚ byť zmenené.  Ak text obsahuje postup alebo legislatívu → použiť AKORDEÓN (V3).",
+          "constraints": {
+            "preserve_verbatim": true
+          }
+        },
+        {
+          "order": "V5",
+          "slot_id": "product_page.sekcia_ikoniek_rozsirena",
+          "stav": "VOLITEĽNÁ",
+          "name": "Sekcia ikoniek – ROZŠÍRENÁ  (4–6 ikoniek, alternatíva k sekcii 5)",
+          "element_types": "4–6× ikona + nadpis + text (2–3 vety)",
+          "item_count": {
+            "raw": "4–6 ikon, 4–6 nadpisov, 4–6 textov",
+            "min": 4,
+            "max": 6,
+            "unlimited": false
+          },
+          "visual_type": "Fixná ikona  (z knižnice systému)",
+          "visual_count": "4–6× fixná ikona",
+          "ai_can_edit": [
+            "Všetky nadpisy",
+            "texty ikoniek"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "ikony (fixné)",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Claude z výhod",
+            "dôvodov klienta"
+          ],
+          "rules_text": "POUŽIŤ namiesto sekcie 5 ak klient dodal 4–6 jasných výhod alebo dôvodov.  Každá ikonka: 2–3 vety.  Nevymýšľať výhody, ktoré klient nedodal.",
+          "constraints": {}
+        },
+        {
+          "order": "6",
+          "slot_id": "product_page.dovera_klientov_recenzie",
+          "stav": "POVINNÁ",
+          "name": "Dôvera klientov – recenzie",
+          "element_types": "H2, podnadpis, popisný text, Google odkaz, 3× recenzia (karta)",
+          "item_count": {
+            "raw": "1× H2, 1× podnadpis, 1× text (2–4 vety), 1× odkaz, 3× recenzia",
+            "min": 2,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "text nad recenziami"
+          ],
+          "ai_cannot_edit": [
+            "Odkaz Google (fixný)",
+            "texty recenzií",
+            "mená",
+            "hviezdičky"
+          ],
+          "data_source": [
+            "Claude (text)",
+            "klient dodá Google odkaz",
+            "recenzie"
+          ],
+          "rules_text": "Ak klient dodá recenzie: uprednostniť 5★, vybrať s textom.  NEVYMYŠĽAŤ mená, hodnotenia ani texty.  Text recenzie: opraviť IBA gramaticky.  Ak klient recenzie nedodá: dôveryhodný text bez vymyslených recenzií.",
+          "constraints": {
+            "price_client_required": true,
+            "no_invented_reviews": true
+          }
+        },
+        {
+          "order": "7",
+          "slot_id": "product_page.cta_banner_zaverecny",
+          "stav": "POVINNÁ",
+          "name": "CTA banner – záverečný  (tmavé pozadie)",
+          "element_types": "H2, podnadpis, 1× CTA tlačidlo",
+          "item_count": {
+            "raw": "1× H2, 1× podnadpis, 1× CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2 text",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia (tmavá)",
+            "štýl tlačidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": "CTA: MAX. 21 znakov.  Nadpis musí motivovať k akcii – konkrétny prínos.  NEPOUŽIŤ: Kliknite sem / Viac / Tu / Kúpte hneď.",
+          "constraints": {
+            "cta_max_chars": 21
+          }
+        },
+        {
+          "order": "8",
+          "slot_id": "product_page.newsletter",
+          "stav": "POVINNÁ",
+          "name": "Newsletter  (systémová sekcia)",
+          "element_types": "Nadpis, podnadpis, 2× input pole, tlačidlo",
+          "item_count": {
+            "raw": "1× nadpis, 1× podnadpis, 2× pole, 1× tlačidlo",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "—",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "podnadpis",
+            "text tlačidla"
+          ],
+          "ai_cannot_edit": [
+            "Formulárové polia",
+            "farba",
+            "backend"
+          ],
+          "data_source": [
+            "Claude (text)",
+            "systém (formulár)"
+          ],
+          "rules_text": "AI generuje iba text (nadpis, podnadpis).  Formulárové polia generuje programátor.",
+          "constraints": {}
+        },
+        {
+          "order": "9",
+          "slot_id": "product_page.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Päta – footer  (systémová sekcia)",
+          "element_types": "Logo, soc. siete, menu, copyright, GDPR",
+          "item_count": {
+            "raw": "1× logo, variabilné položky, copyright",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1× logo",
+          "ai_can_edit": [
+            "Copyright text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "rozloženie",
+            "soc. ikony",
+            "menu štruktúra"
+          ],
+          "data_source": [
+            "Formulár klienta",
+            "logo súbor z GDrive"
+          ],
+          "rules_text": "Systémová sekcia. AI negeneruje copywriting.  Pracovník vyberá logo, vypĺňa menu.",
+          "constraints": {}
+        }
+      ]
+    },
+    "pricing": {
+      "sheet": "cenník",
+      "elementor_target": "cenník",
+      "intro_notes": [],
+      "sections": [
+        {
+          "order": "1",
+          "slot_id": "pricing.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigacia",
+          "element_types": "Logo, menu, CTA",
+          "item_count": {
+            "raw": "1 logo, variabilne menu",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "CTA text",
+            "menu polozky"
+          ],
+          "ai_cannot_edit": [
+            "Struktura menu",
+            "farby"
+          ],
+          "data_source": [
+            "Formular klienta – Zoznam stranok webu"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "pricing.hero_produkt_sluzba",
+          "stav": "POVINNÁ",
+          "name": "Hero – produkt/sluzba",
+          "element_types": "H1, hlavny vizual",
+          "item_count": {
+            "raw": "1 H1, 1 vizual",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Foto",
+          "visual_count": "1x (AI generuje foto ALE klient schvaluje)",
+          "ai_can_edit": [
+            "H1 text",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Farba nadpisu (brand)",
+            "rozlozenie"
+          ],
+          "data_source": [
+            "Claude",
+            "Image 2.0 alebo Runway podla volby pracovnika"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "pricing.popis_pod_hero",
+          "stav": "POVINNÁ",
+          "name": "Popis pod hero",
+          "element_types": "Nadpis, 3x stlpec (podnadpis + text)",
+          "item_count": {
+            "raw": "1 nadpis, 3 podnadpisy, 6 textov",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "podnadpisy",
+            "odrazky"
+          ],
+          "ai_cannot_edit": [
+            "Pocet stlpcov (3)",
+            "rozlozenie"
+          ],
+          "data_source": [
+            "Claude zo zoznamu sluzieb klienta"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "pricing.cennik_balicky_sluzieb",
+          "stav": "POVINNÁ",
+          "name": "Cennik – balicky sluzieb",
+          "element_types": "Nadpis, karta (vizual, nazov, cena, zoznam vyhod, CTA)",
+          "item_count": {
+            "raw": "1 nadpis, N kart (neobmedzene)",
+            "min": null,
+            "max": null,
+            "unlimited": true
+          },
+          "visual_type": "AI ROZHODLO: KARTY  (dlhy popis / viacero vlastnosti)",
+          "visual_count": "N kart (kazda: nazov, cena, vyhody, CTA)",
+          "ai_can_edit": [
+            "Popis vyhod",
+            "CTA text",
+            "formulaciu"
+          ],
+          "ai_cannot_edit": [
+            "Ceny",
+            "nazvy balickov",
+            "pocet kart"
+          ],
+          "data_source": [
+            "Klient dodava: nazvy",
+            "ceny",
+            "zoznam vyhod"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "5",
+          "slot_id": "pricing.cennik_jednotlive_sluzby",
+          "stav": "POVINNÁ",
+          "name": "Cennik – jednotlive sluzby",
+          "element_types": "Tabulka: Sluzba | Popis | Cena (max 5 stlpcov)",
+          "item_count": {
+            "raw": "Neobmedzeny pocet riadkov",
+            "min": null,
+            "max": null,
+            "unlimited": true
+          },
+          "visual_type": "AI ROZHODLO: TABULKA  (kratky popis, max 5 stlpcov)",
+          "visual_count": "1 tabulka, N riadkov",
+          "ai_can_edit": [
+            "Popis sluzby",
+            "formulaciu"
+          ],
+          "ai_cannot_edit": [
+            "Ceny",
+            "nazvy sluzieb",
+            "pocet stlpcov (max 5)"
+          ],
+          "data_source": [
+            "Klient dodava: nazvy",
+            "ceny sluzieb"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "6",
+          "slot_id": "pricing.benefity_farebna_sekcia",
+          "stav": "POVINNÁ",
+          "name": "Benefity (farebna sekcia)",
+          "element_types": "3x stlpec (ikona, podnadpis, 3 odrazky)",
+          "item_count": {
+            "raw": "3 ikony, 3 podnadpisy, 3-9 odrazok",
+            "min": 3,
+            "max": 9,
+            "unlimited": false
+          },
+          "visual_type": "Fixna ikona",
+          "visual_count": "3x fixna ikona (grafika v brand farbach)",
+          "ai_can_edit": [
+            "Vsetky podnadpisy",
+            "texty odrazok"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "ikony (fixne)",
+            "rozlozenie"
+          ],
+          "data_source": [
+            "Claude z vyhod firmy"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "7",
+          "slot_id": "pricing.dovera_klientov",
+          "stav": "POVINNÁ",
+          "name": "Dovera klientov",
+          "element_types": "H2, podnadpis, popisny text, 1 CTA",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 text",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "text"
+          ],
+          "ai_cannot_edit": [
+            "Odkaz na Google (fixny – klient doda)"
+          ],
+          "data_source": [
+            "Claude",
+            "klient doda Google odkaz"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "8",
+          "slot_id": "pricing.cta_banner_tmavy",
+          "stav": "POVINNÁ",
+          "name": "CTA banner (tmavy)",
+          "element_types": "H2, podnadpis, 1x CTA",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "styl tlacidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "9",
+          "slot_id": "pricing.newsletter",
+          "stav": "POVINNÁ",
+          "name": "Newsletter",
+          "element_types": "Nadpis, podnadpis, 2x input, tlacidlo",
+          "item_count": {
+            "raw": "1 nadpis, 1 podnadpis, 2 inputy",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "podnadpis",
+            "text tlacidla"
+          ],
+          "ai_cannot_edit": [
+            "Formularove polia",
+            "farba tlacidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "10",
+          "slot_id": "pricing.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Pata (footer)",
+          "element_types": "Logo, soc. siete, menu, copyright",
+          "item_count": {
+            "raw": "1 logo, variabilne menu, soc. siete",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "copyright",
+            "menu polozky"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "rozlozenie"
+          ],
+          "data_source": [
+            "Formular",
+            "logo subor z GDrive"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        }
+      ]
+    },
+    "area": {
+      "sheet": "okolie,výlety,zážitky",
+      "elementor_target": "Okolie / Výlety / Zážitky",
+      "intro_notes": [
+        "CONTENT MAPPING – Stránka: Okolie / Výlety / Zážitky",
+        "▶ PRAVIDLÁ PRE VIDEÁ – platí pre obe šablóny",
+        "Počet videí na stránku | Vždy 2–3 videá na stránku. Nikdy menej ako 2, nikdy viac ako 3 (pokiaľ klient neurčí inak).",
+        "Umiestnenie videa | Video sa umiestni VŽDY tam, kde je fotka vedľa textu (foto/text sekcie).\n NIKDY nie do galérie. NIKDY nie samostatná video sekcia.",
+        "Pravidlo – nikdy dve pod sebou | Medzi dvoma videami musí byť vždy aspoň 1 sekcia iba s fotkou alebo bez vizuálu.\n Poradie príkladu: [foto] → [VIDEO] → [foto] → [foto] → [VIDEO] → [foto]",
+        "Veľkosť videa | Video môže byť veľké (50% šírky – namiesto hero foto) ALEBO malé (50% šírky – namiesto bežnej foto vedľa textu).\n AI vyberie veľkosť podľa dôležitosti obsahu videa.",
+        "Zdroj videa | Klient dodá video súbor alebo YouTube/Vimeo odkaz.\n AI NESMIE generovať video – iba určí pozíciu a veľkosť.",
+        "▶ AI ROZHODOVANIE – ktorú šablónu použiť? (vždy iba jednu)",
+        "Podmienka | ŠABLÓNA 1 – Bohatý obsah | ŠABLÓNA 2 – Kompaktný obsah | AI pravidlo",
+        "Počet aktivít dodaných klientom | ≥ 6 aktivít (letné + zimné + celoročné) | 1–5 aktivít bez sezónneho delenia | ≥6 → Š1\n <6 → Š2",
+        "Počet fotografií + videí dodaných klientom | ≥ 10 médií (hero + galéria + sekcie) | 3–9 médií (fotky + 2–3 videá) | ≥10 → Š1\n <10 → Š2",
+        "Počet textových sekcií | ≥ 8 sekcií → dlhá stránka | 4–7 sekcií → kratšia stránka | ≥8 → Š1\n <8 → Š2",
+        "Recenzie / Google hodnotenia | ≥ 3 recenzie + Google badge | < 3 recenzií → sekcia vynechaná | ≥3 → Š1\n <3 → Š2",
+        "Štatistiky s číslami (km, počty...) | Nie sú potrebné | Klient dodal 3–5 čísel (380km, 10+...) | Čísla dodané → Š2\n Bez čísel → Š1",
+        "Konkrétny zoznam miest / POI | Miesta integrované do textu, nie zoznam | 5+ konkrétnych miest ako bullet zoznam | Zoznam → Š2\n Bez zoznamu → Š1",
+        "★ | ŠABLÓNA 1: bohatý obsah (8+ sekcií, 10+ médií, 6+ aktivít, 3+ recenzií) | ŠABLÓNA 2: kompaktný obsah (4–7 sekcií, 3–9 médií, zoznam miest + štatistiky) | Väčšina podmienok rozhodne → AI vyberie jednu šablónu",
+        "★ SPOLOČNÉ SEKCIE – rovnaké v oboch šablónach"
+      ],
+      "sections": [
+        {
+          "order": "S",
+          "slot_id": "area.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigácia",
+          "element_types": "Logo, menu, CTA tlačidlo",
+          "item_count": {
+            "raw": "1 logo, variabilné menu",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "LOGO KLIENTA",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "CTA text",
+            "menu položky"
+          ],
+          "ai_cannot_edit": [
+            "Štruktúra menu",
+            "farby (brand)"
+          ],
+          "data_source": [
+            "Formulár klienta – zoznam stránok webu"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "S",
+          "slot_id": "area.benefity_3_ikony",
+          "stav": "POVINNÁ",
+          "name": "Benefity – 3 ikony",
+          "element_types": "3x ikona + H3 + text",
+          "item_count": {
+            "raw": "3 ikony, 3 nadpisy, 3 texty",
+            "min": 3,
+            "max": 3,
+            "unlimited": false
+          },
+          "visual_type": "FIXNÁ IKONA",
+          "visual_count": "3x ikona (brand farby)",
+          "ai_can_edit": [
+            "Všetky texty",
+            "nadpisy benefitov"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "ikony (fixné brand)"
+          ],
+          "data_source": [
+            "Claude z výhod firmy",
+            "regiónu"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "S",
+          "slot_id": "area.cta_banner_tmavy",
+          "stav": "POVINNÁ",
+          "name": "CTA banner (tmavý)",
+          "element_types": "H2, podnadpis, 1x CTA",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia (brand)",
+            "štýl tlačidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "S",
+          "slot_id": "area.newsletter",
+          "stav": "POVINNÁ",
+          "name": "Newsletter",
+          "element_types": "Nadpis, bullets, 2x input, tlačidlo",
+          "item_count": {
+            "raw": "1 nadpis, bullets, 2 inputy",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "bullets",
+            "text tlačidla"
+          ],
+          "ai_cannot_edit": [
+            "Formulárové polia",
+            "farba"
+          ],
+          "data_source": [
+            "Claude",
+            "formulár klienta"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "S",
+          "slot_id": "area.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Pata (footer)",
+          "element_types": "Logo, soc. siete, menu, copyright",
+          "item_count": {
+            "raw": "1 logo, menu, soc. siete",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "LOGO KLIENTA",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Copyright text",
+            "menu položky"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Formulár",
+            "logo súbor z GDrive"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "1",
+          "slot_id": "area.hero_hlavny_vizual",
+          "stav": "POVINNÁ",
+          "name": "Hero – hlavný vizuál",
+          "element_types": "H1, podnadpis, hero médium (foto alebo video)",
+          "item_count": {
+            "raw": "1 H1, 1 médium (foto alebo video), 1 podnadpis",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "1x foto ALEBO 1x video (veľké – 100% šírky)\n AI rozhodne podľa dostupného materiálu",
+          "ai_can_edit": [
+            "H1 text",
+            "podnadpis"
+          ],
+          "ai_cannot_edit": [
+            "Farba nadpisu (brand)",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Klient dodá foto",
+            "video → AI vyberie video ak je k dispozícii"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "area.uvodny_text_3_stlpce",
+          "stav": "POVINNÁ",
+          "name": "Úvodný text – 3 stĺpce",
+          "element_types": "Perex, nadpis, 3 stĺpce (letné / zimné / iné zážitky)",
+          "item_count": {
+            "raw": "1 nadpis, 1 perex, 3 stĺpce s textom",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Všetky texty",
+            "kategórie zážitkov"
+          ],
+          "ai_cannot_edit": [
+            "Počet stĺpcov (3)",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Claude zo zoznamu aktivít klienta"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "area.foto_text_sekcia_a_video",
+          "stav": "POVINNÁ",
+          "name": "Foto + text – sekcia A ▶ VIDEO",
+          "element_types": "Foto/video (ľavý 50%), H3 + text + odkaz (pravý 50%)",
+          "item_count": {
+            "raw": "1 VIDEO (malé, 50% šírky), 1 H3, 1 text, 1 odkaz",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "VIDEO (1x)",
+          "visual_count": "1x video (malé – 50% šírky)\n ★ VIDEO č.1 z 2–3",
+          "ai_can_edit": [
+            "H3 text",
+            "popis",
+            "odkaz text"
+          ],
+          "ai_cannot_edit": [
+            "Fotografia",
+            "video (klient dodá)",
+            "rozloženie (50",
+            "50)"
+          ],
+          "data_source": [
+            "Klient dodá video",
+            "Claude text"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "area.foto_text_sekcia_b_foto",
+          "stav": "POVINNÁ",
+          "name": "Foto + text – sekcia B ▶ FOTO",
+          "element_types": "H3 + text + odkaz (ľavý 50%), foto (pravý 50%)",
+          "item_count": {
+            "raw": "1 foto (malé), 1 H3, 1 text, 1 odkaz",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO (1x)",
+          "visual_count": "1x foto (klient dodá)",
+          "ai_can_edit": [
+            "H3 text",
+            "popis",
+            "odkaz text"
+          ],
+          "ai_cannot_edit": [
+            "Fotografia (klient dodá)",
+            "rozloženie (50",
+            "50)"
+          ],
+          "data_source": [
+            "Klient dodá foto",
+            "Claude text"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "5",
+          "slot_id": "area.benefity_3_ikony_text",
+          "stav": "POVINNÁ",
+          "name": "Benefity – 3 ikony + text",
+          "element_types": "3x ikona + H3 + text",
+          "item_count": {
+            "raw": "3 ikony, 3 nadpisy, 3 texty",
+            "min": 3,
+            "max": 3,
+            "unlimited": false
+          },
+          "visual_type": "FIXNÁ IKONA",
+          "visual_count": "3x ikona (brand farby)",
+          "ai_can_edit": [
+            "Všetky texty",
+            "nadpisy benefitov"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "ikony (fixné)"
+          ],
+          "data_source": [
+            "Claude z výhod firmy"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "6",
+          "slot_id": "area.cta_banner_stred_stranky",
+          "stav": "POVINNÁ",
+          "name": "CTA banner – stred stránky",
+          "element_types": "H2, podnadpis, 1x CTA tlačidlo",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia (brand oranžová)"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "7",
+          "slot_id": "area.priroda_hlavna_sekcia_video",
+          "stav": "POVINNÁ",
+          "name": "Príroda / hlavná sekcia ▶ VIDEO",
+          "element_types": "H2, perex, dlhý text (ľavý 50%), video (pravý 50%) + galéria pod",
+          "item_count": {
+            "raw": "1 H2, 1 perex, 1 text, 1 VIDEO (malé), galéria 8–12 fotiek",
+            "min": 8,
+            "max": 12,
+            "unlimited": false
+          },
+          "visual_type": "VIDEO (1x)",
+          "visual_count": "1x video (malé – 50% šírky) + galéria pod\n ★ VIDEO č.2 z 2–3",
+          "ai_can_edit": [
+            "Texty",
+            "nadpis",
+            "perex"
+          ],
+          "ai_cannot_edit": [
+            "Video",
+            "fotografie (klient dodá)",
+            "počet foto v galérii"
+          ],
+          "data_source": [
+            "Klient dodá video",
+            "fotky",
+            "Claude texty"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "8",
+          "slot_id": "area.referencie_hodnotenia",
+          "stav": "POVINNÁ",
+          "name": "Referencie / hodnotenia",
+          "element_types": "H2, perex, 3x karta recenzie, Google badge",
+          "item_count": {
+            "raw": "3+ recenzií, 1 Google badge",
+            "min": 3,
+            "max": null,
+            "unlimited": true
+          },
+          "visual_type": "LOGO GOOGLE",
+          "visual_count": "3x avatar + Google logo",
+          "ai_can_edit": [
+            "Perex",
+            "texty recenzií (ak nie sú dané)"
+          ],
+          "ai_cannot_edit": [
+            "Mená",
+            "hviezdy",
+            "Google badge"
+          ],
+          "data_source": [
+            "Klient dodá recenzie",
+            "Google odkaz"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "9",
+          "slot_id": "area.zaverecna_sekcia_video_volitelne",
+          "stav": "POVINNÁ",
+          "name": "Záverečná sekcia ▶ VIDEO (voliteľné)",
+          "element_types": "H2, text, VIDEO (veľké – namiesto foto), CTA",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 VIDEO (veľké – 100% alebo 50%), 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "VIDEO (1x)",
+          "visual_count": "1x video (veľké – 100% šírky) – voliteľné\n ★ VIDEO č.3 z 2–3 (iba ak klient dodá 3. video)",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Video (klient dodá!)",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Klient dodá video",
+            "Claude text"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "1",
+          "slot_id": "area.hero_uvodny_text_galeria",
+          "stav": "POVINNÁ",
+          "name": "Hero – úvodný text + galéria",
+          "element_types": "H2, perex, galéria (6–9 fotiek)",
+          "item_count": {
+            "raw": "1 H2, 1 perex, galéria",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO (galéria)",
+          "visual_count": "6–9x foto (klient dodá)",
+          "ai_can_edit": [
+            "H2 text",
+            "perex"
+          ],
+          "ai_cannot_edit": [
+            "Fotografie",
+            "rozloženie galérie"
+          ],
+          "data_source": [
+            "Klient dodá fotky",
+            "Claude texty"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "area.statistiky_pruhy_s_cislami",
+          "stav": "POVINNÁ",
+          "name": "Štatistiky – pruhy s číslami",
+          "element_types": "4x číslo + popis (380km, 10+, 200m...)",
+          "item_count": {
+            "raw": "4 číselné štatistiky",
+            "min": 4,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Texty popisov štatistík"
+          ],
+          "ai_cannot_edit": [
+            "Číselné hodnoty (klient dodá!)"
+          ],
+          "data_source": [
+            "Klient dodá čísla",
+            "Claude formuluje popis"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "area.foto_text_sekcia_a_video_2",
+          "stav": "POVINNÁ",
+          "name": "Foto + text – sekcia A ▶ VIDEO",
+          "element_types": "VIDEO (ľavý 50%), H2 + text + CTA (pravý 50%)",
+          "item_count": {
+            "raw": "1 VIDEO (malé – 50% šírky), 1 H2, 1 text, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "VIDEO (1x)",
+          "visual_count": "1x video (malé – 50% šírky)\n ★ VIDEO č.1 z 2–3",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Video (klient dodá!)",
+            "rozloženie (50",
+            "50)"
+          ],
+          "data_source": [
+            "Klient dodá video",
+            "Claude text"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "area.zoznam_miest_poi",
+          "stav": "POVINNÁ",
+          "name": "Zoznam miest / POI",
+          "element_types": "Nadpis, bullet zoznam 5–8 miest, popis napravo",
+          "item_count": {
+            "raw": "5–8 miest, 1 text blok",
+            "min": 5,
+            "max": 8,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Formuláciu názvov",
+            "popisný text napravo"
+          ],
+          "ai_cannot_edit": [
+            "Zoznam miest (klient dodá!)"
+          ],
+          "data_source": [
+            "Klient dodá zoznam miest",
+            "Claude text"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "5",
+          "slot_id": "area.foto_text_sekcia_b_foto_2",
+          "stav": "POVINNÁ",
+          "name": "Foto + text – sekcia B ▶ FOTO",
+          "element_types": "H2 + text + CTA (ľavý 50%), foto (pravý 50%)",
+          "item_count": {
+            "raw": "1 foto (malé), 1 H2, 1 text, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO (1x)",
+          "visual_count": "1x foto (klient dodá)",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Fotografia",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Klient dodá foto",
+            "Claude text"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "6",
+          "slot_id": "area.foto_text_sekcia_c_video",
+          "stav": "POVINNÁ",
+          "name": "Foto + text – sekcia C ▶ VIDEO",
+          "element_types": "VIDEO (ľavý 50%), H2 + text + CTA (pravý 50%)",
+          "item_count": {
+            "raw": "1 VIDEO (malé – 50% šírky), 1 H2, 1 text, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "VIDEO (1x)",
+          "visual_count": "1x video (malé – 50% šírky)\n ★ VIDEO č.2 z 2–3",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Video (klient dodá!)",
+            "rozloženie (50",
+            "50)"
+          ],
+          "data_source": [
+            "Klient dodá video",
+            "Claude text"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "7",
+          "slot_id": "area.foto_text_sekcia_d_foto",
+          "stav": "POVINNÁ",
+          "name": "Foto + text – sekcia D ▶ FOTO",
+          "element_types": "Foto (ľavý 50%), H2 + text + CTA (pravý 50%)",
+          "item_count": {
+            "raw": "1 foto (malé), 1 H2, 1 text, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO (1x)",
+          "visual_count": "1x foto (klient dodá)",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Fotografia",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Klient dodá foto",
+            "Claude text"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "8",
+          "slot_id": "area.zaverecna_sekcia_video_volitelne_2",
+          "stav": "POVINNÁ",
+          "name": "Záverečná sekcia ▶ VIDEO (voliteľné)",
+          "element_types": "H2, text, VIDEO (veľké), CTA",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 VIDEO (veľké – 100%), 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "VIDEO (1x)",
+          "visual_count": "1x video (veľké – 100% šírky) – voliteľné\n ★ VIDEO č.3 z 2–3 (iba ak klient dodá 3. video)",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Video (klient dodá!)",
+            "rozloženie"
+          ],
+          "data_source": [
+            "Klient dodá video",
+            "Claude text"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "9",
+          "slot_id": "area.referencie_hostia_volitelne",
+          "stav": "POVINNÁ",
+          "name": "Referencie / hostia (voliteľné)",
+          "element_types": "H2, perex, 2 textové bloky (citáty hostí)",
+          "item_count": {
+            "raw": "1 H2, 1 perex, 2 citáty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "NIE",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Texty",
+            "nadpisy"
+          ],
+          "ai_cannot_edit": [
+            "Mená hostí (ak dodal klient)"
+          ],
+          "data_source": [
+            "Claude",
+            "klient (mená",
+            "citáty)"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        }
+      ]
+    },
+    "services": {
+      "sheet": "SLuzby",
+      "elementor_target": "Služby",
+      "intro_notes": [],
+      "sections": [
+        {
+          "order": "1",
+          "slot_id": "services.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigacia",
+          "element_types": "Logo, menu, CTA",
+          "item_count": {
+            "raw": "1 logo, variabilne menu, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "CTA text",
+            "menu polozky"
+          ],
+          "ai_cannot_edit": [
+            "Struktura menu",
+            "farby"
+          ],
+          "data_source": [
+            "Formular klienta - Zoznam stranok webu"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "services.hero_sekcia",
+          "stav": "POVINNÁ",
+          "name": "Hero sekcia",
+          "element_types": "H1, podnadpis, CTA, statistiky, hlavny vizual",
+          "item_count": {
+            "raw": "1 H1, 1 podnadpis, 1 CTA, 3 statistiky",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "1 hlavny vizual",
+          "ai_can_edit": [
+            "H1",
+            "podnadpis",
+            "CTA",
+            "statistiky",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie",
+            "farby",
+            "fonty"
+          ],
+          "data_source": [
+            "Claude",
+            "Runway alebo klientove foto"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "services.nase_sluzby_karty",
+          "stav": "POVINNÁ",
+          "name": "Nase sluzby (karty)",
+          "element_types": "Nadpis sekcie, podnadpis, karty sluzieb",
+          "item_count": {
+            "raw": "1 nadpis, 1 podnadpis, min. 2 max. 8 kariet",
+            "min": 2,
+            "max": 8,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo IKONA",
+          "visual_count": "1 vizual na kartu",
+          "ai_can_edit": [
+            "Nazov sluzby",
+            "popis",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Pocet kariet",
+            "layout"
+          ],
+          "data_source": [
+            "Claude",
+            "klientove podklady"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "services.sluzba_blok_1_vpravo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 1 (vpravo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "5",
+          "slot_id": "services.sluzba_blok_2_vlavo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 2 (vlavo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "6",
+          "slot_id": "services.sluzba_blok_3_vpravo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 3 (vpravo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "7",
+          "slot_id": "services.sluzba_blok_4_vlavo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 4 (vlavo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "8",
+          "slot_id": "services.sluzba_blok_5_vpravo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 5 (vpravo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "9",
+          "slot_id": "services.sluzba_blok_6_vlavo",
+          "stav": "POVINNÁ",
+          "name": "Sluzba blok 6 (vlavo)",
+          "element_types": "H2, text, CTA + vizualna cast (2 sloty)",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 2 vizualne sloty",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Slot A + Slot B",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "oba vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie vlavo",
+            "vpravo",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "GDrive",
+            "Runway"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "10",
+          "slot_id": "services.video_sekcia",
+          "stav": "POVINNÁ",
+          "name": "Video sekcia",
+          "element_types": "H2, podnadpis, video",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 video",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "VIDEO",
+          "visual_count": "1 video",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "video"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie playera",
+            "farby"
+          ],
+          "data_source": [
+            "Runway",
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "11",
+          "slot_id": "services.galeria",
+          "stav": "POVINNÁ",
+          "name": "Galeria",
+          "element_types": "Nadpis sekcie, fotky",
+          "item_count": {
+            "raw": "1 nadpis, 3-12 fotiek",
+            "min": 3,
+            "max": 12,
+            "unlimited": false
+          },
+          "visual_type": "FOTO",
+          "visual_count": "3-12 fotiek",
+          "ai_can_edit": [
+            "Nadpis",
+            "titulky fotiek"
+          ],
+          "ai_cannot_edit": [
+            "Grid galerie",
+            "layout"
+          ],
+          "data_source": [
+            "GDrive",
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "12",
+          "slot_id": "services.referencie_loga",
+          "stav": "POVINNÁ",
+          "name": "Referencie (loga)",
+          "element_types": "Nadpis, loga klientov",
+          "item_count": {
+            "raw": "1 nadpis, 4-20 log",
+            "min": 4,
+            "max": 20,
+            "unlimited": false
+          },
+          "visual_type": "LOGO",
+          "visual_count": "4-20 log",
+          "ai_can_edit": [
+            "Nadpis"
+          ],
+          "ai_cannot_edit": [
+            "Loga",
+            "layout"
+          ],
+          "data_source": [
+            "Klient doda loga"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "13",
+          "slot_id": "services.google_recenzie",
+          "stav": "POVINNÁ",
+          "name": "Google recenzie",
+          "element_types": "Nadpis, hodnotenie, recenzie",
+          "item_count": {
+            "raw": "1 nadpis, 3-6 recenzii",
+            "min": 3,
+            "max": 6,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "mena",
+            "texty recenzii"
+          ],
+          "ai_cannot_edit": [
+            "Widget",
+            "hviezdicky"
+          ],
+          "data_source": [
+            "Google Reviews API"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "14",
+          "slot_id": "services.blog_sekcia",
+          "stav": "POVINNÁ",
+          "name": "Blog sekcia",
+          "element_types": "Nadpis, zoznam clankov",
+          "item_count": {
+            "raw": "1 nadpis, 1-6 clankov",
+            "min": 1,
+            "max": 6,
+            "unlimited": false
+          },
+          "visual_type": "FOTO",
+          "visual_count": "1 foto ku clanku",
+          "ai_can_edit": [
+            "Nadpisy clankov",
+            "perexy"
+          ],
+          "ai_cannot_edit": [
+            "Layout blogu"
+          ],
+          "data_source": [
+            "Blog databaza"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "15",
+          "slot_id": "services.cta_banner_tmavy",
+          "stav": "POVINNÁ",
+          "name": "CTA banner (tmavy)",
+          "element_types": "H2, podnadpis, CTA",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "styl tlacidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "16",
+          "slot_id": "services.newsletter",
+          "stav": "POVINNÁ",
+          "name": "Newsletter",
+          "element_types": "Nadpis, podnadpis, 2 inputy, tlacidlo",
+          "item_count": {
+            "raw": "1 nadpis, 1 podnadpis, email, meno, tlacidlo",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "podnadpis",
+            "text tlacidla"
+          ],
+          "ai_cannot_edit": [
+            "Formularove polia",
+            "integracia"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "17",
+          "slot_id": "services.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Pata (footer)",
+          "element_types": "Logo, menu, socialne siete, kontakt",
+          "item_count": {
+            "raw": "1 logo, variabilne menu, socialne siete, kontakt",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "copyright",
+            "menu polozky",
+            "kontakty"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie",
+            "farby"
+          ],
+          "data_source": [
+            "Formular",
+            "logo z GDrive"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "18",
+          "slot_id": "services.poznamka_pravidlo_pre_sluzby",
+          "stav": "POVINNÁ",
+          "name": "POZNAMKA - pravidlo pre sluzby",
+          "element_types": "Pocet blokov sluzieb je dynamicky podla poctu sluzieb klienta",
+          "item_count": {
+            "raw": "min. 2, max. 8 blokov",
+            "min": 2,
+            "max": 8,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "2 sloty na kazdy blok",
+          "ai_can_edit": [
+            "Vsetky H2",
+            "texty",
+            "CTA",
+            "vizualy"
+          ],
+          "ai_cannot_edit": [
+            "Striedanie layoutu",
+            "fonty",
+            "farby"
+          ],
+          "data_source": [
+            "Formular klienta",
+            "GDrive",
+            "n8n konfiguracia"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        }
+      ]
+    },
+    "about": {
+      "sheet": "o nás",
+      "elementor_target": "O nás",
+      "intro_notes": [],
+      "sections": [
+        {
+          "order": "1",
+          "slot_id": "about.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigacia",
+          "element_types": "Logo, menu, CTA",
+          "item_count": {
+            "raw": "1 logo, variabilne menu, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "CTA text",
+            "menu polozky"
+          ],
+          "ai_cannot_edit": [
+            "Struktura menu",
+            "farby"
+          ],
+          "data_source": [
+            "Formular klienta - Zoznam stranok webu"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "about.hero_o_nas",
+          "stav": "POVINNÁ",
+          "name": "Hero - O nas",
+          "element_types": "H1, popisny text + vizual vpravo",
+          "item_count": {
+            "raw": "1 H1, 1 text, 1 vizual",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "1x (foto od klienta ALEBO Runway video podla volby)",
+          "ai_can_edit": [
+            "H1",
+            "popisny text",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie",
+            "farby nadpisu"
+          ],
+          "data_source": [
+            "Claude",
+            "klient doda foto ALEBO Runway video"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "about.statistiky_4_cisla",
+          "stav": "POVINNÁ",
+          "name": "Statistiky (4 cisla)",
+          "element_types": "4x blok (velke cislo + popis)",
+          "item_count": {
+            "raw": "4 cisla, 4 popisy",
+            "min": 4,
+            "max": 4,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Vsetky 4 cisla a popisy"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie (4 stlpce)",
+            "farby cisiel"
+          ],
+          "data_source": [
+            "Formular klienta - pole Statistiky firmy"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "about.blok_s_vizualom_tmavy",
+          "stav": "POVINNÁ",
+          "name": "Blok s vizualom - tmavy",
+          "element_types": "Vizual vlavo, H2, text, CTA",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 1 vizual",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "1x (foto od klienta ALEBO Runway video podla volby)",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia (tmava)",
+            "rozlozenie"
+          ],
+          "data_source": [
+            "Claude",
+            "klient doda foto ALEBO Runway video"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "5",
+          "slot_id": "about.sme_spolahlivy_tmavy_blok",
+          "stav": "POVINNÁ",
+          "name": "Sme spolahlivy (tmavy blok)",
+          "element_types": "H2, text, CTA + vizual vpravo",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 1 vizual",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "1x (foto od klienta ALEBO Runway video podla volby)",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia (tmava zelena)",
+            "rozlozenie"
+          ],
+          "data_source": [
+            "Claude",
+            "klient doda foto ALEBO Runway video"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "6",
+          "slot_id": "about.sme_rychli_ako_strela",
+          "stav": "POVINNÁ",
+          "name": "Sme rychli ako strela",
+          "element_types": "H2, text, CTA + vizual vlavo",
+          "item_count": {
+            "raw": "1 H2, 1 text, 1 CTA, 1 vizual",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "1x (foto od klienta ALEBO Runway video podla volby)",
+          "ai_can_edit": [
+            "H2",
+            "text",
+            "CTA",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie",
+            "farby"
+          ],
+          "data_source": [
+            "Claude",
+            "klient doda foto ALEBO Runway video"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "7",
+          "slot_id": "about.faq_casto_kladene_otazky",
+          "stav": "POVINNÁ",
+          "name": "FAQ - casto kladene otazky",
+          "element_types": "Nadpis, podnadpis, variabilny pocet otazok/odpovedi, 1x vizual",
+          "item_count": {
+            "raw": "1 nadpis, 1 podnadpis, 4-8 otazok, 1 vizual",
+            "min": 4,
+            "max": 8,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "1x vedla FAQ (foto od klienta ALEBO Runway video podla volby)",
+          "ai_can_edit": [
+            "Vsetky otazky a odpovede",
+            "nadpis",
+            "vizual"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie akordeonu (fixne)",
+            "farby"
+          ],
+          "data_source": [
+            "Claude generuje FAQ",
+            "klient doda foto ALEBO Runway video"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "8",
+          "slot_id": "about.referencie_loga",
+          "stav": "POVINNÁ",
+          "name": "Referencie - loga",
+          "element_types": "Nadpis, 6-8x logo klienta",
+          "item_count": {
+            "raw": "1 nadpis, 6-8 log",
+            "min": 6,
+            "max": 8,
+            "unlimited": false
+          },
+          "visual_type": "Klient doda loga (volitelné)",
+          "visual_count": "6-8x logo",
+          "ai_can_edit": [
+            "Nadpis sekcie"
+          ],
+          "ai_cannot_edit": [
+            "Loga (fixne)",
+            "rozlozenie"
+          ],
+          "data_source": [
+            "Klient doda loga zakaznikov"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "9",
+          "slot_id": "about.cta_banner_tmavy",
+          "stav": "POVINNÁ",
+          "name": "CTA banner (tmavy)",
+          "element_types": "H2, podnadpis, 1x CTA",
+          "item_count": {
+            "raw": "1 H2, 1 podnadpis, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "H2",
+            "podnadpis",
+            "CTA text"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "styl tlacidla"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "10",
+          "slot_id": "about.newsletter",
+          "stav": "POVINNÁ",
+          "name": "Newsletter",
+          "element_types": "Nadpis, podnadpis, 2x input, tlacidlo",
+          "item_count": {
+            "raw": "1 nadpis, 1 podnadpis, 2 inputy, 1 tlacidlo",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "podnadpis",
+            "text tlacidla"
+          ],
+          "ai_cannot_edit": [
+            "Formularove polia"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "11",
+          "slot_id": "about.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Pata (footer)",
+          "element_types": "Logo, soc. siete, menu, copyright",
+          "item_count": {
+            "raw": "1 logo, variabilne menu, 5 ikon, kontakt",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "copyright",
+            "menu polozky"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie",
+            "farby"
+          ],
+          "data_source": [
+            "Formular",
+            "logo subor z GDrive"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        }
+      ]
+    },
+    "contact": {
+      "sheet": "kontakt",
+      "elementor_target": "Kontakt",
+      "intro_notes": [],
+      "sections": [
+        {
+          "order": "1",
+          "slot_id": "contact.navigacia",
+          "stav": "POVINNÁ",
+          "name": "Navigacia",
+          "element_types": "Logo, menu, CTA",
+          "item_count": {
+            "raw": "1 logo, variabilne menu, 1 CTA",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "CTA text",
+            "menu polozky"
+          ],
+          "ai_cannot_edit": [
+            "Struktura menu",
+            "farby"
+          ],
+          "data_source": [
+            "Formular klienta - Zoznam stranok webu"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "2",
+          "slot_id": "contact.hero_kontaktna_osoba",
+          "stav": "POVINNÁ",
+          "name": "Hero - kontaktna osoba",
+          "element_types": "Foto osoby vlavo, meno + titul, email, tel.; H2 + kontakt vpravo",
+          "item_count": {
+            "raw": "1 foto, meno, titul, email, tel., 1 H2",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Klient doda foto CEO",
+          "visual_count": "1x foto kontaktnej osoby",
+          "ai_can_edit": [
+            "H2",
+            "meno",
+            "titul",
+            "email",
+            "telefon"
+          ],
+          "ai_cannot_edit": [
+            "Rozlozenie",
+            "farby"
+          ],
+          "data_source": [
+            "Formular klienta - kontakt",
+            "klient doda foto osoby do GDrive"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "3",
+          "slot_id": "contact.mapa_fakturacne_udaje",
+          "stav": "POVINNÁ",
+          "name": "Mapa + fakturacne udaje",
+          "element_types": "Foto mesta vlavo, Google mapa vpravo, fakturacne udaje, 2x kontaktny blok",
+          "item_count": {
+            "raw": "1 foto mesta, 1 mapa, ICO, DIC, adresa, 2x kontakt",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "FOTO alebo VIDEO",
+          "visual_count": "Foto mesta: foto od klienta ALEBO Runway video podla volby\n Mapa: vzdy fixny Google embed",
+          "ai_can_edit": [
+            "Fakturacne udaje",
+            "kontaktne bloky (tel",
+            "email)"
+          ],
+          "ai_cannot_edit": [
+            "Google mapa (fixna - embed)",
+            "rozlozenie"
+          ],
+          "data_source": [
+            "Formular klienta - fakturacne udaje",
+            "klient doda foto mesta ALEBO Runway video"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "4",
+          "slot_id": "contact.newsletter",
+          "stav": "POVINNÁ",
+          "name": "Newsletter",
+          "element_types": "Nadpis, podnadpis, 2x input, tlacidlo",
+          "item_count": {
+            "raw": "1 nadpis, 1 podnadpis, 2 inputy, 1 tlacidlo",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Nie",
+          "visual_count": "—",
+          "ai_can_edit": [
+            "Nadpis",
+            "podnadpis",
+            "text tlacidla"
+          ],
+          "ai_cannot_edit": [
+            "Formularove polia",
+            "farba"
+          ],
+          "data_source": [
+            "Claude"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        },
+        {
+          "order": "5",
+          "slot_id": "contact.pata_footer",
+          "stav": "POVINNÁ",
+          "name": "Pata (footer)",
+          "element_types": "Logo, soc. siete, menu, copyright",
+          "item_count": {
+            "raw": "1 logo, variabilne menu, 5 ikon, copyright",
+            "min": 1,
+            "max": 1,
+            "unlimited": false
+          },
+          "visual_type": "Logo klienta",
+          "visual_count": "1x logo",
+          "ai_can_edit": [
+            "Logo",
+            "copyright",
+            "menu polozky"
+          ],
+          "ai_cannot_edit": [
+            "Farba pozadia",
+            "rozlozenie"
+          ],
+          "data_source": [
+            "Formular",
+            "logo subor z GDrive"
+          ],
+          "rules_text": null,
+          "constraints": {}
+        }
+      ]
+    }
+  },
+  "stats": {
+    "pages": 11,
+    "sections_total": 133,
+    "errors": 0,
+    "warnings": 4
+  }
+}

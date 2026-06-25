@@ -1,0 +1,586 @@
+{
+  "_poznamka": "Blueprint sekcií HP. 'path' = index-cesta v strome z get-page-structure (0-based poradie detí). Pri klonovaní sa menia element ID, ale poradie/štruktúra ostáva, takže index-cesta je stabilná. resolve_slots.py podľa nej priradí slot_id -> aktuálne element_id.",
+  "page": "hp",
+  "source_sample_post": 11154,
+  "slots": [
+    {
+      "slot_id": "hp.hero.h1",
+      "path": [
+        0,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.claim"
+    },
+    {
+      "slot_id": "hp.hero.stat1.number",
+      "path": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.kpis[0].number",
+      "rule": "must_be_number"
+    },
+    {
+      "slot_id": "hp.hero.stat1.label",
+      "path": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        1
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.kpis[0].label"
+    },
+    {
+      "slot_id": "hp.hero.stat2.number",
+      "path": [
+        0,
+        0,
+        3,
+        0,
+        1,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.kpis[1].number",
+      "rule": "must_be_number"
+    },
+    {
+      "slot_id": "hp.hero.stat2.label",
+      "path": [
+        0,
+        0,
+        3,
+        0,
+        1,
+        1
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.kpis[1].label"
+    },
+    {
+      "slot_id": "hp.hero.stat3.number",
+      "path": [
+        0,
+        0,
+        3,
+        0,
+        2,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.kpis[2].number",
+      "rule": "must_be_number"
+    },
+    {
+      "slot_id": "hp.hero.stat3.label",
+      "path": [
+        0,
+        0,
+        3,
+        0,
+        2,
+        1
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.kpis[2].label"
+    },
+    {
+      "slot_id": "hp.hero.cta_primary",
+      "path": [
+        0,
+        0,
+        3,
+        1,
+        0
+      ],
+      "widget": "button",
+      "setting": "text",
+      "brief": "content.cta_primary",
+      "rule": "cta_max_21"
+    },
+    {
+      "slot_id": "hp.hero.cta_secondary",
+      "path": [
+        0,
+        0,
+        3,
+        1,
+        1
+      ],
+      "widget": "button",
+      "setting": "text",
+      "brief": "content.cta_secondary",
+      "rule": "cta_max_21"
+    },
+    {
+      "slot_id": "hp.cards.card1.title",
+      "path": [
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.services[0].title"
+    },
+    {
+      "slot_id": "hp.cards.card1.text",
+      "path": [
+        2,
+        2,
+        0,
+        0,
+        1
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.services[0].text"
+    },
+    {
+      "slot_id": "hp.cards.card2.title",
+      "path": [
+        2,
+        2,
+        1,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.services[1].title"
+    },
+    {
+      "slot_id": "hp.cards.card2.text",
+      "path": [
+        2,
+        2,
+        1,
+        0,
+        1
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.services[1].text"
+    },
+    {
+      "slot_id": "hp.cards.card3.title",
+      "path": [
+        2,
+        2,
+        2,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.services[2].title"
+    },
+    {
+      "slot_id": "hp.cards.card3.text",
+      "path": [
+        2,
+        2,
+        2,
+        0,
+        1
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.services[2].text"
+    },
+    {
+      "slot_id": "hp.block1.title",
+      "path": [
+        3,
+        0,
+        1,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.value_props[0].title"
+    },
+    {
+      "slot_id": "hp.block1.text",
+      "path": [
+        3,
+        0,
+        1,
+        1
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.value_props[0].text"
+    },
+    {
+      "slot_id": "hp.block1.cta",
+      "path": [
+        3,
+        0,
+        1,
+        2
+      ],
+      "widget": "button",
+      "setting": "text",
+      "brief": "content.cta_primary",
+      "rule": "cta_max_21"
+    },
+    {
+      "slot_id": "hp.block2.title",
+      "path": [
+        4,
+        0,
+        0,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.value_props[1].title"
+    },
+    {
+      "slot_id": "hp.block2.text",
+      "path": [
+        4,
+        0,
+        0,
+        1,
+        0
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.value_props[1].text"
+    },
+    {
+      "slot_id": "hp.block3.title",
+      "path": [
+        5,
+        0,
+        1,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.value_props[2].title"
+    },
+    {
+      "slot_id": "hp.block3.text",
+      "path": [
+        5,
+        0,
+        1,
+        1
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.value_props[2].text"
+    },
+    {
+      "slot_id": "hp.video.title",
+      "path": [
+        6,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.video_section.title"
+    },
+    {
+      "slot_id": "hp.video.title_inner",
+      "path": [
+        6,
+        1,
+        0,
+        0,
+        1
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.video_section.title"
+    },
+    {
+      "slot_id": "hp.video.text",
+      "path": [
+        6,
+        1,
+        0,
+        1
+      ],
+      "widget": "text-editor",
+      "setting": "editor",
+      "brief": "content.video_section.text"
+    },
+    {
+      "slot_id": "hp.services.eyebrow",
+      "path": [
+        1,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.sections.services_eyebrow"
+    },
+    {
+      "slot_id": "hp.services.heading",
+      "path": [
+        1,
+        1,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.sections.services_heading"
+    },
+    {
+      "slot_id": "hp.cards.eyebrow",
+      "path": [
+        2,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.sections.cards_eyebrow"
+    },
+    {
+      "slot_id": "hp.cards.heading",
+      "path": [
+        2,
+        1,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.sections.cards_heading"
+    },
+    {
+      "slot_id": "hp.gallery.eyebrow",
+      "path": [
+        7,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.sections.gallery_eyebrow"
+    },
+    {
+      "slot_id": "hp.gallery.heading",
+      "path": [
+        7,
+        0,
+        1
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.sections.gallery_heading"
+    },
+    {
+      "slot_id": "hp.blog.eyebrow",
+      "path": [
+        10,
+        0,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.sections.blog_eyebrow"
+    },
+    {
+      "slot_id": "hp.blog.heading",
+      "path": [
+        10,
+        1,
+        0
+      ],
+      "widget": "heading",
+      "setting": "title",
+      "brief": "content.sections.blog_heading"
+    },
+    {
+      "slot_id": "hp.blog.button",
+      "path": [
+        10,
+        1,
+        1
+      ],
+      "widget": "button",
+      "setting": "text",
+      "brief": "content.sections.blog_button"
+    }
+  ],
+  "do_not_touch": {
+    "global_ctas": "GLOBAL widgety (Chcem viac informácii) sú zdieľané – needitovať na úrovni stránky.",
+    "reviews": "Sekcia recenzií = Google Reviews API, nie text-fill.",
+    "global_theme": "Header a Footer sú theme templates (globálne, Theme Builder) – nie sú súčasťou HP; riešia sa samostatne raz na inštanciu.",
+    "cta_banner": "CTA banner a spodný divider sú xpro-template (zdieľané šablóny) – needitovať ako HP sloty."
+  },
+  "_poznamka_image": "Image sloty pre fázu Médiá (n8n gpt-image-2). 'path' = overené index-cesty z live HP 11154 (image widgety). 'setting'='image' (hodnota = objekt {id,url}). 'prompt_context' = brief pole pre význam záberu; 'shot_type' a 'aspect_ratio' idú do items[] dávky; 'seo_hint' = vzor pre seo_filename (sk bez diakritiky, malé, pomlčky). 'optional': true = ak chýba podklad/zdroj, slot sa môže preskočiť. Recenzie/gallery slider/video sem nepatria.",
+  "image_slots": [
+    {
+      "slot_id": "hp.hero.image_main",
+      "path": [
+        0,
+        0,
+        1
+      ],
+      "widget": "image",
+      "setting": "image",
+      "prompt_context": "content.claim",
+      "shot_type": "wide",
+      "aspect_ratio": "16:9",
+      "seo_hint": "hero-{segment}",
+      "optional": false
+    },
+    {
+      "slot_id": "hp.hero.image_secondary",
+      "path": [
+        0,
+        0,
+        2
+      ],
+      "widget": "image",
+      "setting": "image",
+      "prompt_context": "content.claim",
+      "shot_type": "detail",
+      "aspect_ratio": "1:1",
+      "seo_hint": "{segment}-detail",
+      "optional": true
+    },
+    {
+      "slot_id": "hp.hero.image_extra",
+      "path": [
+        0,
+        1,
+        0
+      ],
+      "widget": "image",
+      "setting": "image",
+      "prompt_context": "content.claim",
+      "shot_type": "wide",
+      "aspect_ratio": "4:3",
+      "seo_hint": "{segment}-uvod",
+      "optional": true
+    },
+    {
+      "slot_id": "hp.block1.image_a",
+      "path": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "widget": "image",
+      "setting": "image",
+      "prompt_context": "content.value_props[0]",
+      "shot_type": "person",
+      "aspect_ratio": "4:3",
+      "seo_hint": "{segment}-praca",
+      "optional": false
+    },
+    {
+      "slot_id": "hp.block1.image_b",
+      "path": [
+        3,
+        0,
+        0,
+        1
+      ],
+      "widget": "image",
+      "setting": "image",
+      "prompt_context": "content.value_props[0]",
+      "shot_type": "detail",
+      "aspect_ratio": "1:1",
+      "seo_hint": "{segment}-detail-1",
+      "optional": true
+    },
+    {
+      "slot_id": "hp.block2.image_a",
+      "path": [
+        4,
+        0,
+        1,
+        0,
+        1
+      ],
+      "widget": "image",
+      "setting": "image",
+      "prompt_context": "content.value_props[1]",
+      "shot_type": "person",
+      "aspect_ratio": "4:3",
+      "seo_hint": "{segment}-klient",
+      "optional": false
+    },
+    {
+      "slot_id": "hp.block2.image_b",
+      "path": [
+        4,
+        0,
+        1,
+        0,
+        0
+      ],
+      "widget": "image",
+      "setting": "image",
+      "prompt_context": "content.value_props[1]",
+      "shot_type": "detail",
+      "aspect_ratio": "1:1",
+      "seo_hint": "{segment}-detail-2",
+      "optional": true
+    },
+    {
+      "slot_id": "hp.block3.image_a",
+      "path": [
+        5,
+        0,
+        0,
+        1
+      ],
+      "widget": "image",
+      "setting": "image",
+      "prompt_context": "content.value_props[2]",
+      "shot_type": "person",
+      "aspect_ratio": "4:3",
+      "seo_hint": "{segment}-vysledok",
+      "optional": false
+    },
+    {
+      "slot_id": "hp.block3.image_b",
+      "path": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "widget": "image",
+      "setting": "image",
+      "prompt_context": "content.value_props[2]",
+      "shot_type": "symbol",
+      "aspect_ratio": "1:1",
+      "seo_hint": "{segment}-symbol",
+      "optional": true
+    }
+  ]
+}

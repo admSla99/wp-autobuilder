@@ -1,0 +1,638 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WP Autobuilder – Brief",
+  "description": "Štruktúrovaný brief klienta. Vstup pre wp-autobuilder. Vzniká z dotazníka + podkladov (GDrive).",
+  "type": "object",
+  "required": [
+    "client",
+    "content"
+  ],
+  "properties": {
+    "client": {
+      "type": "object",
+      "required": [
+        "name",
+        "segment"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "domain": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "segment": {
+          "type": "string"
+        },
+        "tone_of_voice": {
+          "type": "string"
+        }
+      }
+    },
+    "brand": {
+      "type": "object",
+      "properties": {
+        "logo_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "primary_color": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "secondary_color": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "accent_color": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Voliteľná akcentová farba. Ak chýba, odvodí sa z primárnej (build_palette)."
+        },
+        "fonts": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "claim": {
+          "type": "string",
+          "description": "Hero H1. Ideálne ≤7 slov, kľúčové slovo + prínos."
+        },
+        "kpis": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "number",
+              "label"
+            ],
+            "properties": {
+              "number": {
+                "type": "string",
+                "description": "MUSÍ začínať číslom (15+, 1 200+, 4,9 ★)."
+              },
+              "label": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "cta_primary": {
+          "type": "string",
+          "description": "Max 21 znakov."
+        },
+        "cta_secondary": {
+          "type": "string",
+          "description": "Max 21 znakov."
+        },
+        "services": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "text"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "value_props": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "text"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "video_section": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            }
+          }
+        },
+        "sections": {
+          "type": "object",
+          "description": "Editovatelne nadpisy sekcii (Claude generuje): eyebrow+heading sluzby/karty/galeria/blog + blog button.",
+          "properties": {
+            "services_eyebrow": {
+              "type": "string"
+            },
+            "services_heading": {
+              "type": "string"
+            },
+            "cards_eyebrow": {
+              "type": "string"
+            },
+            "cards_heading": {
+              "type": "string"
+            },
+            "gallery_eyebrow": {
+              "type": "string"
+            },
+            "gallery_heading": {
+              "type": "string"
+            },
+            "blog_eyebrow": {
+              "type": "string"
+            },
+            "blog_heading": {
+              "type": "string"
+            },
+            "blog_button": {
+              "type": "string"
+            }
+          }
+        },
+        "about": {
+          "type": "object",
+          "description": "Stránka O nás. hero 1x (na masteri sa plní do oboch variantov A/B), 4 štatistiky (counter: number=čisté číslo, suffix='+/%/×', label=veta), 3 bloky, FAQ so 4 otázkami.",
+          "properties": {
+            "hero": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            },
+            "stats": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "object",
+                "required": [
+                  "number",
+                  "label"
+                ],
+                "properties": {
+                  "number": {
+                    "type": "string",
+                    "description": "Čisté číslo pre counter (napr. '97', '1200'). Tvrdé fakty len od klienta."
+                  },
+                  "suffix": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "'+', '%', '★'…"
+                  },
+                  "label": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "blocks": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "text"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "faq": {
+              "type": "object",
+              "properties": {
+                "eyebrow": {
+                  "type": "string"
+                },
+                "heading": {
+                  "type": "string"
+                },
+                "intro": {
+                  "type": "string"
+                },
+                "items": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "q",
+                      "a"
+                    ],
+                    "properties": {
+                      "q": {
+                        "type": "string"
+                      },
+                      "a": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "services_page": {
+          "type": "object",
+          "description": "Stránka Služby. Hero (title/text/cta) + presne 5 blokov služieb (striedavé). Ak má klient menej služieb, zmysluplne ich rozšír (procesné bloky: konzultácia, realizácia, servis) — nevymýšľaj nové služby.",
+          "properties": {
+            "hero": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                },
+                "cta": {
+                  "type": "string",
+                  "description": "Max 21 znakov."
+                }
+              }
+            },
+            "blocks": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "items": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "text"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "contact": {
+          "type": "object",
+          "description": "Stránka Kontakt. VŠETKO tvrdé fakty z dotazníka 1:1 — nič nevymýšľať (mená, čísla, adresy). HTML bloky skladá intake z polí dotazníka.",
+          "properties": {
+            "heading": {
+              "type": "string",
+              "description": "Default 'Zaujali sme vás? Kontaktujte nás'."
+            },
+            "person_html": {
+              "type": "string",
+              "description": "<strong>Meno - rola</strong> + mail/tel odkazy. Len z dotazníka."
+            },
+            "phone": {
+              "type": "string"
+            },
+            "phone_link": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "tel:+421..."
+            },
+            "email": {
+              "type": "string"
+            },
+            "email_link": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "mailto:..."
+            },
+            "cta": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Max 21 znakov. Default ponechať master text."
+            },
+            "map_query": {
+              "type": "string",
+              "description": "Adresa prevádzky pre google_maps widget."
+            },
+            "map_directions_url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=<adresa>&travelmode=driving"
+            },
+            "billing_html": {
+              "type": "string",
+              "description": "Fakturačné údaje 1:1, pevné poradie po riadkoch (<br>): meno spoločnosti / adresa / IČO / DIČ / IČ DPH. Chýbajúci údaj vynechaj, nevymýšľaj."
+            },
+            "office_country": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "office_html": {
+              "type": "string",
+              "description": "Adresa pobočky 1:1."
+            }
+          }
+        },
+        "legal": {
+          "type": "object",
+          "description": "Identifikačné údaje firmy klienta pre GLOBÁLNE prvky (footer, popup, CTA bublina) a PRÁVNE stránky (GDPR, cookies). Nahrádzajú agentúrne tokeny (global_tokens.json) cez fill_globals.py. Všetko 1:1 od klienta — nevymýšľať.",
+          "properties": {
+            "company_name": { "type": "string", "description": "Plný názov spoločnosti (napr. 'Drevko s.r.o.')." },
+            "company_short": { "type": "string", "description": "Krátky názov (bez právnej formy)." },
+            "brand_label": { "type": "string", "description": "Značka pre copyright (napr. 'Drevko.sk')." },
+            "address": { "type": "string", "description": "Sídlo (ulica, mesto, PSČ)." },
+            "ico": { "type": "string" },
+            "dic": { "type": "string" },
+            "ic_dph": { "type": ["string", "null"] },
+            "register": { "type": ["string", "null"], "description": "Zápis v OR (súd, oddiel, vložka)." },
+            "domain": { "type": ["string", "null"], "description": "Doména klienta (napr. www.drevko.sk)." },
+            "email": { "type": "string" },
+            "phone": { "type": "string" }
+          }
+        },
+        "products": {
+          "type": "array",
+          "description": "Produktové/servisné podstránky — 1 stránka na produkt (klon z mastera 'new2'). INVARIANT: ceny aj foto produktu VÝHRADNE od klienta. Copy podľa references/product_copy_guide.md.",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string" },
+              "category": { "type": ["string", "null"], "description": "Eyebrow kategória nad H1." },
+              "slug": { "type": ["string", "null"] },
+              "h1": { "type": ["string", "null"], "description": "H1 = primárne kľúčové slovo + konkrétny prínos." },
+              "description": { "type": "string", "description": "Popis 3–5 odsekov; konkrétne fakty alebo [DOPLNIŤ: …]." },
+              "price_no_vat": { "type": ["string", "null"], "description": "Cena bez DPH — LEN od klienta." },
+              "price_vat": { "type": ["string", "null"], "description": "Cena s DPH — LEN od klienta." },
+              "price_note": { "type": ["string", "null"] },
+              "photos": { "type": "array", "items": { "type": "string" }, "description": "Foto produktu — LEN od klienta (client_only), negenerovať." },
+              "benefits": { "type": "array", "maxItems": 6, "items": { "type": "object", "properties": { "icon": { "type": ["string", "null"] }, "title": { "type": "string" }, "text": { "type": "string" } } }, "description": "3–6 ikoniek: názov + 2–3 vety (≥3 riadky, približne rovnako dlhé)." },
+              "cta_primary": { "type": ["string", "null"], "description": "≤21 znakov." },
+              "cta_secondary": { "type": ["string", "null"], "description": "≤21 znakov." }
+            }
+          }
+        },
+        "reviews": {
+          "type": "object",
+          "description": "Google recenzie — VÝHRADNE od klienta (nikdy nevymýšľať). Ak chýba google_url aj items, sekcia recenzií sa skryje (hide_if_missing).",
+          "properties": {
+            "google_url": { "type": ["string", "null"], "description": "Odkaz na Google profil/recenzie klienta (link tlačidlo)." },
+            "heading": { "type": ["string", "null"], "description": "Nadpis sekcie recenzií (default 'Čo o nás hovoria klienti')." },
+            "button_text": { "type": ["string", "null"], "description": "Text link tlačidla (default napr. 'Pozrite si Google recenzie'). Nesmie ostať demo text." },
+            "rating": { "type": ["string", "null"], "description": "Súhrnný rating, napr. '4,9' — od klienta/Google." },
+            "items": {
+              "type": "array",
+              "description": "Reálne recenzie dodané klientom (na statické karty). Bez dodaných sa karty neplnia.",
+              "items": {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "author": { "type": "string" },
+                  "text": { "type": "string" },
+                  "rating": { "type": ["string", "number", "null"] }
+                }
+              }
+            }
+          }
+        },
+        "pricing": {
+          "type": "object",
+          "description": "Stránka Cenník. INVARIANT: ceny výlučne od klienta — nikdy neodhadovať. Max 6 riadkov na tabuľku; chýbajúce riadky sa skryjú.",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "benefits": {
+              "type": "array",
+              "maxItems": 3,
+              "items": {
+                "type": "string"
+              },
+              "description": "3 krátke benefity (icon-boxy)."
+            },
+            "packages": {
+              "type": "array",
+              "maxItems": 6,
+              "items": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "price"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "desc": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "string",
+                    "description": "LEN od klienta."
+                  }
+                }
+              },
+              "description": "Balíčky služieb (tabuľka 1)."
+            },
+            "items": {
+              "type": "array",
+              "maxItems": 6,
+              "items": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "price"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "desc": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "string",
+                    "description": "LEN od klienta."
+                  }
+                }
+              },
+              "description": "Jednotlivé služby (tabuľka 2)."
+            }
+          }
+        },
+        "gallery": {
+          "type": "object",
+          "description": "Stránka Galéria. INVARIANT: fotky a poradie LEN od klienta (GDrive 03_Fotky) — AI negeneruje a nepreusporadúva. item_per_row sa volí podľa počtu fotiek: 4–8→2, 9–16→3, 17+→4 stĺpce.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "H1 galérie (napr. 'Naše realizácie')."
+            },
+            "section_labels": {
+              "type": "array",
+              "maxItems": 3,
+              "items": {
+                "type": "string"
+              },
+              "description": "Nadpisy podsekcií galérie (voliteľné)."
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "photos"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Názov kategórie/filtra (AI smie pomenovať podľa dodaných kategórií)."
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Zoznam fotiek (GDrive id/URL) v poradí od klienta."
+                  }
+                }
+              },
+              "description": "Kategórie fotiek; filter sa zapne len ak je kategórií viac než 1."
+            },
+            "cards": {
+              "type": "array",
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "description": "Karty s popiskami (voliteľný variant)."
+            }
+          }
+        }
+      }
+    },
+    "media": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "placeholder",
+            "client",
+            "generated",
+            "mix"
+          ]
+        },
+        "client_folder_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "video_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "wordpress": {
+      "type": "object",
+      "description": "Cieľová WP inštancia pre upload médií (Fáza 4b). base_url = doména, ktorú edituje Elementor MCP (NIE URL obrázkov v obsahu). Zisti cez sideload-image.",
+      "properties": {
+        "base_url": {
+          "type": "string",
+          "description": "napr. https://news10.eshopion.sk"
+        },
+        "upload": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "required": [
+        "base_url"
+      ]
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ktoré stránky postaviť. Podporované: hp, about, services, contact, pricing, gallery."
+    }
+  }
+}

@@ -1,0 +1,801 @@
+{
+ "_poznamka": "Blueprint Cenník. INVARIANT: ceny NIKDY nevymýšľať — výlučne z dotazníka klienta. Riadok bez položky v briefe sa SKRYJE (hide_if_missing na section) a texty sa vyčistia (clear_if_missing), aby QA nevidela placeholder 'Služba 1'. Tabuľka 1 = balíčky, tabuľka 2 = jednotlivé služby (max 6 riadkov každá; hlavičkový riadok [_,0,0] sa needituje).",
+ "page": "pricing",
+ "source_sample_post": 15389,
+ "page_title_candidates": [
+  "cenník",
+  "Cenník",
+  "Cennik",
+  "Pricing"
+ ],
+ "slots": [
+  {
+   "slot_id": "pricing.title",
+   "path": [
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.title"
+  },
+  {
+   "slot_id": "pricing.packages.section",
+   "path": [
+    1
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.packages[0].name",
+   "hide_if_missing": true,
+   "optional": true,
+   "_pozn": "Ak nie je ani jedna položka, skryje sa celá tabuľka."
+  },
+  {
+   "slot_id": "pricing.packages.row1",
+   "path": [
+    1,
+    0,
+    1
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.packages[0].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row1.name",
+   "path": [
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[0].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row1.desc",
+   "path": [
+    1,
+    0,
+    1,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[0].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row1.price",
+   "path": [
+    1,
+    0,
+    1,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[0].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row2",
+   "path": [
+    1,
+    0,
+    2
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.packages[1].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row2.name",
+   "path": [
+    1,
+    0,
+    2,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[1].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row2.desc",
+   "path": [
+    1,
+    0,
+    2,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[1].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row2.price",
+   "path": [
+    1,
+    0,
+    2,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[1].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row3",
+   "path": [
+    1,
+    0,
+    3
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.packages[2].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row3.name",
+   "path": [
+    1,
+    0,
+    3,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[2].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row3.desc",
+   "path": [
+    1,
+    0,
+    3,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[2].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row3.price",
+   "path": [
+    1,
+    0,
+    3,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[2].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row4",
+   "path": [
+    1,
+    0,
+    4
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.packages[3].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row4.name",
+   "path": [
+    1,
+    0,
+    4,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[3].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row4.desc",
+   "path": [
+    1,
+    0,
+    4,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[3].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row4.price",
+   "path": [
+    1,
+    0,
+    4,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[3].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row5",
+   "path": [
+    1,
+    0,
+    5
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.packages[4].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row5.name",
+   "path": [
+    1,
+    0,
+    5,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[4].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row5.desc",
+   "path": [
+    1,
+    0,
+    5,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[4].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row5.price",
+   "path": [
+    1,
+    0,
+    5,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[4].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row6",
+   "path": [
+    1,
+    0,
+    6
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.packages[5].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row6.name",
+   "path": [
+    1,
+    0,
+    6,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[5].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row6.desc",
+   "path": [
+    1,
+    0,
+    6,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[5].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.packages.row6.price",
+   "path": [
+    1,
+    0,
+    6,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.packages[5].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.benefit1",
+   "path": [
+    2,
+    0,
+    0
+   ],
+   "widget": "xpro-icon-box",
+   "setting": "title",
+   "brief": "content.pricing.benefits[0]",
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.benefit2",
+   "path": [
+    2,
+    1,
+    0
+   ],
+   "widget": "xpro-icon-box",
+   "setting": "title",
+   "brief": "content.pricing.benefits[1]",
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.benefit3",
+   "path": [
+    2,
+    2,
+    0
+   ],
+   "widget": "xpro-icon-box",
+   "setting": "title",
+   "brief": "content.pricing.benefits[2]",
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.section",
+   "path": [
+    3
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.items[0].name",
+   "hide_if_missing": true,
+   "optional": true,
+   "_pozn": "Ak nie je ani jedna položka, skryje sa celá tabuľka."
+  },
+  {
+   "slot_id": "pricing.items.row1",
+   "path": [
+    3,
+    0,
+    1
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.items[0].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row1.name",
+   "path": [
+    3,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[0].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row1.desc",
+   "path": [
+    3,
+    0,
+    1,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[0].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row1.price",
+   "path": [
+    3,
+    0,
+    1,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[0].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row2",
+   "path": [
+    3,
+    0,
+    2
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.items[1].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row2.name",
+   "path": [
+    3,
+    0,
+    2,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[1].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row2.desc",
+   "path": [
+    3,
+    0,
+    2,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[1].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row2.price",
+   "path": [
+    3,
+    0,
+    2,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[1].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row3",
+   "path": [
+    3,
+    0,
+    3
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.items[2].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row3.name",
+   "path": [
+    3,
+    0,
+    3,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[2].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row3.desc",
+   "path": [
+    3,
+    0,
+    3,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[2].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row3.price",
+   "path": [
+    3,
+    0,
+    3,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[2].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row4",
+   "path": [
+    3,
+    0,
+    4
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.items[3].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row4.name",
+   "path": [
+    3,
+    0,
+    4,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[3].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row4.desc",
+   "path": [
+    3,
+    0,
+    4,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[3].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row4.price",
+   "path": [
+    3,
+    0,
+    4,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[3].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row5",
+   "path": [
+    3,
+    0,
+    5
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.items[4].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row5.name",
+   "path": [
+    3,
+    0,
+    5,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[4].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row5.desc",
+   "path": [
+    3,
+    0,
+    5,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[4].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row5.price",
+   "path": [
+    3,
+    0,
+    5,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[4].price",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row6",
+   "path": [
+    3,
+    0,
+    6
+   ],
+   "widget": "section",
+   "setting": "_row",
+   "brief": "content.pricing.items[5].name",
+   "hide_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row6.name",
+   "path": [
+    3,
+    0,
+    6,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[5].name",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row6.desc",
+   "path": [
+    3,
+    0,
+    6,
+    1,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[5].desc",
+   "clear_if_missing": true,
+   "optional": true
+  },
+  {
+   "slot_id": "pricing.items.row6.price",
+   "path": [
+    3,
+    0,
+    6,
+    2,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.pricing.items[5].price",
+   "clear_if_missing": true,
+   "optional": true
+  }
+ ],
+ "do_not_touch": {
+  "table_headers": "Hlavičkové riadky tabuliek (Služba/Popis/Cena) na [1,0,0] a [3,0,0] – needitovať.",
+  "no_invented_prices": "Ceny LEN od klienta. Položku bez ceny nechaj bez ceny alebo riadok skry — nikdy nedopĺňaj odhad.",
+  "xpro_templates": "Footer/CTA šablóna (top-level [4]) – needitovať.",
+  "benefit_icons": "Ikony/obrázky icon-boxov – nemeniť (iba title)."
+ },
+ "image_slots": [
+  {
+   "slot_id": "pricing.hero.image",
+   "path": [
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.pricing.title",
+   "shot_type": "symbol",
+   "aspect_ratio": "16:9",
+   "seo_hint": "cennik-{segment}",
+   "optional": true
+  }
+ ]
+}

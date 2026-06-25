@@ -1,0 +1,247 @@
+{
+  "_zdroj": "Znormalizované z GDrive: AI pracovník/testovaci klienti/testovacie projekty/test1/01_Formulár a info/dotazník_.xlsx + informácie.docx",
+  "_pozn_odhad": "Tretia štatistika '100%/na kľúč', hero claim a štvrtá about-štatistika '2 pobočky' sú marketingové formulácie/odvodeniny (AI) — 15 rokov, 6 služieb, 2 adresy a kontakty sú tvrdé fakty z dotazníka. Kontakty/adresy/e-mail prenesené 1:1. Cenník sa NEgeneruje (flags.pricing = individuálny → stránka pricing sa nestavia).",
+  "client": {
+    "name": "Enova House",
+    "domain": "enova.sk",
+    "company_legal": "zarodom s.r.o.",
+    "segment": "fotovoltika / obnoviteľné zdroje energie",
+    "tone_of_voice": "odborný, dôveryhodný, zrozumiteľný",
+    "target_audience": "25–50, majitelia rodinných domov a firiem",
+    "email": "info@enova.sk"
+  },
+  "brand": {
+    "logo_url": "GDrive: 02_Logo a branding/logo-enova-house-01-copy.jpg",
+    "primary_color": "#2E7D32",
+    "secondary_color": "#1565C0",
+    "accent_color": "#F39200",
+    "fonts": "podľa master kitu (Lexend / Inter)"
+  },
+  "content": {
+    "claim": "Fotovoltika, ktorá sa vám vráti.",
+    "kpis": [
+      {
+        "number": "15+",
+        "label": "rokov na trhu"
+      },
+      {
+        "number": "6",
+        "label": "služieb pod jednou strechou"
+      },
+      {
+        "number": "100%",
+        "label": "riešenie na kľúč"
+      }
+    ],
+    "cta_primary": "Chcem cenovú ponuku",
+    "cta_secondary": "Chcem konzultáciu",
+    "services": [
+      {
+        "title": "Fotovoltika",
+        "text": "Navrhneme a namontujeme fotovoltiku na mieru vášho domu či firmy — od projektu cez legislatívu až po spustenie."
+      },
+      {
+        "title": "Tepelné čerpadlá",
+        "text": "Úsporné vykurovanie aj chladenie. Vyberieme čerpadlo, ktoré sadne na váš objekt a rozpočet."
+      },
+      {
+        "title": "Energetický audit",
+        "text": "Posúdime budovu a ukážeme, kde a koľko viete reálne ušetriť na nákladoch za energie."
+      }
+    ],
+    "value_props": [
+      {
+        "title": "Všetko pod jednou strechou.",
+        "text": "Od poradenstva cez projekt a legislatívu až po montáž a uvedenie do prevádzky. Neriešite viac firiem — všetko zastrešíme my."
+      },
+      {
+        "title": "Riešenie na mieru vašej spotreby.",
+        "text": "Najprv počúvame a meriame, až potom navrhujeme zdroj a technológiu, ktoré sa vám reálne oplatia."
+      },
+      {
+        "title": "15 rokov skúseností v obore.",
+        "text": "Tím odborníkov, ktorý prešiel stovkami realizácií. Máte istotu, že je o vás aj o váš dom postarané."
+      }
+    ],
+    "video_section": {
+      "title": "Pozrite si naše realizácie",
+      "text": "Skutočné inštalácie u skutočných zákazníkov — fotovoltika, ktorá funguje."
+    },
+    "sections": {
+      "services_eyebrow": "NAŠE SLUŽBY",
+      "services_heading": "Energetické riešenia na kľúč",
+      "cards_eyebrow": "NAŠE SLUŽBY",
+      "cards_heading": "Čomu sa venujeme",
+      "gallery_eyebrow": "NAŠE REALIZÁCIE",
+      "gallery_heading": "Galéria",
+      "blog_eyebrow": "NÁŠ BLOG",
+      "blog_heading": "Najnovšie články",
+      "blog_button": "Všetky články"
+    },
+    "about": {
+      "hero": {
+        "title": "Energia z vlastnej strechy už 15 rokov",
+        "text": "Enova House pomáha majiteľom domov a firiem znížiť účty za energie. Od fotovoltiky cez tepelné čerpadlá až po energetický audit — všetko navrhujeme a montujeme vlastným tímom."
+      },
+      "stats": [
+        {
+          "number": "15",
+          "suffix": "+",
+          "label": "rokov skúseností s obnoviteľnými zdrojmi."
+        },
+        {
+          "number": "6",
+          "suffix": null,
+          "label": "služieb pod jednou strechou — od auditu po montáž."
+        },
+        {
+          "number": "2",
+          "suffix": null,
+          "label": "pobočky: Poprad a Vígľaš."
+        },
+        {
+          "number": "100",
+          "suffix": "%",
+          "label": "riešenie na kľúč vrátane legislatívy."
+        }
+      ],
+      "blocks": [
+        {
+          "title": "Špecializujeme sa na domy aj firmy",
+          "text": "Rodinné domy, bytovky aj prevádzky. Najprv zmeriame spotrebu, potom navrhneme zdroj, ktorý sa reálne oplatí."
+        },
+        {
+          "title": "Všetko zastrešíme my",
+          "text": "Projekt, legislatíva, montáž aj servis — neriešite viac firiem. Jeden partner od prvej konzultácie po spustenie."
+        },
+        {
+          "title": "Navrhujeme na mieru spotreby",
+          "text": "Žiadne univerzálne balíky. Riešenie staviame na nameranej spotrebe a podmienkach vášho objektu."
+        }
+      ],
+      "faq": {
+        "eyebrow": "Často kladené otázky",
+        "heading": "Máte otázky? My máme odpovede",
+        "intro": "Fotovoltika nemusí byť komplikovaná. Tu sú odpovede na otázky, ktoré počúvame najčastejšie.",
+        "items": [
+          {
+            "q": "Oplatí sa mi fotovoltika?",
+            "a": "Závisí od spotreby a orientácie strechy. Spravíme bezplatné posúdenie a ukážeme reálnu návratnosť pre váš objekt."
+          },
+          {
+            "q": "Vybavíte aj legislatívu a pripojenie?",
+            "a": "Áno, kompletne — od žiadosti o pripojenie po revíznu správu. Riešenie na kľúč."
+          },
+          {
+            "q": "Aké služby ponúkate?",
+            "a": "Fotovoltiku, tepelné čerpadlá, energetický audit a ďalšie — spolu 6 služieb pod jednou strechou."
+          },
+          {
+            "q": "Kde pôsobíte?",
+            "a": "Máme pobočky v Poprade a vo Vígľaši, realizujeme po celom Slovensku."
+          }
+        ]
+      }
+    },
+    "services_page": {
+      "hero": {
+        "title": "Energetické riešenia na kľúč",
+        "text": "Od merania spotreby cez návrh a legislatívu až po montáž a servis. Jeden tím, jedna zodpovednosť.",
+        "cta": "Chcem cenovú ponuku"
+      },
+      "blocks": [
+        {
+          "title": "Fotovoltika na mieru",
+          "text": "Návrh, montáž a spustenie fotovoltiky pre domy aj firmy — vrátane pripojenia do siete."
+        },
+        {
+          "title": "Tepelné čerpadlá",
+          "text": "Úsporné vykurovanie aj chladenie. Vyberieme čerpadlo podľa objektu a rozpočtu."
+        },
+        {
+          "title": "Energetický audit",
+          "text": "Zmeriame a posúdime budovu — ukážeme, kde reálne ušetríte."
+        },
+        {
+          "title": "Legislatíva a pripojenie",
+          "text": "Žiadosti, povolenia, revízie. Celý papierový proces vybavíme za vás."
+        },
+        {
+          "title": "Servis a monitoring",
+          "text": "Staráme sa o inštalácie aj po spustení — kontroly, servis a sledovanie výroby."
+        }
+      ]
+    },
+    "contact": {
+      "heading": "Zaujali sme vás? Kontaktujte nás",
+      "person_html": "<strong>Ing. Patrik Polák</strong><br /><a href=\"mailto:info@enova.sk\">info@enova.sk</a><br /><a href=\"tel:094812388\">094 812 388</a>",
+      "phone": "094 812 388",
+      "phone_link": "tel:094812388",
+      "email": "info@enova.sk",
+      "email_link": "mailto:info@enova.sk",
+      "cta": "Chcem konzultáciu",
+      "map_query": "Šrobárova 23, 058 01 Poprad",
+      "map_directions_url": "https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=Srobarova+23,+Poprad&travelmode=driving",
+      "billing_html": "<p>zarodom s.r.o. (Enova House)<br />Šrobárova 23, 058 01 Poprad</p>",
+      "office_country": "Slovensko",
+      "office_html": "<p>Enova House<br />pobočka Vígľaš<br />Pstruša 348<br />Vígľaš</p>"
+    },
+    "gallery": {
+      "title": "Naše realizácie",
+      "section_labels": [
+        "Fotovoltické inštalácie",
+        "Tepelné čerpadlá",
+        "Detaily montáží"
+      ],
+      "categories": [
+        {
+          "name": "Všetky",
+          "photos": [
+            "GDrive: test1/03_Fotky (solárne panely — poradie od klienta)"
+          ]
+        }
+      ],
+      "cards": []
+    }
+  },
+  "contact": {
+    "company": "zarodom s.r.o. (Enova House)",
+    "addresses": [
+      "Šrobárova 23, 058 01 Poprad",
+      "Pstruša 348, Vígľaš"
+    ],
+    "contacts": [
+      {
+        "name": "Ing. Patrik Polák",
+        "address": "Šrobárova 23, 058 01 Poprad",
+        "phone": "094812388"
+      },
+      {
+        "name": "František Bednár",
+        "address": "Nám. Sv. Egidia 12, 058 01 Poprad",
+        "phone": "+421 903 142 771"
+      }
+    ],
+    "socials": [],
+    "reviews_note": "Pár Google recenzií pod starým názvom 'Patrik Polák - EnergoRenova'."
+  },
+  "media": {
+    "source": "placeholder",
+    "client_folder_url": "GDrive: test1/03_Fotky (solárne panely, 2 videá)",
+    "video_required": true,
+    "note": "Fotky/videá klienta sú k dispozícii; v MVP ostávajú placeholder (sideload cez n8n neskôr)."
+  },
+  "pages": [
+    "hp",
+    "about",
+    "services",
+    "contact",
+    "gallery"
+  ],
+  "flags": {
+    "blog": false,
+    "gallery": true,
+    "pricing": "individuálny (ceny závisia od lokality a objektu)",
+    "gdpr": true
+  }
+}

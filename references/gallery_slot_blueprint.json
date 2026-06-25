@@ -1,0 +1,284 @@
+{
+ "_poznamka": "Blueprint stránky Galéria (master 897 = Jednoúrovňová galéria, ukážková stránka so 4 variantmi). PRAVIDLO: pri bežných fotkách použi IBA jeden variant — gallery.widget.main — a tam daj všetky fotky; sekundárnu galériu (gallery.widget.secondary) a kartové mini-galérie (gallery.cardN.gallery) + ich nadpisy SKRY (hide_*). item_per_row biasované na 4: ≤4→2, 5–8→3, 9+→4; rozloženie nemeniť. INVARIANT: fotografie a ich poradie LEN od klienta — AI NESMIE fotky meniť ani generovať. Gallery widgety (xpro-simple-gallery) sa plnia read-merge-write (viď repeater poznámku), texty batchom.",
+ "page": "gallery",
+ "source_sample_post": 897,
+ "page_title_candidates": [
+  "Jednoúrovňová galéria",
+  "Galéria",
+  "Galeria",
+  "Gallery"
+ ],
+ "slots": [
+  {
+   "slot_id": "gallery.title",
+   "path": [
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.gallery.title"
+  },
+  {
+   "slot_id": "gallery.label1",
+   "path": [
+    0,
+    2
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.gallery.section_labels[0]",
+   "optional": true
+  },
+  {
+   "slot_id": "gallery.label2",
+   "path": [
+    0,
+    4
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.gallery.section_labels[1]",
+   "optional": true
+  },
+  {
+   "slot_id": "gallery.label3",
+   "path": [
+    0,
+    6
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.gallery.section_labels[2]",
+   "optional": true
+  },
+  {
+   "slot_id": "gallery.card1.title",
+   "path": [
+    0,
+    7,
+    0,
+    1
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.gallery.cards[0].title",
+   "optional": true
+  },
+  {
+   "slot_id": "gallery.card1.text",
+   "path": [
+    0,
+    7,
+    0,
+    2
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.gallery.cards[0].text",
+   "optional": true
+  },
+  {
+   "slot_id": "gallery.card2.title",
+   "path": [
+    0,
+    7,
+    1,
+    1
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.gallery.cards[1].title",
+   "optional": true
+  },
+  {
+   "slot_id": "gallery.card2.text",
+   "path": [
+    0,
+    7,
+    1,
+    2
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.gallery.cards[1].text",
+   "optional": true
+  },
+  {
+   "slot_id": "gallery.card3.title",
+   "path": [
+    0,
+    7,
+    2,
+    1
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.gallery.cards[2].title",
+   "optional": true
+  },
+  {
+   "slot_id": "gallery.card3.text",
+   "path": [
+    0,
+    7,
+    2,
+    2
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.gallery.cards[2].text",
+   "optional": true
+  },
+  {
+   "slot_id": "gallery.widget.main",
+   "path": [
+    0,
+    1
+   ],
+   "widget": "xpro-simple-gallery",
+   "setting": "gallery",
+   "brief": "content.gallery.categories",
+   "optional": true,
+   "repeater": {
+    "_pozn": "HLAVNÝ a JEDINÝ použitý variant pri bežných fotkách — všetky fotky daj sem. NIKDY batch-update. Postup: 1) nahraj klientove fotky do WP médií (n8n upload / sideload), 2) get-element-settings widgetu, 3) prepíš pole 'gallery' = [{filter:<kategória>,_id:<zachovaj/nové>,images:[{id,url}…]}] z brief.content.gallery.categories — PORADIE fotiek 1:1 od klienta, NIČ negenerovať, 4) item_per_row biasované na 4: ≤4→2, 5–8→3, 9+→4; show_filter:'yes' len ak kategórií >1, 5) update-widget s celými settings ({gallery, item_per_row, show_filter}). Rozloženie nemeniť."
+   }
+  },
+  {
+   "slot_id": "gallery.widget.secondary",
+   "path": [
+    0,
+    5
+   ],
+   "widget": "xpro-simple-gallery",
+   "setting": "gallery",
+   "brief": "content.gallery.categories",
+   "optional": true,
+   "repeater": {
+    "_pozn": "Sekundárna galéria (alternatívny variant). Pri bežných fotkách NEPOUŽÍVAŤ a SKRYŤ (hide-op hide_desktop/tablet/mobile na tomto widgete aj jeho sekcii). Plniť len v špeciálnom prípade (viac albumov) — inak by vznikla prázdna/duplicitná galéria."
+   }
+  },
+  {
+   "slot_id": "gallery.card1.gallery",
+   "path": [
+    0,
+    7,
+    0,
+    0
+   ],
+   "widget": "xpro-simple-gallery",
+   "setting": "gallery",
+   "brief": "content.gallery.cards[0].photos",
+   "optional": true,
+   "repeater": {
+    "_pozn": "Kartová mini-galéria — rovnaký repeater postup, fotky karty od klienta."
+   }
+  },
+  {
+   "slot_id": "gallery.card2.gallery",
+   "path": [
+    0,
+    7,
+    1,
+    0
+   ],
+   "widget": "xpro-simple-gallery",
+   "setting": "gallery",
+   "brief": "content.gallery.cards[1].photos",
+   "optional": true,
+   "repeater": {
+    "_pozn": "Kartová mini-galéria."
+   }
+  },
+  {
+   "slot_id": "gallery.card3.gallery",
+   "path": [
+    0,
+    7,
+    2,
+    0
+   ],
+   "widget": "xpro-simple-gallery",
+   "setting": "gallery",
+   "brief": "content.gallery.cards[2].photos",
+   "optional": true,
+   "repeater": {
+    "_pozn": "Kartová mini-galéria."
+   }
+  }
+ ],
+ "do_not_touch": {
+  "photos": "Fotografie, ich obsah a PORADIE určuje klient — AI nesmie fotky meniť, mazať ani generovať.",
+  "layout": "Rozloženie sekcií nemeniť; nepotrebné varianty radšej skryť (hide_*) než mazať."
+ },
+ "image_slots": [
+  {
+   "slot_id": "gallery.grid.img1",
+   "path": [
+    0,
+    3,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.gallery.title",
+   "shot_type": "wide",
+   "aspect_ratio": "4:3",
+   "seo_hint": "galeria-{segment}-1",
+   "optional": true,
+   "source_policy": "client_only"
+  },
+  {
+   "slot_id": "gallery.grid.img2",
+   "path": [
+    0,
+    3,
+    1,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.gallery.title",
+   "shot_type": "wide",
+   "aspect_ratio": "4:3",
+   "seo_hint": "galeria-{segment}-2",
+   "optional": true,
+   "source_policy": "client_only"
+  },
+  {
+   "slot_id": "gallery.grid.img3",
+   "path": [
+    0,
+    3,
+    2,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.gallery.title",
+   "shot_type": "detail",
+   "aspect_ratio": "4:3",
+   "seo_hint": "galeria-{segment}-3",
+   "optional": true,
+   "source_policy": "client_only"
+  },
+  {
+   "slot_id": "gallery.grid.img4",
+   "path": [
+    0,
+    3,
+    3,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.gallery.title",
+   "shot_type": "detail",
+   "aspect_ratio": "4:3",
+   "seo_hint": "galeria-{segment}-4",
+   "optional": true,
+   "source_policy": "client_only"
+  }
+ ]
+}

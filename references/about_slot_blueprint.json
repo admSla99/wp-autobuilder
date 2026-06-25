@@ -1,0 +1,610 @@
+{
+ "_poznamka": "Blueprint O nás. 'path' = index-cesta v strome z get-page-structure (0-based). Hero je na masteri 2x (variant A/B) — oba dostanú rovnaký text. Štatistiky = counter widgety (ending_number/suffix/title). FAQ otázky sú repeater (items[].item_title) — build_ops ich preskočí, rieši sa read-merge-write cez get-element-settings + update-widget so zachovaním _id.",
+ "page": "about",
+ "source_sample_post": 13109,
+ "page_title_candidates": [
+  "O nás",
+  "O nas",
+  "About"
+ ],
+ "slots": [
+  {
+   "slot_id": "about.heroA.title",
+   "path": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.about.hero.title"
+  },
+  {
+   "slot_id": "about.heroA.text",
+   "path": [
+    0,
+    0,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.hero.text"
+  },
+  {
+   "slot_id": "about.heroB.title",
+   "path": [
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.about.hero.title"
+  },
+  {
+   "slot_id": "about.heroB.text",
+   "path": [
+    1,
+    0,
+    0,
+    1,
+    0
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.hero.text"
+  },
+  {
+   "slot_id": "about.stat1.number",
+   "path": [
+    2,
+    0,
+    0
+   ],
+   "widget": "counter",
+   "setting": "ending_number",
+   "brief": "content.about.stats[0].number",
+   "rule": "must_be_number",
+   "cast": "int"
+  },
+  {
+   "slot_id": "about.stat1.suffix",
+   "path": [
+    2,
+    0,
+    0
+   ],
+   "widget": "counter",
+   "setting": "suffix",
+   "brief": "content.about.stats[0].suffix",
+   "optional": true
+  },
+  {
+   "slot_id": "about.stat1.label",
+   "path": [
+    2,
+    0,
+    0
+   ],
+   "widget": "counter",
+   "setting": "title",
+   "brief": "content.about.stats[0].label"
+  },
+  {
+   "slot_id": "about.stat2.number",
+   "path": [
+    2,
+    1,
+    0
+   ],
+   "widget": "counter",
+   "setting": "ending_number",
+   "brief": "content.about.stats[1].number",
+   "rule": "must_be_number",
+   "cast": "int"
+  },
+  {
+   "slot_id": "about.stat2.suffix",
+   "path": [
+    2,
+    1,
+    0
+   ],
+   "widget": "counter",
+   "setting": "suffix",
+   "brief": "content.about.stats[1].suffix",
+   "optional": true
+  },
+  {
+   "slot_id": "about.stat2.label",
+   "path": [
+    2,
+    1,
+    0
+   ],
+   "widget": "counter",
+   "setting": "title",
+   "brief": "content.about.stats[1].label"
+  },
+  {
+   "slot_id": "about.stat3.number",
+   "path": [
+    2,
+    2,
+    0
+   ],
+   "widget": "counter",
+   "setting": "ending_number",
+   "brief": "content.about.stats[2].number",
+   "rule": "must_be_number",
+   "cast": "int"
+  },
+  {
+   "slot_id": "about.stat3.suffix",
+   "path": [
+    2,
+    2,
+    0
+   ],
+   "widget": "counter",
+   "setting": "suffix",
+   "brief": "content.about.stats[2].suffix",
+   "optional": true
+  },
+  {
+   "slot_id": "about.stat3.label",
+   "path": [
+    2,
+    2,
+    0
+   ],
+   "widget": "counter",
+   "setting": "title",
+   "brief": "content.about.stats[2].label"
+  },
+  {
+   "slot_id": "about.stat4.number",
+   "path": [
+    2,
+    3,
+    0
+   ],
+   "widget": "counter",
+   "setting": "ending_number",
+   "brief": "content.about.stats[3].number",
+   "rule": "must_be_number",
+   "cast": "int"
+  },
+  {
+   "slot_id": "about.stat4.suffix",
+   "path": [
+    2,
+    3,
+    0
+   ],
+   "widget": "counter",
+   "setting": "suffix",
+   "brief": "content.about.stats[3].suffix",
+   "optional": true
+  },
+  {
+   "slot_id": "about.stat4.label",
+   "path": [
+    2,
+    3,
+    0
+   ],
+   "widget": "counter",
+   "setting": "title",
+   "brief": "content.about.stats[3].label"
+  },
+  {
+   "slot_id": "about.block1.title",
+   "path": [
+    3,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.about.blocks[0].title"
+  },
+  {
+   "slot_id": "about.block1.text",
+   "path": [
+    3,
+    0,
+    1,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.blocks[0].text"
+  },
+  {
+   "slot_id": "about.block2.title",
+   "path": [
+    4,
+    0,
+    0,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.about.blocks[1].title"
+  },
+  {
+   "slot_id": "about.block2.text",
+   "path": [
+    4,
+    0,
+    0,
+    1,
+    0
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.blocks[1].text"
+  },
+  {
+   "slot_id": "about.block3.title",
+   "path": [
+    5,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.about.blocks[2].title"
+  },
+  {
+   "slot_id": "about.block3.text",
+   "path": [
+    5,
+    0,
+    1,
+    1
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.blocks[2].text"
+  },
+  {
+   "slot_id": "about.faq.eyebrow",
+   "path": [
+    6,
+    0,
+    0
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.about.faq.eyebrow"
+  },
+  {
+   "slot_id": "about.faq.heading",
+   "path": [
+    6,
+    0,
+    1
+   ],
+   "widget": "heading",
+   "setting": "title",
+   "brief": "content.about.faq.heading"
+  },
+  {
+   "slot_id": "about.faq.intro",
+   "path": [
+    6,
+    0,
+    2
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.faq.intro"
+  },
+  {
+   "slot_id": "about.faq.answer1",
+   "path": [
+    6,
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.faq.items[0].a"
+  },
+  {
+   "slot_id": "about.faq.answer2",
+   "path": [
+    6,
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.faq.items[1].a"
+  },
+  {
+   "slot_id": "about.faq.answer3",
+   "path": [
+    6,
+    1,
+    1,
+    0,
+    2,
+    0
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.faq.items[2].a"
+  },
+  {
+   "slot_id": "about.faq.answer4",
+   "path": [
+    6,
+    1,
+    1,
+    0,
+    3,
+    0
+   ],
+   "widget": "text-editor",
+   "setting": "editor",
+   "brief": "content.about.faq.items[3].a"
+  },
+  {
+   "slot_id": "about.faq.questions",
+   "path": [
+    6,
+    1,
+    1,
+    0
+   ],
+   "widget": "nested-accordion",
+   "setting": "items",
+   "brief": "content.about.faq.items",
+   "optional": true,
+   "repeater": {
+    "item_field": "item_title",
+    "brief_item_field": "q",
+    "_pozn": "NEgenerovať cez batch-update. Skill: get-element-settings → uprav items[k].item_title=faq.items[k].q (zachovaj _id!) → update-widget s celým items."
+   }
+  }
+ ],
+ "do_not_touch": {
+  "global_ctas": "GLOBAL widgety (Chcem viac informácii) sú zdieľané – needitovať.",
+  "xpro_templates": "Eyebrow/divider šablóny (xpro-template) + CTA banner/newsletter/footer (top-level [7],[8]) – needitovať.",
+  "divider": "Oddeľovač v hero [0,0,0,2] – needitovať."
+ },
+ "image_slots": [
+  {
+   "slot_id": "about.heroA.image",
+   "path": [
+    0,
+    1,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.hero",
+   "shot_type": "person",
+   "aspect_ratio": "4:3",
+   "seo_hint": "o-nas-{segment}",
+   "optional": false
+  },
+  {
+   "slot_id": "about.heroB.image_a",
+   "path": [
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.hero",
+   "shot_type": "person",
+   "aspect_ratio": "4:3",
+   "seo_hint": "o-nas-{segment}-tim",
+   "optional": true
+  },
+  {
+   "slot_id": "about.heroB.image_b",
+   "path": [
+    1,
+    0,
+    1,
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.hero",
+   "shot_type": "detail",
+   "aspect_ratio": "1:1",
+   "seo_hint": "o-nas-{segment}-detail",
+   "optional": true
+  },
+  {
+   "slot_id": "about.block1.image_a",
+   "path": [
+    3,
+    0,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.blocks[0]",
+   "shot_type": "detail",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-specializacia",
+   "optional": false
+  },
+  {
+   "slot_id": "about.block1.image_b",
+   "path": [
+    3,
+    0,
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.blocks[0]",
+   "shot_type": "symbol",
+   "aspect_ratio": "1:1",
+   "seo_hint": "{segment}-riesenia",
+   "optional": true
+  },
+  {
+   "slot_id": "about.block2.image_a",
+   "path": [
+    4,
+    0,
+    1,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.blocks[1]",
+   "shot_type": "person",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-spolahlivost",
+   "optional": false
+  },
+  {
+   "slot_id": "about.block2.image_b",
+   "path": [
+    4,
+    0,
+    1,
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.blocks[1]",
+   "shot_type": "wide",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-tim",
+   "optional": true
+  },
+  {
+   "slot_id": "about.block3.image_a",
+   "path": [
+    5,
+    0,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.blocks[2]",
+   "shot_type": "person",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-rychlost",
+   "optional": false
+  },
+  {
+   "slot_id": "about.block3.image_b",
+   "path": [
+    5,
+    0,
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.blocks[2]",
+   "shot_type": "detail",
+   "aspect_ratio": "1:1",
+   "seo_hint": "{segment}-praca",
+   "optional": true
+  },
+  {
+   "slot_id": "about.faq.grid1",
+   "path": [
+    6,
+    1,
+    0,
+    0,
+    0
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.faq",
+   "shot_type": "wide",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-faq-1",
+   "optional": true
+  },
+  {
+   "slot_id": "about.faq.grid2",
+   "path": [
+    6,
+    1,
+    0,
+    0,
+    1
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.faq",
+   "shot_type": "person",
+   "aspect_ratio": "1:1",
+   "seo_hint": "{segment}-faq-2",
+   "optional": true
+  },
+  {
+   "slot_id": "about.faq.grid3",
+   "path": [
+    6,
+    1,
+    0,
+    0,
+    2
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.faq",
+   "shot_type": "detail",
+   "aspect_ratio": "1:1",
+   "seo_hint": "{segment}-faq-3",
+   "optional": true
+  },
+  {
+   "slot_id": "about.faq.grid4",
+   "path": [
+    6,
+    1,
+    0,
+    0,
+    3
+   ],
+   "widget": "image",
+   "setting": "image",
+   "prompt_context": "content.about.faq",
+   "shot_type": "symbol",
+   "aspect_ratio": "4:3",
+   "seo_hint": "{segment}-faq-4",
+   "optional": true
+  }
+ ]
+}

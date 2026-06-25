@@ -1,0 +1,48 @@
+{
+  "_poznamka": "Blueprint GLOBÁLNYCH prvkov inštancie (footer, CTA bublina, popup) a PRÁVNYCH stránok (GDPR, cookies). Tieto sa riešia RAZ na inštanciu (nie per stránka v slučke). Princíp: nájdi widgety s agentúrnymi tokenmi (find-element search_text na 'netovapomoc'/'fajne-weby') a nahraď ich údajmi klienta cez fill_globals.py + global_tokens.json. Element_id sú referencie z masteru (2026-06-24) — na inštancii klienta ich radšej DOHĽADAJ cez find-element (sú stabilné per inštancia, ale theme template mohol byť aktualizovaný). NIKDY nemeň štruktúru menu; logo a copyright sú editovateľné.",
+  "discovered_on_master": "dev master 2026-06-24",
+  "targets": {
+    "gdpr_page": {
+      "post_id": 14065,
+      "title": "Ochrana osobných údajov",
+      "fill": "text_substitution",
+      "elements": [{ "element_id": "9f65040", "widget": "text-editor", "setting": "editor", "note": "Celý právny text s firemnými údajmi — fill_globals na 'editor'." }],
+      "find_rule": "find-element(post_id, search_text='Netova pomoc' alebo 'netovapomoc') → text-editor widgety"
+    },
+    "cookies_page": {
+      "post_id": 10840,
+      "title": "Zásady cookies (EU)",
+      "fill": "text_substitution",
+      "elements": [{ "element_id": "67414f4", "widget": "text-editor", "setting": "editor" }],
+      "find_rule": "find-element(post_id, search_text='IČO' / 'netovapomoc' / e-mail) → text-editor; ak cookies neobsahujú firemné údaje, netreba meniť"
+    },
+    "footer": {
+      "template_id": 10998,
+      "type": "footer",
+      "fill": "text_substitution + structural",
+      "elements": [
+        { "element_id": "b98321d", "widget": "text-editor", "setting": "editor", "note": "Copyright (© ... Netovapomoc.sk) — fill_globals." },
+        { "element_id": "99959ab", "widget": "text-editor", "setting": "editor", "note": "Copyright (variant)." },
+        { "element_id": "42282a2", "widget": "form", "setting": "email_to", "note": "Newsletter form — email_to 'info@fajne-weby.cz' → klientov e-mail (fill_globals na hodnotu settingu)." }
+      ],
+      "structural": ["logo klienta (image)", "kontaktné údaje (tel/mail/adresa) ak sú vo footri", "menu položky z brief.pages — ŠTRUKTÚRU menu nemeniť"],
+      "find_rule": "find-element(template_id, search_text='netovapomoc'/'fajne-weby'/'Copyright')"
+    },
+    "cta_bubble": {
+      "note": "CTA bublina nad footrom = globálny prvok (plávajúce tlačidlo / Header-CTA widget 15213 alebo súčasť footra). Dohľadaj cez find-element (CTA text / odkaz) a nastav CTA text + cieľový odkaz (tel:/kontakt) klienta. Farby needitovať (globálny kit).",
+      "find_rule": "find-element na footer/header template, widget_type button alebo search_text agentúrneho CTA"
+    },
+    "popups": [
+      { "popup_id": 15139, "title": "Contact form - popup", "fill": "text_substitution + form",
+        "elements": [{ "element_id": "d81bf3f", "widget": "icon-box", "setting": "description_text", "note": "Email icon-box (jan@netovapomoc.sk) → klient." }],
+        "find_rule": "find-element(popup_id, search_text='netovapomoc') + form recipient" },
+      { "popup_id": 15926, "title": "Newsletter popup", "fill": "text_substitution + form",
+        "find_rule": "find-element(popup_id, search_text='netovapomoc'/'fajne-weby')" }
+    ]
+  },
+  "do_not_touch": {
+    "menu_structure": "Štruktúra/poradie menu sa nemení (invariant).",
+    "colors": "Farby/typografia globálneho kitu sa needitujú (rieši Fáza 1b).",
+    "legal_body": "Právny TEXT (GDPR/cookies) sa obsahovo nemení — menia sa LEN identifikačné údaje firmy (názov, adresa, IČO, DIČ, e-mail, telefón, doména, copyright)."
+  }
+}

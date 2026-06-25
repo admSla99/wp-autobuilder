@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://netovapomoc/rules.schema.json",
+  "title": "WP Autobuilder – Content Mapping Rules",
+  "description": "Normalizovaný výstup z 01_SABLONA_v2.xlsx (compile_rules.py). Skilly čítajú tento JSON, nie surový Excel.",
+  "type": "object",
+  "required": ["version", "source_file", "global_invariants", "pages"],
+  "additionalProperties": true,
+  "properties": {
+    "version": { "type": "string" },
+    "source_file": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "global_invariants": {
+      "type": "array",
+      "description": "Nemenné bezpečnostné pravidlá — neprepísateľné z Excelu.",
+      "items": { "type": "string" }
+    },
+    "tool_routing": {
+      "type": "object",
+      "description": "Kam smerovať generovanie podľa typu obsahu.",
+      "additionalProperties": { "type": "string" }
+    },
+    "pages": {
+      "type": "object",
+      "description": "Kľúč = page_key (hp, about, services…).",
+      "additionalProperties": { "$ref": "#/definitions/page" }
+    },
+    "stats": { "type": "object" }
+  },
+  "definitions": {
+    "page": {
+      "type": "object",
+      "required": ["sheet", "elementor_target", "sections"],
+      "additionalProperties": true,
+      "properties": {
+        "sheet": { "type": "string", "description": "Názov hárku v Exceli." },
+        "elementor_target": { "type": "string", "description": "Cieľová stránka/šablóna v Elementore." },
+        "intro_notes": {
+          "type": "array",
+          "description": "Rozhodovacie tabuľky a poznámky nad sekciami (voľný text – AI logika výberu šablóny).",
+          "items": { "type": "string" }
+        },
+        "sections": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/section" }
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "required": ["order", "slot_id", "name"],
+      "additionalProperties": true,
+      "properties": {
+        "order": { "type": "string", "description": "Kód/poradie (1.0, 2A, V1, S)." },
+        "slot_id": {
+          "type": ["string", "null"],
+          "description": "Stabilný identifikátor slotu pre Elementor (napr. hp.hero). Povinný pre automatizáciu.",
+          "pattern": "^[a-z0-9_]+\\.[a-z0-9_]+$"
+        },
+        "stav": {
+          "type": "string",
+          "description": "POVINNÁ = vždy. VOLITEĽNÁ = len ak klient dodá dáta. ALTERNATÍVA = nahrádza inú sekciu podľa podmienky.",
+          "enum": ["POVINNÁ", "POVINNA", "VOLITEĽNÁ", "VOLITELNA", "ALTERNATÍVA", "ALTERNATIVA"]
+        },
+        "name": { "type": "string" },
+        "element_types": { "type": ["string", "null"] },
+        "item_count": {
+          "type": "object",
+          "properties": {
+            "raw": { "type": ["string", "null"] },
+            "min": { "type": ["integer", "null"] },
+            "max": { "type": ["integer", "null"] },
+            "unlimited": { "type": "boolean" }
+          }
+        },
+        "visual_type": {
+          "type": ["string", "null"],
+          "description": "FOTO / VIDEO / IKONA / LOGO / NIE. 'pracovník vyberá' = ľudská voľba."
+        },
+        "visual_count": { "type": ["string", "null"] },
+        "ai_can_edit": { "type": "array", "items": { "type": "string" } },
+        "ai_cannot_edit": { "type": "array", "items": { "type": "string" } },
+        "data_source": { "type": "array", "items": { "type": "string" } },
+        "rules_text": { "type": ["string", "null"] },
+        "constraints": {
+          "type": "object",
+          "description": "Strojovo čitateľné tvrdé pravidlá vyparsované z textu.",
+          "properties": {
+            "cta_max_chars": { "type": "integer" },
+            "price_client_required": { "type": "boolean" },
+            "no_invented_reviews": { "type": "boolean" },
+            "photo_order_locked": { "type": "boolean" },
+            "pair_photo_video": { "type": "boolean" },
+            "preserve_verbatim": { "type": "boolean" }
+          },
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}

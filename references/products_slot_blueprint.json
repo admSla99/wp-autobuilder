@@ -1,0 +1,54 @@
+{
+  "_poznamka": "Blueprint produktovej stránky — VYČISTENÝ master 'Produktová stránka — MASTER (clean)' post 18197 (z 17045, odstránené demo sekcie: Featured stories, text+image, Services/Our vision, Kam vyraziť/Výlety, image-carousel). Čistá osnova: [0] hero, [1] global CTA, [2] ikonky, [3] recenzie-intro+link, [4] recenzie-karty, [5] footer. Per produkt: skill v slučke vloží aktuálny produkt do brief.content.product (singular); recenzie zdieľané v brief.content.reviews. Index-cesty odčítané z živej 18197 (2026-06-24).",
+  "page": "products",
+  "source_sample_post": 18197,
+  "source_master_backup_template": 18195,
+  "page_title_candidates": ["Produktová stránka — MASTER (clean)", "Produktova stránka", "Produktová stránka", "Produkt", "Product"],
+  "loop_brief": "content.products[]",
+  "loop_inject_path": "content.product",
+  "slots": [
+    { "slot_id": "products.category", "path": [0, 0], "widget": "heading", "setting": "title", "brief": "content.product.category", "optional": true },
+    { "slot_id": "products.h1", "path": [0, 2], "widget": "heading", "setting": "title", "brief": "content.product.h1" },
+    { "slot_id": "products.bullet1.title", "path": [0, 3, 0, 1], "widget": "heading", "setting": "title", "brief": "content.product.bullets[0].title", "optional": true },
+    { "slot_id": "products.bullet1.text", "path": [0, 3, 0, 2], "widget": "text-editor", "setting": "editor", "brief": "content.product.bullets[0].text", "optional": true },
+    { "slot_id": "products.bullet2.title", "path": [0, 3, 1, 1], "widget": "heading", "setting": "title", "brief": "content.product.bullets[1].title", "optional": true },
+    { "slot_id": "products.bullet2.text", "path": [0, 3, 1, 2], "widget": "text-editor", "setting": "editor", "brief": "content.product.bullets[1].text", "optional": true },
+    { "slot_id": "products.bullet3.title", "path": [0, 3, 2, 1], "widget": "heading", "setting": "title", "brief": "content.product.bullets[2].title", "optional": true },
+    { "slot_id": "products.bullet3.text", "path": [0, 3, 2, 2], "widget": "text-editor", "setting": "editor", "brief": "content.product.bullets[2].text", "optional": true },
+
+    { "slot_id": "products.icon1.title", "path": [2, 0, 0, 0], "widget": "xpro-icon-box", "setting": "title", "brief": "content.product.benefits[0].title" },
+    { "slot_id": "products.icon1.desc", "path": [2, 0, 0, 0], "widget": "xpro-icon-box", "setting": "description", "brief": "content.product.benefits[0].text" },
+    { "slot_id": "products.icon2.title", "path": [2, 0, 1, 0], "widget": "xpro-icon-box", "setting": "title", "brief": "content.product.benefits[1].title" },
+    { "slot_id": "products.icon2.desc", "path": [2, 0, 1, 0], "widget": "xpro-icon-box", "setting": "description", "brief": "content.product.benefits[1].text" },
+    { "slot_id": "products.icon3.title", "path": [2, 0, 2, 0], "widget": "xpro-icon-box", "setting": "title", "brief": "content.product.benefits[2].title" },
+    { "slot_id": "products.icon3.desc", "path": [2, 0, 2, 0], "widget": "xpro-icon-box", "setting": "description", "brief": "content.product.benefits[2].text" },
+
+    { "slot_id": "products.reviews.intro_section", "path": [3], "widget": "container", "setting": "_row", "brief": "content.reviews.google_url", "hide_if_missing": true, "optional": true, "_pozn": "Sekcia intro+link recenzií; skry, ak klient nedodal Google odkaz." },
+    { "slot_id": "products.reviews.intro_heading", "path": [3, 0], "widget": "heading", "setting": "title", "brief": "content.reviews.heading", "optional": true },
+    { "slot_id": "products.reviews.link", "path": [3, 2], "widget": "xpro-button", "setting": "link.url", "brief": "content.reviews.google_url", "optional": true, "link_extra": { "is_external": "on" } },
+    { "slot_id": "products.reviews.link_text", "path": [3, 2], "widget": "xpro-button", "setting": "text", "brief": "content.reviews.button_text", "optional": true },
+
+    { "slot_id": "products.reviews.cards_section", "path": [4], "widget": "container", "setting": "_row", "brief": "content.reviews.items", "hide_if_missing": true, "optional": true, "_pozn": "Sekcia 3 kariet recenzií; skry, ak klient nedodal recenzie (items)." },
+    { "slot_id": "products.reviews.rating", "path": [4, 0, 0, 1, 1, 1], "widget": "heading", "setting": "title", "brief": "content.reviews.rating", "optional": true },
+    { "slot_id": "products.reviews.card1.author", "path": [4, 0, 1, 0, 0, 1, 0], "widget": "heading", "setting": "title", "brief": "content.reviews.items[0].author", "optional": true },
+    { "slot_id": "products.reviews.card1.text", "path": [4, 0, 1, 0, 1], "widget": "text-editor", "setting": "editor", "brief": "content.reviews.items[0].text", "optional": true },
+    { "slot_id": "products.reviews.card2.author", "path": [4, 0, 1, 1, 0, 1, 0], "widget": "heading", "setting": "title", "brief": "content.reviews.items[1].author", "optional": true },
+    { "slot_id": "products.reviews.card2.text", "path": [4, 0, 1, 1, 1], "widget": "text-editor", "setting": "editor", "brief": "content.reviews.items[1].text", "optional": true },
+    { "slot_id": "products.reviews.card3.author", "path": [4, 0, 1, 2, 0, 1, 0], "widget": "heading", "setting": "title", "brief": "content.reviews.items[2].author", "optional": true },
+    { "slot_id": "products.reviews.card3.text", "path": [4, 0, 1, 2, 1], "widget": "text-editor", "setting": "editor", "brief": "content.reviews.items[2].text", "optional": true }
+  ],
+  "do_not_touch": {
+    "global_cta": "global widgety [1,0] a [2,1,0] (Chcem viac informácii) — needitovať.",
+    "review_images_rating_stars": "Google logo, hviezdy (rating widget) a poradie — needitovať; mení sa len text/author/rating heading.",
+    "colors": "Farby ikon/nadpisov dedia globálnu primárnu (Fáza 1b) — needitovať per widget.",
+    "footer": "xpro-template footer [5] — zdieľaná šablóna."
+  },
+  "section_background_fix": {
+    "_pozn": "Ikonková sekcia (kontajner [2], id na masteri 224f695) má pozadie #96DB3E26 = transparentná ZELENÁ (~15% alfa), ale hardcoded — nie viazaná na brand. PRI BUILDE per klient nastav background_color = <brand.primary HEX> + '26' (rovnaká ~15% alfa) cez update-container, aby sledovalo brand. Master ostáva default zelený-transparentný.",
+    "container_path": [2],
+    "alpha_suffix": "26"
+  },
+  "image_slots": [
+    { "slot_id": "products.hero.photo", "path": [0, 1], "widget": "image", "setting": "image", "prompt_context": "content.product.name", "shot_type": "product", "aspect_ratio": "4:3", "seo_hint": "{product}-foto", "optional": false, "source_policy": "client_only", "_pozn": "Foto produktu LEN od klienta (upload/enhance) — negeneruj. Master má demo legal foto, prepíše sa pri builde." }
+  ]
+}

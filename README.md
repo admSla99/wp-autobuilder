@@ -103,6 +103,7 @@ Ak report hlási chyby, tvorba stránky sa nemá spustiť.
 | `scripts/resolve_slots.py` | Štruktúra stránky → mapa `slot_id` → aktuálne `element_id` |
 | `scripts/build_ops.py` | brief + slotmap + blueprint → operácie pre `batch-update` |
 | `scripts/qa_check.py` | Predpublikačná QA (placeholdery, CTA dĺžky, číselné štatistiky, agentúrne zvyšky) |
+| `scripts/check_intake.py` | Pred-letová kontrola úplnosti briefu (chýbajúce klientske vstupy: BLOCKER/WARN/INFO); nezastavuje build |
 | `scripts/build_palette.py` | brief + aktuálny kit → nový kit (farby, read-merge-write) |
 | `scripts/build_page_color_css.py` | Z nového kitu vyrobí per-stránka custom_css (farby len pre danú stránku, nedotkne sa kitu) |
 | `scripts/extract_palette.py` | Z loga klienta vytiahne brand farby (intake, ak dotazník farby nemá) |
@@ -119,8 +120,18 @@ Ak report hlási chyby, tvorba stránky sa nemá spustiť.
 - **Fáza 0 — Intake (`intake.md`).** Používateľ zadá iba zdroj (GDrive priečinok klienta, napr. „test1").
   Claude nájde priečinok, prečíta `01_Formulár a info/dotazník_.xlsx` (+ info.docx), namapuje stĺpce na
   brief, vygeneruje copy podľa pravidiel a uloží `brief.json` (validuje voči `brief.schema.json`). Ak
-  dotazník nemá farby, `extract_palette.py` ich vytiahne z loga.
+  dotazník nemá farby, `extract_palette.py` ich vytiahne z loga. Nakoniec `check_intake.py` spraví
+  **pred-letovú kontrolu úplnosti** — vypíše chýbajúce klientske vstupy (logo, IČO/DIČ, ceny, fotky,
+  príjemca formulára…) ako BLOCKER / WARN / INFO. **Build sa nezastavuje**, zoznam ide do hlavičky behu
+  a do záverečného reportu.
 - **Fáza 1 — Pravidlá.** Skontroluje `rules.json` (stránka `hp`); ak treba, prekompiluje z Excelu.
+- **Fáza 1a — Overenie inštancie (echo identity, PRED prvým zápisom).** Skill nevie, na ktorý web je
+  connector pripojený (všetky klientske weby majú rovnaké tituly stránok). Preto ešte pred akýmkoľvek
+  zápisom prečíta **živú doménu** pripojenej inštancie (`list-pages` → doména z `preview_url`) a vypíše ju
+  spárovanú s klientom z briefu. Dev/pracovné inštancie (`newX`/`newsX.eshopion.sk`) sú platné ciele a
+  neblokujú sa; build **nepokračuje len** pri presnej zhode s agentúrnym hostom z denylistu
+  (`newo.eshopion.sk`). `instance_domain` sa zapamätá a uvedie v reporte (Fáza 5). Zámenu dvoch platných
+  inštancií zachytí iba človek z echo riadku (skill je autonómny, nepýta sa).
 - **Fáza 1b — Brand / Farby (`colors.md`).** Read-merge-write celého kitu (viď kap. 7). Flag `color_mode`
   (default `"kit"`) rozhoduje o zápise: `kit` = atomický zápis do globálneho kitu; `page_css` = `--e-global-color-*`
   len na cieľové stránky (`build_page_color_css.py`, nedotkne sa kitu); `plan` = len „color plan" bez zápisu.
@@ -136,7 +147,8 @@ Ak report hlási chyby, tvorba stránky sa nemá spustiť.
   image slotov cez `sideload-image` + `update-element`. Video = sesterský Runway workflow (TODO).
 - **Fáza 5 — QA + publikovanie.** `qa_check.py`; ak QA prejde bez CHÝB a `publish_after_build=true` (default),
   stránka sa **publikuje**. Pri čo i len jednej CHYBE ostáva **draft** + dôvod v reporte (QA gate).
-  Varovania (globálne zvyšky šablóny) publikovaniu nebránia.
+  Varovania (globálne zvyšky šablóny) publikovaniu nebránia. Súhrnný report uvádza aj **`instance_domain`**
+  (na ktorý web sa stavalo — z Fázy 1a) a zopakuje **BLOCKER/WARN** z completeness checku (Fáza 0).
 - **Fáza 6 — Globálne prvky a právne stránky (raz na inštanciu).** Footer, CTA bublina, popup, GDPR/cookies
   obsahujú agentúrne údaje → `fill_globals.py` ich nahradí údajmi z `content.legal`. Právny TEXT sa obsahovo
   nemení, menia sa len identifikačné údaje firmy. Blueprint: `globals_blueprint.json`.
@@ -194,6 +206,8 @@ stránky cez `build_page_color_css.py`, kit ostáva nedotknutý) alebo `plan` (l
 - **Produktové stránky (Fáza 7)** — klon na produkt + naplnenie podľa blueprintu/copy guide.
 - **Recenzie** — plnené z klientových dát (`content.reviews`); nikdy sa nevymýšľajú.
 - QA (placeholdery, CTA dĺžky, číselné štatistiky, agentúrne zvyšky) + **automatické publikovanie** za QA gate.
+- **Pred-letová kontrola úplnosti** (`check_intake.py`) — chýbajúce klientske vstupy hneď po intaku (nezastaví build).
+- **Overenie inštancie pred prvým zápisom** (Fáza 1a, echo identity + denylist agentúrnych hostov).
 - Direktíva autonómie (bez doplňujúcich otázok), self-testy (resolve→build→QA pre 6 stránok, farby).
 
 **Zatiaľ nie / vedome vynechané:**
@@ -212,6 +226,8 @@ stránky cez `build_page_color_css.py`, kit ostáva nedotknutý) alebo `plan` (l
 **Self-testy (bez živého webu):**
 - `python scripts/selftest.py` — reťazec resolve → build_ops → QA pre všetkých 6 pokrytých stránok.
 - `python scripts/palette_selftest.py` — farebná logika (merge zachová kit).
+
+**Kontrola úplnosti briefu:** `python scripts/check_intake.py --brief <brief.json>` (`--json` pre strojový výstup) — vypíše BLOCKER/WARN/INFO chýbajúcich klientskych vstupov; vždy exit 0 (nezastavuje build).
 
 **Po zmene Excelu:** `python scripts/compile_rules.py <cesta_k_01_SABLONA_v2.xlsx>` → nové rules.json.
 
@@ -262,12 +278,22 @@ POUŽÍVATEĽ: „postav web pre klienta test1"          (jediný vstup = zdroj 
 │   honesty: tvrdé fakty 1:1, ceny/recenzie/kontakty sa NIKDY nevymýšľajú                  │
 │   flags → brief.pages (napr. pricing „individuálny" ⇒ stránka sa nestavia)               │
 │   ──► brief.json   (validácia: brief.schema.json; vzory: brief.example*.json)            │
+│   check_intake.py --brief brief.json → BLOCKER/WARN/INFO chýbajúcich vstupov (nezastaví) │
 └─────────────────────────────────────────────────────────────────────────────────────────┘
    │
    ▼
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
 │ FÁZA 1 — PRAVIDLÁ (offline, len ak sa menil Excel)                                       │
 │   01_SABLONA_v2.xlsx ──compile_rules.py──► references/rules.json (11 stránok, invarianty)│
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+   │
+   ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│ FÁZA 1a — OVERENIE INŠTANCIE (echo identity, read-only, PRED PRVÝM ZÁPISOM)              │
+│   list-pages → živá doména inštancie (z preview_url, napr. new1.eshopion.sk)             │
+│   🔌 echo: „pripojený web = <doména> · klient z briefu = <meno>" (prvý riadok behu)      │
+│   newX/newsX.eshopion.sk = platné ciele (neblokovať) · denylist host = newo.eshopion.sk  │
+│   presná zhoda s denylistom ⇒ STOP (prepni inštanciu) · inak zapamätaj instance_domain   │
 └─────────────────────────────────────────────────────────────────────────────────────────┘
    │
    ▼
@@ -345,8 +371,9 @@ POUŽÍVATEĽ: „postav web pre klienta test1"          (jediný vstup = zdroj 
    ▼
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
 │ ODOVZDANIE: stránky PUBLIKOVANÉ (alebo DRAFT, ak QA hlási chybu) + súhrnný report        │
-│   (preview_url per stránka · stav publikovaná/draft+dôvod · čo je naplnené /             │
-│    placeholder / skryté · QA výsledky · color plan · agentúrne zvyšky na ručné dočistenie)│
+│   (instance_domain = na ktorý web sa stavalo · preview_url per stránka ·                 │
+│    stav publikovaná/draft+dôvod · čo je naplnené / placeholder / skryté · QA výsledky ·   │
+│    color plan · BLOCKER/WARN chýbajúcich vstupov · agentúrne zvyšky na ručné dočistenie)  │
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 
 Vrstvy a zodpovednosti:

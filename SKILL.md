@@ -78,10 +78,52 @@ Postupuj presne podľa `references/intake.md`:
 3. Znormalizuj odpovede na `brief.json` podľa mapovania v `intake.md` a vygeneruj HP copy podľa
    pravidiel (claim, štatistiky, 3 služby, 3 hodnotové bloky, CTA). **Bez pýtania sa.**
 4. Over `brief.json` oproti `references/brief.schema.json`. Ulož do pracovného priečinka.
+5. **Completeness check (pred-letová kontrola úplnosti):**
+   `python SKILL_DIR/scripts/check_intake.py --brief brief.json`.
+   Vypíše, ktoré **klientske vstupy chýbajú** (logo, IČO/DIČ, ceny, fotky, príjemca formulára…),
+   rozdelené na **BLOCKER** (skončí ako placeholder/agentúrny zvyšok/prázdna sekcia — dozbieraj od
+   klienta čo najskôr), **WARN** (doplní sa default / sekcia sa skryje) a **INFO** (externé veci mimo
+   briefu — over ručne). **Build sa NEZASTAVUJE** — beží ďalej autonómne; zoznam BLOCKER/WARN zaraď
+   do hlavičky behu a zopakuj v záverečnom reporte (Fáza 5), nech je hneď jasné, čo treba dodať.
 
 ### Fáza 1 — Pravidlá
 Skontroluj `references/rules.json` (stránka `hp`). Ak sa Excel zmenil:
 `python SKILL_DIR/scripts/compile_rules.py <cesta_k_01_SABLONA_v2.xlsx>`.
+
+### Fáza 1a — Overenie inštancie (echo identity) — PRED PRVÝM ZÁPISOM
+**Účel:** najčastejšia a najdrahšia chyba je build na **zlej inštancii** (connector mieril na iný web
+klienta). Skill nevie, na ktorý web je pripojený — všetky klientske weby majú rovnaké tituly stránok
+(„Hp", „O nás"…), takže zlú inštanciu z obsahu nerozozná. Preto **ako úplne prvú vec pred akýmkoľvek
+zápisom** (pred Fázou 1b) prečítaj **živú doménu pripojenej inštancie** a vypíš ju spárovanú s identitou
+klienta z briefu, nech sa nezhoda zachytí skôr, než sa čokoľvek zapíše.
+1. **Prečítaj živú doménu z Elementor MCP** (read-only): `elementor-mcp-list-pages` → z URL ktorejkoľvek
+   stránky (`preview_url`/`link`/permalink) vytiahni doménu (napr. `new1.eshopion.sk`). (Toto je zároveň
+   overenie dostupnosti connectora.)
+2. **Vypíš echo ako prvý riadok behu** (vždy, aj pri úspechu), napr.:
+   `🔌 Pripojený web (live): new1.eshopion.sk · klient z briefu: Stratex / zámočník (segment zámočník) ·
+   zdroj GDrive: test1. Ak doména NEpatrí tomuto klientovi → ZASTAV a prepni inštanciu (CLAUDE.md).`
+3. **Čo sú platné ciele:** pracovné/**developerské inštancie `newsX.eshopion.sk`** (news1, news6, news10…)
+   a `newX.eshopion.sk` (new1, new6, new9…) sú **bežné, platné ciele** — väčšina buildov beží práve na nich.
+   Tie sa **NIKDY neblokujú**.
+3a. **Nezamieňaj s `client.domain`:** `client.domain` v briefe je **pôvodný/verejný web klienta** z dotazníka
+   (napr. `stratex.sk`), NIE pracovná doména inštancie. Na echo NEporovnávaj voči `client.domain` — vznikli
+   by falošné poplachy.
+3b. **Auto-blok = PRESNÝ menný zoznam (denylist) agentúrnych HOSTOV, nie hádanie podľa vzoru.** Build
+   **nepokračuj** IBA ak sa živá doména **presne zhoduje** so zakázaným **agentúrnym hostom**:
+   `newo.eshopion.sk` (agentúrny master/predloha). Porovnávaj **celý host 1:1**, nie prefix — žiadny
+   `startswith("new")`. Tým je vylúčené, že by sa zachytila dev inštancia (`newo` ≠ `news1`; líšia sa
+   4. znakom). Zoznam sú **hostitelia, na ktoré connector reálne môže mieriť** — preto sem NEPATRIA
+   e-mailové/brandové zvyšky z obsahu (`netovapomoc.sk`, `fajne-weby.cz` rieši Fáza 6 ako TEXT, nie ako
+   inštanciu). Ak je agentúrny web (napr. `netovapomoc.sk`) reálne samostatná WP inštancia, doplň jeho
+   host do denylistu.
+3c. **Zámenu dvoch dev/klientskych inštancií** (napr. `new1` vs `new6`, `news6` vs `news10`) skill sám
+   rozoznať NEVIE — oba sú platné weby. Tú zachytí **iba človek** z echo riadku (skill je autonómny, nepýta
+   sa cez AskUserQuestion), prípadne tvrdá brána Vrstvy 2 (`instances.json`) nižšie.
+4. **Zapamätaj `instance_domain`** a uveď ju v hlavičke behu aj v záverečnom reporte (Fáza 5) — nech je
+   z reportu vždy jasné, NA KTORÝ web sa stavalo.
+- **Voliteľná tvrdá brána (Vrstva 2):** ak existuje developer-register `instances.json`
+  (`GDrive priečinok klienta → pracovná doména`), porovnaj `instance_domain` s očakávanou doménou pre
+  staveného klienta a pri nezhode **STOP** (bez registra ostáva len echo z bodu 2).
 
 ### Fáza 1b — Brand / Farby (read-merge-write, atomicky)
 Farby sa nastavujú IBA globálne v kite, nikdy po sekciách (01_SABLONA: „AI NESMIE meniť farby").
@@ -212,8 +254,11 @@ ikona/silueta bez identity), v galérii slot preskoč. Nikdy nenechaj agentúrnu
   s post statusom `publish`; ak konkrétne pole nie je isté, over cez `get-page-structure`/page settings).
   Ak QA hlási čo i len jednu **CHYBU**, stránku **nechaj ako draft** a chybu zapíš do reportu.
   (Revert publikovania: `update-page-settings(post_id, {post_status:"draft"})`.)
-- Vypíš súhrnný report za všetky stránky: `preview_url`, stav (publikovaná / draft + dôvod), čo je naplnené
-  (texty / farby / médiá), čo ostalo placeholder/skryté, a QA výsledok per stránka.
+- Vypíš súhrnný report za všetky stránky: **`instance_domain`** (na ktorý web sa stavalo — z Fázy 1a),
+  `preview_url`, stav (publikovaná / draft + dôvod), čo je naplnené (texty / farby / médiá), čo ostalo
+  placeholder/skryté, a QA výsledok per stránka.
+- **Chýbajúce klientske vstupy:** zopakuj BLOCKER/WARN z completeness checku (Fáza 0, krok 5) — čo treba
+  od klienta dozbierať (logo, IČO/DIČ, ceny, fotky, príjemca formulára…), aby to nezapadlo.
 
 ### Fáza 6 — Globálne prvky a právne stránky (RAZ na inštanciu, nie per stránka)
 **Trigger:** spúšťa sa **vždy raz po dokončení per-stránka slučky** (po Fáze 5), nie je voliteľná. QA `netovapomoc`/
@@ -299,6 +344,8 @@ Nikdy sa neprepíšu z briefu ani z Excelu:
 - `python SKILL_DIR/scripts/selftest.py` — synteticky overí reťazec resolve → build_ops → QA
   (text + image sloty) **pre všetky pokryté stránky** (hp, about, services, contact, pricing, gallery) bez živého webu.
 - `python SKILL_DIR/scripts/palette_selftest.py` — overí farebnú logiku (merge zachová kit) bez dotyku webu.
+- `python SKILL_DIR/scripts/check_intake.py --brief <brief.json>` — pred-letová kontrola úplnosti
+  briefu (BLOCKER/WARN/INFO chýbajúcich klientskych vstupov); nezastavuje build, len reportuje.
 - Príklady briefov: `references/brief.example.json` (Podlahy Novák), `references/brief.example.enova.json` (reálny intake).
 
 ## Rozšírenie

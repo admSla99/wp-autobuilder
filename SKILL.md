@@ -4,12 +4,13 @@ description: >
   Autonómne poskladá WordPress stránku z briefu klienta cez Elementor MCP. Používateľ zadá iba
   ZDROJ podkladov (priečinok klienta na Google Drive, napr. „test1"); skill sám nájde dotazník,
   prečíta ho, vytvorí brief.json, naplní textové sloty stránok webu (HP, O nás, Služby, Kontakt,
-  Cenník) podľa pravidiel (rules.json), spraví QA a stránky po úspešnej QA publikuje (draft ostáva len ak
-  QA hlási chybu) — celé bez prerušovania a bez doplňujúcich otázok.
+  Cenník) podľa pravidiel (rules.json), nastaví brand farby v kite, doplní obrázky (fotky klienta / AI),
+  spraví QA a stránky po úspešnej QA publikuje (draft ostáva len ak QA hlási chybu) — celé bez prerušovania
+  a bez doplňujúcich otázok.
   Použi tento skill VŽDY, keď používateľ chce vygenerovať/poskladať/naplniť/vytvoriť web alebo HP
-  stránku z briefu, dotazníka alebo podkladov na GDrive, „spustiť autobuilder", „spraviť kópiu HP a
-  naplniť ju", alebo automatizovať tvorbu webu klienta v Elementore — aj keď nepovie presne „skill".
-  Spúšťa sa ako jeden vstupný bod a vnútri prejde celý proces (intake → klon → sloty → texty → QA).
+  stránku z briefu, dotazníka alebo podkladov na GDrive, „spustiť autobuilder", „naplniť/poskladať HP
+  stránku", alebo automatizovať tvorbu webu klienta v Elementore — aj keď nepovie presne „skill".
+  Spúšťa sa ako jeden vstupný bod a vnútri prejde celý proces (intake → farby → sloty → texty → médiá → QA → publish).
 ---
 
 # WP Autobuilder
@@ -35,23 +36,25 @@ Používateľ zadá **iba zdroj podkladov** — názov/cestu/ID **priečinka kli
 vytvorenie `brief.json`) **robí skill sám**. Ak používateľ zdroj nezadá, použi posledný spomenutý
 priečinok klienta z konverzácie; iba ak naozaj žiadny nie je, vypýtaj si jednu vec — cestu k podkladom.
 
-Na **vlastnej inštancii klienta** je cieľová stránka priamo HP (nájde sa cez `list-pages`).
-Pri **testovaní na zdieľanom dev webe** používateľ navyše zadá `post_id` draft **kópie HP**
-(aby sa neprepísal master) — viď Fáza 2.
+Cieľové stránky sú **živé stránky inštancie klienta** — nájdu sa cez `list-pages` (Fáza 2). Skill
+predpokladá **jednu vlastnú inštanciu klienta** (jeden web = jeden klient, vlastný kit aj Application
+Password) a pracuje priamo na živých stránkach. Žiadne zdieľané dev weby, draft kópie ani „test mód".
 
-Flag `apply_global_colors` (default `true` — globálne farby sa reálne zapíšu do kitu) rozhoduje,
-či sa farby zapíšu, alebo sa len vygeneruje „color plan". Nastav `false` IBA ak cieľový web zdieľa
-jeden kit s inými klientmi/masterom (vtedy by zápis prepísal aj ich) — viď Fáza 1b.
+Flag `color_mode` (default `"kit"`) rozhoduje, ako sa zapíšu brand farby: `kit` = atomický zápis do
+globálneho kitu (default, viď Fáza 1b); `page_css` = voliteľne len `--e-global-color-*` na konkrétne
+stránky (`build_page_color_css.py`); `plan` = len „color plan" bez zápisu.
 
 Flag `publish_after_build` (default `true`) rozhoduje, či sa stránka po úspešnej QA publikuje. Pri
 `true` sa publikuje len ak QA prejde bez CHÝB (inak ostáva draft + zápis do reportu); `false` = vždy ostane
 draft (publikuje človek) — viď Fáza 5.
 
 ## Potrebné konektory
-- **Elementor MCP** — cieľový web (klon a úpravy stránky).
+- **Elementor MCP** — inštancia klienta (úpravy stránok, zápis kitu, publikovanie).
 - **Google Drive MCP** — podklady klienta (dotazník, logo, fotky).
-- **n8n (oficiálne MCP s `execute_workflow`)** — generovanie/úprava médií (Image 2.0; Runway neskôr).
-  Potrebné len vo **Fáze 4b Médiá**, a to iba ak `brief.media.source != "placeholder"`. Inak vizuály = placeholder.
+- **n8n — built-in connector** (ten, čo používa Claude cowork; tool `execute_workflow` + `get_execution`) — generovanie/úprava médií (Image 2.0; Runway pre video).
+  Potrebné vo **Fáze 4b Médiá**. Workflow **NEnahráva** do WordPressu — obrázok uloží na agentúrny Google Drive
+  (priečinok `wp-autobuilder-media`, jeden GDrive credential v n8n) a vráti **verejnú URL**. Žiadne WP credentials
+  klienta v n8n; upload do inštancie rieši `elementor-mcp-sideload-image` per-inštancia (auth z prepínača).
 Over dostupnosť: `elementor-mcp-list-pages` a GDrive `search_files`.
 
 > **Prepnutie inštancie:** skill sám `elementor-mcp` connector NEprepína. Ak ukazuje na iný web než
@@ -65,7 +68,7 @@ Over dostupnosť: `elementor-mcp-list-pages` a GDrive `search_files`.
 
 ## Pipeline (jeden beh)
 
-Pracuj po krokoch, po každom zápise over výsledok. **NEROB zmeny na master stránke ani v globálnom kite.**
+Pracuj po krokoch, po každom zápise over výsledok. Mimo cielene zadefinovaných slotov a kitu (Fáza 1b) nič nemeň.
 
 ### Fáza 0 — Intake z GDrive  → `brief.json`
 Postupuj presne podľa `references/intake.md`:
@@ -87,13 +90,13 @@ polia resetne na defaulty. Preto vždy **celý kit naraz**. Detaily a varovania:
 1. Nájdi kit: `elementor-mcp-list-templates(template_type="kit")` → `post_id` (napr. 6).
 2. `elementor-mcp-get-global-settings` → ulož `kit_current.json` (celý kit = zároveň záloha).
 3. `python SKILL_DIR/scripts/build_palette.py --brief brief.json --current kit_current.json --kit SKILL_DIR/references/kit_colors.json -o kit_new.json` (vloží brand farby, zachová typografiu/CSS/ostatné).
-4. **Zápis farieb (default `apply_global_colors=true`):** `elementor-mcp-update-page-settings(post_id=<kit_id>, settings=<kit_new.json>)` — JEDEN atomický zápis (predtým MUSÍ existovať `kit_current.json` ako záloha z kroku 2). NIKDY čiastočne, NIKDY `update-global-colors` ani `add-custom-css` na kit.
-5. **Iba ak `apply_global_colors=false` (zdieľaný kit):** kit NEMENIŤ; vygeneruj `kit_new.json` + „color plan" do reportu.
-- Rollback: `update-page-settings(post_id=<kit_id>, settings=<kit_current.json>)`. Typografiu needitovať (iba ak brief žiada font).
+4. **Zápis farieb (default `color_mode="kit"`):** `elementor-mcp-update-page-settings(post_id=<kit_id>, settings=<kit_new.json>)` — JEDEN atomický zápis (predtým MUSÍ existovať `kit_current.json` ako záloha z kroku 2). NIKDY čiastočne, NIKDY `update-global-colors` ani `add-custom-css` na kit.
+5. **Voliteľne `color_mode="page_css"`:** namiesto kitu zapíš `--e-global-color-*` len na cieľové stránky — `python SKILL_DIR/scripts/build_page_color_css.py --kit kit_new.json --post-id <id>` → `update-page-settings(post_id=<page>, {custom_css:...})`. `color_mode="plan"` = len color plan do reportu.
+- Rollback: `update-page-settings(post_id=<kit_id>, settings=<kit_current.json>)` (alebo `{custom_css:""}` pri page_css). Typografiu needitovať (iba ak brief žiada font).
 
 ### Fáza 2 — Urči cieľové stránky
-Na novej WP inštancii klienta sú stránky už hotové (z template inštalácie). Skill **NEklonuje** —
-pracuje priamo na cieľových stránkach:
+Na inštancii klienta sú stránky už hotové (z template inštalácie). Skill **NEklonuje** — pracuje priamo
+na **živých cieľových stránkach** (výnimka = produkty, Fáza 7):
 - `elementor-mcp-list-pages` → pre každú stránku z `brief.pages` nájdi `post_id` podľa
   `page_title_candidates` v jej blueprinte (nepredpokladaj ID natvrdo):
   | page | blueprint | typický titul |
@@ -107,15 +110,14 @@ pracuje priamo na cieľových stránkach:
 - Stránku z `brief.pages` bez blueprintu preskoč a zapíš do reportu. Zaznač `preview_url`/`edit_url`.
 - **Pozn. k doménam:** obsah skopírovaných stránok môže referencovať cudzie domény (master `newo…`,
   agentúrny `netovapomoc.sk`) v URL obrázkov — sú to zvyšky z predlohy, NIE iná inštancia. Reálne
-  editovaná inštancia je tá, kam zapisuje Elementor MCP (= `wordpress.base_url` pre médiá vo Fáze 4b).
-
-> **Teraz (testovanie na zdieľanom dev webe):** nepracuj na živých masteroch — prepísal by si master
-> pre ostatných. Použi **draft KÓPIE** stránok a ich `post_id` zadaj ako vstup (alebo pokračuj na
-> posledných vytvorených kópiách). Kópie sa v skille nevytvárajú; na vlastnej inštancii klienta sú
-> cieľom priamo živé stránky.
+  editovaná inštancia je tá, kam zapisuje Elementor MCP (a kam `sideload-image` nahráva médiá vo Fáze 4b).
 
 **Fázy 3 → 4 → 4b → 5 odtiaľto bež v slučke pre KAŽDÚ cieľovú stránku** (medzisúbory per stránka:
 `structure_<page>.json`, `slotmap_<page>.json`, `ops_<page>.json`).
+
+**Po dokončení slučky (všetky stránky hotové):** spusti **Fázu 6** (globálne prvky — RAZ na inštanciu) a ak
+`brief.content.products` nie je prázdne aj **Fázu 7** (produkty). Fáza 6 **sa nevynecháva** — je súčasťou behu;
+ak nejaké `content.legal` pole chýba, príslušný token nechaj nezmenený a zapíš ho do reportu.
 
 ### Fáza 3 — Mapovanie slotov (per stránka)
 - `elementor-mcp-get-page-structure(post_id=<cieľová stránka>)` → ulož `structure_<page>.json`.
@@ -133,13 +135,13 @@ pracuje priamo na cieľových stránkach:
   - `link.url` setting: zapíše sa vnorený link objekt (tel:/mailto:/maps),
   - **repeater sloty preskočí** — viď nižšie.
 - Pošli `ops_<page>.json` ako `operations` do `elementor-mcp-batch-update(post_id=<cieľová stránka>, operations=...)`.
-- **Auto-skrytie voliteľných sekcií bez obsahu (všetky stránky):** sekciu, pre ktorú klient nedodal obsah,
-  **skry** (hide-op na kontajner) + vyčisti jej placeholder texty — nikdy nenechaj viditeľný demo obsah.
-  Týka sa najmä: **referencie/logá** (ak klient nedodal logá), **blog** (ak niet článkov), prázdne value/cik-cak
-  bloky. Pri **Google recenziách** skry sekciu len ak klient recenzie nemá; ak má, vlož odkaz na Google profil —
-  OBSAH recenzií negeneruj (Google Reviews API). Ak sekcia ešte nie je v blueprinte (napr. referencie/recenzie/blog
-  na HP), zisti cestu jej kontajnera z `get-page-structure` a pridaj hide-slot (`widget:"section"`, `hide_if_missing`,
-  `brief` = pole prítomnosti) — NEHÁDŽ cesty naslepo, over typ cez resolver.
+- **Auto-skrytie voliteľných sekcií bez obsahu (DETERMINISTICKY cez blueprint):** voliteľné sekcie sú v blueprinte
+  ako **kontajnerové hide-sloty** (`widget:"container"`, `hide_if_missing:true`, `brief`=pole prítomnosti). `build_ops`
+  ich skryje automaticky, keď je brief pole prázdne (None/""/[]/{}) — **netreba ad-hoc rozhodnutie agenta za behu**.
+  Na HP sú to: `hp.reviews.cards` (←`content.reviews.items`), `hp.reviews.tabs` (←`content.reviews.google_url`),
+  `hp.blog.section` (←`content.blog.posts`). Pri **Google recenziách**: ak klient dodá `google_url`, sekcia ostane a
+  vloží sa odkaz (Fáza 7); OBSAH recenzií negeneruj (Google Reviews API). **Nová sekcia na skrytie?** pridaj
+  kontajnerový hide-slot do blueprintu a `path` over resolverom proti živej štruktúre — NIE ad-hoc za behu.
 - **Gallery widgety (Galéria):** master má **viac variantov galérie** (hlavná, sekundárna, kartové mini-galérie).
   Pri bežných fotkách použi **IBA jeden variant — `gallery.widget.main`** a všetky fotky daj tam; **ostatné varianty
   skry** (hide-op na `gallery.widget.secondary` a na kartovú sekciu + jej nadpisy/labely), aby sa nezobrazovali prázdne
@@ -151,12 +153,21 @@ pracuje priamo na cieľových stránkach:
   1. `elementor-mcp-get-element-settings(post_id, element_id=<nested-accordion z slotmap>)`,
   2. v poli `items` uprav IBA `item_title` podľa `content.about.faq.items[k].q` — **`_id` zachovaj!**,
   3. `elementor-mcp-update-widget(post_id, element_id, settings={"items": <celé upravené pole>})`.
-- **Recenzie:** napĺňaj z `content.reviews` (od klienta), inak sekciu skry — viď Fáza 7 (nikdy nevymýšľaj).
-- **NEEDITUJ** `global` widgety (zdieľané CTA), hlavičkové riadky
-  cenníka, icon-list na Kontakte, ani obrázky (image sloty rieši Fáza 4b).
+- **Recenzie:** napĺňaj z `content.reviews` (od klienta); ak chýbajú, sekcie sa skryjú cez blueprint hide-sloty (vyššie). Viď Fáza 7 (nikdy nevymýšľaj).
+- **Kontakt — icon-list (kontaktné ikony, repeater):** napĺňaj **read-merge-write** (NIE batch):
+  `get-element-settings(post_id, <icon-list element_id>)` → v poli `icon_list` uprav IBA `text`
+  (`<b>Telefón:</b> <client.phone>`, `<b>E-mail:</b> <client.email>`) — **`_id` aj `selected_icon` zachovaj** →
+  `update-widget`. Nikdy nenechaj agentúrny kontakt (`…@netovapomoc.sk`, cudzie číslo).
+- **CTA odkazy (link):** link-sloty (`setting:"link.url"`, `brief:"content.cta_target"`) nastavia cieľ
+  editovateľných buttonov (hero, block1, Služby hero) na klientovu stránku — `build_ops` ich pošle v batchi.
+  **Globálne** „Chcem viac informácii" (`global` widgety) odkazujú na agentúrny `/produktova-stranka/` — tie rieši
+  **Fáza 6** (raz na inštanciu), needituj per stránka.
+- **Portfólio (HP):** ak `content.sections.use_portfolio` je prázdne (default), portfóliová sekcia `[1]` sa
+  auto-skryje (`hp.services.portfolio_section`; kartová sekcia `[2]` pokrýva služby).
+- **NEEDITUJ** ostatné `global` widgety, hlavičkové riadky cenníka, ani obrázky (image sloty rieši Fáza 4b).
 
-### Fáza 4b — Médiá (obrázky cez n8n Image 2.0)
-Spusti **iba ak** `brief.media.source != "placeholder"`. Inak fázu preskoč (vizuály ostanú placeholder).
+### Fáza 4b — Médiá (obrázky cez n8n Image 2.0 / fotky klienta)
+Beží **vždy** — `media.source ∈ {client, generated, mix}` (`placeholder` sa nepoužíva ako default; vizuál sa rieši vždy).
 Kontrakt: `references/media.md`; image sloty: pole `image_slots` v `references/<page>_slot_blueprint.json`
 (každá pokrytá stránka má vlastné). Dávku môžeš poslať jednu pre všetky stránky naraz (slot_id má
 prefix stránky). Sloty so `source_policy:"client_only"` (fotka osoby na Kontakte, galéria) NIKDY negeneruj —
@@ -170,22 +181,21 @@ ikona/silueta bez identity), v galérii slot preskoč. Nikdy nenechaj agentúrnu
    Plán zabezpečí: **žiadna fotka vo dvoch slotoch** (dedup), klientove vs generované rovnomerne,
    generované do veľkých aj malých slotov, **osoby ≥ 50 %** naplnených slotov, a `client_only` sa NEgeneruje.
    Dávku v kroku 2 stavaj PODĽA `plan_<page>.json` (mode/shot_type/client_index per slot); `mode:"skip"` slot vynechaj.
-2. **Zostav dávku** `{ job_id, client, brand, defaults, wordpress, reference_faces, items[] }` (media.md / SPEC 1.1):
+2. **Zostav dávku** `{ job_id, client, brand, defaults, reference_faces, items[] }` (media.md / SPEC 1.1):
    - pre každý image slot jeden `item` (`slot_id`, `mode`, `prompt`, `aspect_ratio`, `shot_type`, `seo_filename`, `alt`);
      `prompt` + `seo_filename` stavaj podľa `references/image_prompt_guide.md` z `image_slots[].prompt_context`
      + briefu + brand HEX. **Nepýtaj sa**; generuj presne toľko promptov, koľko je slotov.
-   - `wordpress.upload = true` na produkcii (na dev bez WP app password nechaj placeholder).
-   - **`wordpress.base_url` = doména WP inštancie, ktorú edituješ cez Elementor MCP** (kam sa nahrávajú médiá),
-     NIE URL obrázkov v obsahu (tie môžu ukazovať na master `newo…`/agentúrny `netovapomoc.sk` — zvyšky z predlohy).
-     Zisti ju cez `sideload-image` (doména vo vrátenej `url`). Nesúlad → WP 401 `rest_cannot_create`.
+   - **`wordpress` objekt sa NEPOSIELA** — workflow nahráva na agentúrny Google Drive a vracia verejnú URL
+     (`image_url`); `wp_media_id` je vždy `null`. Upload do inštancie klienta urobí `sideload-image` (krok 4).
    - **3 vetvy podľa `brief.media.source`:** `client` = len upload/`enhance` klientových fotiek (`input_image_url`
-     z GDrive), negeneruj nové · `generated` = všetko `mode:"generate"` · `mix` = väčšie sekcie fotky klienta
-     (enhance), menšie generované.
+     z GDrive; ak GDrive nemá priame public URL, `elementor-mcp-sideload-image(<verejná URL pôvodného webu klienta>)`),
+     negeneruj nové · `generated` = všetko `mode:"generate"` · `mix` = väčšie sekcie fotky klienta (enhance), menšie generované.
 3. **Spusti workflow (Webhook Trigger):** `execute_workflow(workflow_id="GtjjsjvLqPar2FwB", executionMode="manual", inputs={ type:"webhook", webhookData:{ method:"POST", body:<dávka> } })` → `get_execution`
    (poll do dokončenia). Výstup `{ job_id, status, results[] }` (SPEC 1.2).
-4. **Priraď do slotov** — pre každý `result` so `status:"ok"`: ak `wp_media_id` → použi priamo, inak
-   `elementor-mcp-sideload-image(image_url)` → media id; potom `elementor-mcp-update-element` na image slot
-   (element_id z resolvera podľa `image_slots[].path` + `setting`).
+4. **Priraď do slotov** — pre každý `result` so `status:"ok"`: `image_url` je verejná Drive URL, takže
+   `elementor-mcp-sideload-image(image_url)` → media id (tým sa obrázok nahrá do inštancie klienta cez auth
+   Elementor MCP, bez WP credentials v n8n); potom `elementor-mcp-update-element` na image slot
+   (element_id z resolvera podľa `image_slots[].path` + `setting`). Alt/title nastav na slote z `result.alt`/`seo_filename`.
 5. **Chyby:** `status:"error"` alebo `partial` → daný slot zopakuj, alebo nechaj placeholder a zapíš do reportu (negeneruj naslepo). Aspoň 1 video / stránka rieši sesterský Runway workflow (rovnaký kontrakt).
 
 ### Fáza 5 — QA + odovzdanie (per stránka)
@@ -201,10 +211,13 @@ ikona/silueta bez identity), v galérii slot preskoč. Nikdy nenechaj agentúrnu
   (default), stránku **publikuj** — nastav status na `publish` (napr. `elementor-mcp-update-page-settings`
   s post statusom `publish`; ak konkrétne pole nie je isté, over cez `get-page-structure`/page settings).
   Ak QA hlási čo i len jednu **CHYBU**, stránku **nechaj ako draft** a chybu zapíš do reportu.
+  (Revert publikovania: `update-page-settings(post_id, {post_status:"draft"})`.)
 - Vypíš súhrnný report za všetky stránky: `preview_url`, stav (publikovaná / draft + dôvod), čo je naplnené
   (texty / farby / médiá), čo ostalo placeholder/skryté, a QA výsledok per stránka.
 
 ### Fáza 6 — Globálne prvky a právne stránky (RAZ na inštanciu, nie per stránka)
+**Trigger:** spúšťa sa **vždy raz po dokončení per-stránka slučky** (po Fáze 5), nie je voliteľná. QA `netovapomoc`/
+`fajne-weby` zostatky sú VAROVANIA, ktoré po Fáze 6 musia zmiznúť — preto je súčasťou každého behu na inštancii.
 Blueprint: `references/globals_blueprint.json`; tokeny: `references/global_tokens.json`. Footer, CTA bublina,
 popup a stránky GDPR/cookies obsahujú **agentúrne údaje** (Netova pomoc s.r.o., `jan@netovapomoc.sk`,
 `info@fajne-weby.cz`, „Copyright … Netovapomoc.sk", IČO/DIČ…). Tie nahraď údajmi klienta z `content.legal`:
@@ -215,7 +228,9 @@ popup a stránky GDPR/cookies obsahujú **agentúrne údaje** (Netova pomoc s.r.
    `python SKILL_DIR/scripts/fill_globals.py --brief brief.json --tokens SKILL_DIR/references/global_tokens.json --in value.html -o value_new.html`
    → `update-element`/`update-widget` s novou hodnotou. fill_globals hlási NEnahradené agentúrne zvyšky.
 3. **Footer štruktúrne:** nastav logo klienta (image), kontakt (tel/mail/adresa); **menu štruktúru nemeň** (invariant).
-4. **CTA bublina:** nastav CTA text + cieľový odkaz (tel:/kontakt) klienta; farby/kit needituj.
+4. **CTA bublina + globálne CTA buttony:** nastav CTA text + cieľový odkaz klienta (`content.cta_target`).
+   Globálne „Chcem viac informácii" (`cta_global` v `globals_blueprint.json`): `find-element(search_text="/produktova-stranka")`
+   → `update-widget(link.url = content.cta_target)`. Farby/kit needituj.
 5. **Právny TEXT GDPR/cookies sa obsahovo NEMENÍ** — menia sa len identifikačné údaje firmy.
 6. **Kontrola:** po behu spusti QA / over, že nikde neostal `netovapomoc`/`fajne-weby` (qa_check AGENCY_LEFTOVERS
    už tieto hlási ako varovanie — po Fáze 6 majú zmiznúť).
@@ -246,11 +261,12 @@ Nikdy sa neprepíšu z briefu ani z Excelu:
 - Nemeniť fakty, čísla, legislatívu, technické parametre, poradie fotiek.
 - Nemeniť brand farby, fonty, layout, štruktúru menu.
 - CTA default max 21 znakov; nepoužívať „Kliknite sem / Viac / Tu / Kúpte hneď".
+- CTA cieľ (link) = klientova stránka/kontakt; nikdy agentúrny `/produktova-stranka/`.
 
 ## Mapovanie brief → sloty
 - Textové sloty: pole `slots` v `references/<page>_slot_blueprint.json` (pole `brief` pri každom slote).
 - Image sloty: pole `image_slots` tamtiež (`prompt_context` = brief pole, `shot_type`, `aspect_ratio`, `path`, `setting`).
-- **hp**: hero H1 ← `content.claim`; štatistiky ← `content.kpis[]`; CTA ← `content.cta_*`; karty ← `content.services[]`;
+- **hp**: hero H1 ← `content.claim`; štatistiky ← `content.kpis[]`; CTA text ← `content.cta_*`, CTA link ← `content.cta_target`; karty ← `content.services[]`;
   hodnotové bloky ← `content.value_props[]`; video ← `content.video_section`; eyebrows/H3 ← `content.sections`.
 - **about**: hero (2 varianty na masteri, rovnaký text) ← `content.about.hero`; 4 countery ←
   `content.about.stats[]` (ending_number/suffix/title); 3 bloky ← `content.about.blocks[]`;

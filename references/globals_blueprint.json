@@ -6,14 +6,27 @@
       "post_id": 14065,
       "title": "Ochrana osobných údajov",
       "fill": "text_substitution",
-      "elements": [{ "element_id": "9f65040", "widget": "text-editor", "setting": "editor", "note": "Celý právny text s firemnými údajmi — fill_globals na 'editor'." }],
+      "elements": [
+        {
+          "element_id": "9f65040",
+          "widget": "text-editor",
+          "setting": "editor",
+          "note": "Celý právny text s firemnými údajmi — fill_globals na 'editor'."
+        }
+      ],
       "find_rule": "find-element(post_id, search_text='Netova pomoc' alebo 'netovapomoc') → text-editor widgety"
     },
     "cookies_page": {
       "post_id": 10840,
       "title": "Zásady cookies (EU)",
       "fill": "text_substitution",
-      "elements": [{ "element_id": "67414f4", "widget": "text-editor", "setting": "editor" }],
+      "elements": [
+        {
+          "element_id": "67414f4",
+          "widget": "text-editor",
+          "setting": "editor"
+        }
+      ],
       "find_rule": "find-element(post_id, search_text='IČO' / 'netovapomoc' / e-mail) → text-editor; ak cookies neobsahujú firemné údaje, netreba meniť"
     },
     "footer": {
@@ -21,11 +34,30 @@
       "type": "footer",
       "fill": "text_substitution + structural",
       "elements": [
-        { "element_id": "b98321d", "widget": "text-editor", "setting": "editor", "note": "Copyright (© ... Netovapomoc.sk) — fill_globals." },
-        { "element_id": "99959ab", "widget": "text-editor", "setting": "editor", "note": "Copyright (variant)." },
-        { "element_id": "42282a2", "widget": "form", "setting": "email_to", "note": "Newsletter form — email_to 'info@fajne-weby.cz' → klientov e-mail (fill_globals na hodnotu settingu)." }
+        {
+          "element_id": "b98321d",
+          "widget": "text-editor",
+          "setting": "editor",
+          "note": "Copyright (© ... Netovapomoc.sk) — fill_globals."
+        },
+        {
+          "element_id": "99959ab",
+          "widget": "text-editor",
+          "setting": "editor",
+          "note": "Copyright (variant)."
+        },
+        {
+          "element_id": "42282a2",
+          "widget": "form",
+          "setting": "email_to",
+          "note": "Newsletter form — email_to 'info@fajne-weby.cz' → klientov e-mail (fill_globals na hodnotu settingu)."
+        }
       ],
-      "structural": ["logo klienta (image)", "kontaktné údaje (tel/mail/adresa) ak sú vo footri", "menu položky z brief.pages — ŠTRUKTÚRU menu nemeniť"],
+      "structural": [
+        "logo klienta (image)",
+        "kontaktné údaje (tel/mail/adresa) ak sú vo footri",
+        "menu položky z brief.pages — ŠTRUKTÚRU menu nemeniť"
+      ],
       "find_rule": "find-element(template_id, search_text='netovapomoc'/'fajne-weby'/'Copyright')"
     },
     "cta_bubble": {
@@ -33,12 +65,33 @@
       "find_rule": "find-element na footer/header template, widget_type button alebo search_text agentúrneho CTA"
     },
     "popups": [
-      { "popup_id": 15139, "title": "Contact form - popup", "fill": "text_substitution + form",
-        "elements": [{ "element_id": "d81bf3f", "widget": "icon-box", "setting": "description_text", "note": "Email icon-box (jan@netovapomoc.sk) → klient." }],
-        "find_rule": "find-element(popup_id, search_text='netovapomoc') + form recipient" },
-      { "popup_id": 15926, "title": "Newsletter popup", "fill": "text_substitution + form",
-        "find_rule": "find-element(popup_id, search_text='netovapomoc'/'fajne-weby')" }
-    ]
+      {
+        "popup_id": 15139,
+        "title": "Contact form - popup",
+        "fill": "text_substitution + form",
+        "elements": [
+          {
+            "element_id": "d81bf3f",
+            "widget": "icon-box",
+            "setting": "description_text",
+            "note": "Email icon-box (jan@netovapomoc.sk) → klient."
+          }
+        ],
+        "find_rule": "find-element(popup_id, search_text='netovapomoc') + form recipient"
+      },
+      {
+        "popup_id": 15926,
+        "title": "Newsletter popup",
+        "fill": "text_substitution + form",
+        "find_rule": "find-element(popup_id, search_text='netovapomoc'/'fajne-weby')"
+      }
+    ],
+    "cta_global": {
+      "fill": "link_substitution",
+      "setting": "link.url",
+      "find_rule": "find-element(post_id, search_text='/produktova-stranka') alebo widget_type 'global' → CTA buttony; nastav link.url = content.cta_target",
+      "note": "Globalne CTA 'Chcem viac informacii' odkazuju na agenturny lievik /produktova-stranka/ — prepni na klientov cta_target (raz na instanciu)."
+    }
   },
   "do_not_touch": {
     "menu_structure": "Štruktúra/poradie menu sa nemení (invariant).",

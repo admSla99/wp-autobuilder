@@ -185,6 +185,13 @@
             },
             "blog_button": {
               "type": "string"
+            },
+            "use_portfolio": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Ak vyplnené, HP použije portfóliový variant služieb namiesto kariet. Default prázdne → portfóliová sekcia sa skryje."
             }
           }
         },
@@ -398,17 +405,54 @@
           "type": "object",
           "description": "Identifikačné údaje firmy klienta pre GLOBÁLNE prvky (footer, popup, CTA bublina) a PRÁVNE stránky (GDPR, cookies). Nahrádzajú agentúrne tokeny (global_tokens.json) cez fill_globals.py. Všetko 1:1 od klienta — nevymýšľať.",
           "properties": {
-            "company_name": { "type": "string", "description": "Plný názov spoločnosti (napr. 'Drevko s.r.o.')." },
-            "company_short": { "type": "string", "description": "Krátky názov (bez právnej formy)." },
-            "brand_label": { "type": "string", "description": "Značka pre copyright (napr. 'Drevko.sk')." },
-            "address": { "type": "string", "description": "Sídlo (ulica, mesto, PSČ)." },
-            "ico": { "type": "string" },
-            "dic": { "type": "string" },
-            "ic_dph": { "type": ["string", "null"] },
-            "register": { "type": ["string", "null"], "description": "Zápis v OR (súd, oddiel, vložka)." },
-            "domain": { "type": ["string", "null"], "description": "Doména klienta (napr. www.drevko.sk)." },
-            "email": { "type": "string" },
-            "phone": { "type": "string" }
+            "company_name": {
+              "type": "string",
+              "description": "Plný názov spoločnosti (napr. 'Drevko s.r.o.')."
+            },
+            "company_short": {
+              "type": "string",
+              "description": "Krátky názov (bez právnej formy)."
+            },
+            "brand_label": {
+              "type": "string",
+              "description": "Značka pre copyright (napr. 'Drevko.sk')."
+            },
+            "address": {
+              "type": "string",
+              "description": "Sídlo (ulica, mesto, PSČ)."
+            },
+            "ico": {
+              "type": "string"
+            },
+            "dic": {
+              "type": "string"
+            },
+            "ic_dph": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "register": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Zápis v OR (súd, oddiel, vložka)."
+            },
+            "domain": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Doména klienta (napr. www.drevko.sk)."
+            },
+            "email": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            }
           }
         },
         "products": {
@@ -416,20 +460,100 @@
           "description": "Produktové/servisné podstránky — 1 stránka na produkt (klon z mastera 'new2'). INVARIANT: ceny aj foto produktu VÝHRADNE od klienta. Copy podľa references/product_copy_guide.md.",
           "items": {
             "type": "object",
-            "required": ["name"],
+            "required": [
+              "name"
+            ],
             "properties": {
-              "name": { "type": "string" },
-              "category": { "type": ["string", "null"], "description": "Eyebrow kategória nad H1." },
-              "slug": { "type": ["string", "null"] },
-              "h1": { "type": ["string", "null"], "description": "H1 = primárne kľúčové slovo + konkrétny prínos." },
-              "description": { "type": "string", "description": "Popis 3–5 odsekov; konkrétne fakty alebo [DOPLNIŤ: …]." },
-              "price_no_vat": { "type": ["string", "null"], "description": "Cena bez DPH — LEN od klienta." },
-              "price_vat": { "type": ["string", "null"], "description": "Cena s DPH — LEN od klienta." },
-              "price_note": { "type": ["string", "null"] },
-              "photos": { "type": "array", "items": { "type": "string" }, "description": "Foto produktu — LEN od klienta (client_only), negenerovať." },
-              "benefits": { "type": "array", "maxItems": 6, "items": { "type": "object", "properties": { "icon": { "type": ["string", "null"] }, "title": { "type": "string" }, "text": { "type": "string" } } }, "description": "3–6 ikoniek: názov + 2–3 vety (≥3 riadky, približne rovnako dlhé)." },
-              "cta_primary": { "type": ["string", "null"], "description": "≤21 znakov." },
-              "cta_secondary": { "type": ["string", "null"], "description": "≤21 znakov." }
+              "name": {
+                "type": "string"
+              },
+              "category": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Eyebrow kategória nad H1."
+              },
+              "slug": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "h1": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "H1 = primárne kľúčové slovo + konkrétny prínos."
+              },
+              "description": {
+                "type": "string",
+                "description": "Popis 3–5 odsekov; konkrétne fakty alebo [DOPLNIŤ: …]."
+              },
+              "price_no_vat": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Cena bez DPH — LEN od klienta."
+              },
+              "price_vat": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Cena s DPH — LEN od klienta."
+              },
+              "price_note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "photos": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Foto produktu — LEN od klienta (client_only), negenerovať."
+              },
+              "benefits": {
+                "type": "array",
+                "maxItems": 6,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "icon": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "description": "3–6 ikoniek: názov + 2–3 vety (≥3 riadky, približne rovnako dlhé)."
+              },
+              "cta_primary": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "≤21 znakov."
+              },
+              "cta_secondary": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "≤21 znakov."
+              }
             }
           }
         },
@@ -437,20 +561,56 @@
           "type": "object",
           "description": "Google recenzie — VÝHRADNE od klienta (nikdy nevymýšľať). Ak chýba google_url aj items, sekcia recenzií sa skryje (hide_if_missing).",
           "properties": {
-            "google_url": { "type": ["string", "null"], "description": "Odkaz na Google profil/recenzie klienta (link tlačidlo)." },
-            "heading": { "type": ["string", "null"], "description": "Nadpis sekcie recenzií (default 'Čo o nás hovoria klienti')." },
-            "button_text": { "type": ["string", "null"], "description": "Text link tlačidla (default napr. 'Pozrite si Google recenzie'). Nesmie ostať demo text." },
-            "rating": { "type": ["string", "null"], "description": "Súhrnný rating, napr. '4,9' — od klienta/Google." },
+            "google_url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Odkaz na Google profil/recenzie klienta (link tlačidlo)."
+            },
+            "heading": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Nadpis sekcie recenzií (default 'Čo o nás hovoria klienti')."
+            },
+            "button_text": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Text link tlačidla (default napr. 'Pozrite si Google recenzie'). Nesmie ostať demo text."
+            },
+            "rating": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Súhrnný rating, napr. '4,9' — od klienta/Google."
+            },
             "items": {
               "type": "array",
               "description": "Reálne recenzie dodané klientom (na statické karty). Bez dodaných sa karty neplnia.",
               "items": {
                 "type": "object",
-                "required": ["text"],
+                "required": [
+                  "text"
+                ],
                 "properties": {
-                  "author": { "type": "string" },
-                  "text": { "type": "string" },
-                  "rating": { "type": ["string", "number", "null"] }
+                  "author": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  },
+                  "rating": {
+                    "type": [
+                      "string",
+                      "number",
+                      "null"
+                    ]
+                  }
                 }
               }
             }
@@ -584,6 +744,20 @@
               "description": "Karty s popiskami (voliteľný variant)."
             }
           }
+        },
+        "cta_target": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Cieľ (link) hlavných CTA — klientova stránka/kontakt (napr. '/kontakt/' alebo 'tel:...'). NIKDY agentúrny /produktova-stranka/."
+        },
+        "cta_target_secondary": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Cieľ sekundárneho CTA (default = cta_target)."
         }
       }
     },

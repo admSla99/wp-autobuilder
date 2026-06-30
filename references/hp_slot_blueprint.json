@@ -429,11 +429,100 @@
       "widget": "button",
       "setting": "text",
       "brief": "content.sections.blog_button"
+    },
+    {
+      "slot_id": "hp.reviews.cards",
+      "path": [
+        9
+      ],
+      "widget": "container",
+      "setting": "_hide",
+      "brief": "content.reviews.items",
+      "hide_if_missing": true,
+      "optional": true,
+      "_note": "Skry sekciu statickych recenzii (karty), ak klient nedodal content.reviews.items"
+    },
+    {
+      "slot_id": "hp.blog.section",
+      "path": [
+        10
+      ],
+      "widget": "container",
+      "setting": "_hide",
+      "brief": "content.blog.posts",
+      "hide_if_missing": true,
+      "optional": true,
+      "_note": "Skry blog, ak klient nedodal clanky (content.blog.posts)"
+    },
+    {
+      "slot_id": "hp.reviews.tabs",
+      "path": [
+        11
+      ],
+      "widget": "container",
+      "setting": "_hide",
+      "brief": "content.reviews.google_url",
+      "hide_if_missing": true,
+      "optional": true,
+      "_note": "Skry sekciu REFERENCIE (Google reviews tabs), ak klient nedodal google_url"
+    },
+    {
+      "slot_id": "hp.hero.cta_primary.link",
+      "path": [
+        0,
+        0,
+        3,
+        1,
+        0
+      ],
+      "widget": "button",
+      "setting": "link.url",
+      "brief": "content.cta_target",
+      "optional": true
+    },
+    {
+      "slot_id": "hp.hero.cta_secondary.link",
+      "path": [
+        0,
+        0,
+        3,
+        1,
+        1
+      ],
+      "widget": "button",
+      "setting": "link.url",
+      "brief": "content.cta_target_secondary",
+      "optional": true
+    },
+    {
+      "slot_id": "hp.block1.cta.link",
+      "path": [
+        3,
+        0,
+        1,
+        2
+      ],
+      "widget": "button",
+      "setting": "link.url",
+      "brief": "content.cta_target",
+      "optional": true
+    },
+    {
+      "slot_id": "hp.services.portfolio_section",
+      "path": [
+        1
+      ],
+      "widget": "container",
+      "setting": "_hide",
+      "brief": "content.sections.use_portfolio",
+      "hide_if_missing": true,
+      "optional": true,
+      "_note": "Skry portfoliovu sekciu (demo + duplicitny nadpis), ak klient nechce variant portfolia"
     }
   ],
   "do_not_touch": {
     "global_ctas": "GLOBAL widgety (Chcem viac informácii) sú zdieľané – needitovať na úrovni stránky.",
-    "reviews": "Sekcia recenzií = Google Reviews API, nie text-fill.",
+    "reviews": "Karty recenzii a Google-tabs sa NEvyplnaju textom. Ak klient nedodal content.reviews (items/google_url), sekcie hp.reviews.cards/tabs sa AUTO-SKRYJU (hide_if_missing). Inak plni Faza 7 / Google Reviews API.",
     "global_theme": "Header a Footer sú theme templates (globálne, Theme Builder) – nie sú súčasťou HP; riešia sa samostatne raz na inštanciu.",
     "cta_banner": "CTA banner a spodný divider sú xpro-template (zdieľané šablóny) – needitovať ako HP sloty."
   },

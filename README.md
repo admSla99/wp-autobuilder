@@ -73,6 +73,7 @@ Ak report hlási chyby, tvorba stránky sa nemá spustiť.
 |---|---|
 | `SKILL.md` | Orchestrátor — popis, fázy pipeline, invarianty, vstupný kontrakt |
 | `README.md` | Tento prehľad |
+| `CHANGELOG.md` | História zmien skillu |
 | `references/rules.json` | Skompilované pravidlá obsahu (z Excelu) — skill číta toto |
 | `references/rules.schema.json` | JSON schéma rules.json (validácia) |
 | `references/hp_slot_blueprint.json` | Mapovanie sekcií HP na index-cesty v strome + na polia briefu |
@@ -88,6 +89,9 @@ Ak report hlási chyby, tvorba stránky sa nemá spustiť.
 | `references/brief.example.json` | Príklad briefu (Podlahy Novák) |
 | `references/brief.example.enova.json` | Reálny príklad z intake (Enova House) |
 | `references/intake.md` | Postup Google Drive → brief.json (mapovanie dotazníka) + dĺžky textov/SEO |
+| `references/hp_copy_guide.md` | Zákazníkov štandard pre copy hlavnej stránky (AKO písať HP texty) |
+| `references/about_copy_guide.md` | Zákazníkov štandard pre copy stránky O nás |
+| `references/GAP3_navrh_cta_portfolio.md` | Návrh riešenia CTA odkazov + HP portfolio (do_not_touch widgety) |
 | `references/colors.md` | Postup pre farby (read-merge-write) + zistenia |
 | `references/kit_colors.json` | Sloty Elementor kitu + pravidlá odvodenia odtieňov |
 | `references/media.md` | Kontrakt médií (n8n dávka, SPEC) pre Fázu 4b |
@@ -100,6 +104,7 @@ Ak report hlási chyby, tvorba stránky sa nemá spustiť.
 | `scripts/build_ops.py` | brief + slotmap + blueprint → operácie pre `batch-update` |
 | `scripts/qa_check.py` | Predpublikačná QA (placeholdery, CTA dĺžky, číselné štatistiky, agentúrne zvyšky) |
 | `scripts/build_palette.py` | brief + aktuálny kit → nový kit (farby, read-merge-write) |
+| `scripts/build_page_color_css.py` | Z nového kitu vyrobí per-stránka custom_css (farby len pre danú stránku, nedotkne sa kitu) |
 | `scripts/extract_palette.py` | Z loga klienta vytiahne brand farby (intake, ak dotazník farby nemá) |
 | `scripts/kit_to_payload.py` | Pomôcka: get-global-settings → payload (záloha/obnova) |
 | `scripts/plan_media.py` | Plán priradenia fotiek do image slotov (dedup, rozloženie, osoby ≥ 50 %) |
@@ -116,10 +121,13 @@ Ak report hlási chyby, tvorba stránky sa nemá spustiť.
   brief, vygeneruje copy podľa pravidiel a uloží `brief.json` (validuje voči `brief.schema.json`). Ak
   dotazník nemá farby, `extract_palette.py` ich vytiahne z loga.
 - **Fáza 1 — Pravidlá.** Skontroluje `rules.json` (stránka `hp`); ak treba, prekompiluje z Excelu.
-- **Fáza 1b — Brand / Farby (`colors.md`).** Read-merge-write celého kitu (viď kap. 7). Default `apply_global_colors=true` (zapíše farby); na zdieľanom kite nastav `false` → len „color plan".
-- **Fáza 2 — Cieľové stránky.** `list-pages` → pre každú stránku z `brief.pages` nájdi `post_id` podľa
-  `page_title_candidates` v jej blueprinte. Na vlastnej inštancii klienta sa pracuje priamo na živých
-  stránkach (skill NEklonuje); na zdieľanom dev webe sa cieli draft **kópia** (post_id sa zadá ako vstup).
+- **Fáza 1b — Brand / Farby (`colors.md`).** Read-merge-write celého kitu (viď kap. 7). Flag `color_mode`
+  (default `"kit"`) rozhoduje o zápise: `kit` = atomický zápis do globálneho kitu; `page_css` = `--e-global-color-*`
+  len na cieľové stránky (`build_page_color_css.py`, nedotkne sa kitu); `plan` = len „color plan" bez zápisu.
+- **Fáza 2 — Cieľové stránky.** Predpoklad je **jedna vlastná inštancia klienta** (jeden web = jeden klient);
+  stránky sú už hotové z template inštalácie a skill pracuje priamo na **živých stránkach** — **NEklonuje**
+  (výnimka = produkty, Fáza 7). `list-pages` → pre každú stránku z `brief.pages` nájdi `post_id` podľa
+  `page_title_candidates` v jej blueprinte. Žiadne zdieľané dev weby, draft kópie ani „test mód".
 - **Fáza 3 — Mapovanie slotov.** `get-page-structure` → `resolve_slots.py` → `slotmap_<page>.json`.
 - **Fáza 4 — Texty.** `build_ops.py` (brief + slotmap + blueprint) → `ops_<page>.json` → `batch-update`.
   Repeatery (FAQ na O nás, galéria) sa plnia ručne read-merge-write (zachovaj `_id`).
@@ -166,8 +174,9 @@ len custom paletu (nie system) a nuluje alfa hex. Preto jediný bezpečný vzor:
 1. `get-global-settings` → ulož `kit_current.json` (celý kit + záloha),
 2. `build_palette.py --current kit_current.json` → vloží brand farby a **zachová** typografiu/CSS/ostatné,
 3. **jeden atomický** `update-page-settings(post_id=<kit>, settings=<kit_new.json>)`,
-4. rollback = zapísať `kit_current.json` naspäť.
-Na zdieľanom dev webe sa kit nemení (flag `apply_global_colors=false`), len sa vypíše „color plan". Detaily: `colors.md`.
+4. rollback = zapísať `kit_current.json` naspäť (pri `page_css` rollback = `{custom_css:""}`).
+Flag `color_mode` riadi zápis: `kit` (default, atomický zápis do kitu), `page_css` (farby len na cieľové
+stránky cez `build_page_color_css.py`, kit ostáva nedotknutý) alebo `plan` (len „color plan" do reportu). Detaily: `colors.md`.
 
 ---
 
@@ -210,7 +219,7 @@ Na zdieľanom dev webe sa kit nemení (flag `apply_global_colors=false`), len sa
 
 ## 10. Známe obmedzenia / poznámky
 
-- **Kit je site-wide:** na zdieľanom dev webe farby nezapisovať (`apply_global_colors=false`, prefarbili by master). Produkcia = vlastná inštancia klienta.
+- **Kit je site-wide:** zápis do kitu (`color_mode="kit"`) prefarbí celý web. Ak nechceš zasiahnuť globálny kit, použi `color_mode="page_css"` (farby len na cieľové stránky) alebo `"plan"` (len návrh). Predpoklad behu = vlastná inštancia klienta.
 - **Multi-inštancia:** každý klient = nová WP inštancia; Elementor MCP sa nasmeruje na ňu (skill connector sám neprepína — viď `CLAUDE.md` / `Prepni-Elementor.bat`).
 - **Publikovanie:** default je auto-publish po úspešnej QA (`publish_after_build=true`). Nastav `false`, ak má vždy ostať draft na ručné schválenie.
 - **Povolenia nástrojov:** prvý beh v Coworku môže vyžadovať schválenie zápisov (vytvorenie/úprava stránky, čítanie GDrive, n8n).
@@ -219,7 +228,7 @@ Na zdieľanom dev webe sa kit nemení (flag `apply_global_colors=false`), len sa
 
 ## 11. Pokrytie stránok (jún 2026)
 
-| page | blueprint | master (dev) | text sloty | image sloty | špeciality |
+| page | blueprint | master | text sloty | image sloty | špeciality |
 |---|---|---|---|---|---|
 | hp | hp_slot_blueprint.json | 11154 | 34 | 9 | — |
 | about | about_slot_blueprint.json | 13109 | 30 | 13 | countery (cast int), FAQ repeater (read-merge-write) |
@@ -229,7 +238,7 @@ Na zdieľanom dev webe sa kit nemení (flag `apply_global_colors=false`), len sa
 | gallery | gallery_slot_blueprint.json | — | 15 | 4 | jeden variant galérie, fotky 1:1 od klienta, item_per_row biasovaný |
 | products | products_slot_blueprint.json | 17045 | 26 | 1 | Fáza 7: klon na produkt, foto client_only, recenzie len od klienta |
 
-Blueprinty boli odčítané zo živých masterov na dev webe a overené `resolve_slots.py` proti
+Blueprinty boli odčítané zo živých template masterov (stĺpec „master") a overené `resolve_slots.py` proti
 snapshotom (`snapshots/` v projekte; nie sú súčasťou balíčka). `selftest.py` pokrýva 6 stránok
 (hp, about, services, contact, pricing, gallery); products beží vlastnou klon-slučkou (Fáza 7).
 Image sloty pokrytých stránok = **36** (overené resolverom proti živým draftom). Nepokryté: blog,
@@ -266,8 +275,9 @@ POUŽÍVATEĽ: „postav web pre klienta test1"          (jediný vstup = zdroj 
 │ FÁZA 1b — BRAND / FARBY (Claude + Elementor MCP + build_palette.py)         colors.md    │
 │   list-templates(kit) → get-global-settings → kit_current.json (= záloha)                │
 │   build_palette.py (brief farby + kit_colors.json odvodzovacie pravidlá) → kit_new.json  │
-│   apply_global_colors?  ── true (produkcia) ──► update-page-settings(kit) [1 atomický    │
-│                         └─ false (dev) ──────► len „color plan" do reportu     zápis]    │
+│   color_mode? ── "kit" (default) ─► update-page-settings(kit) [1 atomický zápis]         │
+│               ├─ "page_css" ──────► build_page_color_css.py → custom_css len na stránky  │
+│               └─ "plan" ──────────► len „color plan" do reportu                          │
 └─────────────────────────────────────────────────────────────────────────────────────────┘
    │
    ▼
@@ -276,7 +286,7 @@ POUŽÍVATEĽ: „postav web pre klienta test1"          (jediný vstup = zdroj 
 │   list-pages → pre každú stránku z brief.pages nájdi post_id                             │
 │   podľa page_title_candidates v <page>_slot_blueprint.json                               │
 │   pokryté: hp · about · services · contact · pricing · gallery                           │
-│   (dev web: cieľ = draft KÓPIE; produkcia: priamo živé stránky inštalácie)               │
+│   jedna vlastná inštancia klienta → cieľ = priamo živé stránky (skill NEklonuje)         │
 └─────────────────────────────────────────────────────────────────────────────────────────┘
    │
    ▼  ┌──────────────────── SLUČKA PRE KAŽDÚ STRÁNKU z brief.pages ─────────────────────┐

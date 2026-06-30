@@ -255,7 +255,9 @@
           "text": "Záťažový vinyl pre prevádzku s vysokou frekvenciou."
         }
       ]
-    }
+    },
+    "cta_target": "/kontakt/",
+    "cta_target_secondary": "/kontakt/"
   },
   "media": {
     "source": "placeholder",

@@ -8,7 +8,8 @@
     "Nevymýšľať recenzie, mená ani hodnotenia.",
     "Nemeniť fakty, čísla, legislatívu, technické parametre ani poradie fotiek.",
     "Nemeniť brand farby, fonty, layout ani štruktúru menu.",
-    "CTA default max 21 znakov; nepoužívať „Kliknite sem / Viac / Tu / Kúpte hneď\"."
+    "CTA default max 21 znakov; nepoužívať „Kliknite sem / Viac / Tu / Kúpte hneď\".",
+    "CTA cieľ (link) = klientova stránka/kontakt; nikdy agentúrny /produktova-stranka/."
   ],
   "tool_routing": {
     "foto": "Image 2.0 (cez n8n)",
@@ -375,7 +376,7 @@
         {
           "order": "12",
           "slot_id": "hp.referencie_loga",
-          "stav": "POVINNÁ",
+          "stav": "VOLITEĽNÁ",
           "name": "Referencie (loga)",
           "element_types": "Nadpis, loga klientov",
           "item_count": {
@@ -402,7 +403,7 @@
         {
           "order": "13",
           "slot_id": "hp.google_recenzie",
-          "stav": "POVINNÁ",
+          "stav": "VOLITEĽNÁ",
           "name": "Google recenzie",
           "element_types": "Nadpis, hodnotenie, recenzie",
           "item_count": {
@@ -431,7 +432,7 @@
         {
           "order": "14",
           "slot_id": "hp.blog_sekcia",
-          "stav": "POVINNÁ",
+          "stav": "VOLITEĽNÁ",
           "name": "Blog sekcia",
           "element_types": "Nadpis, zoznam clankov",
           "item_count": {

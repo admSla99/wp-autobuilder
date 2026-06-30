@@ -61,6 +61,11 @@ Tvrdé pravidlo: farby z dotazníka majú prednosť; logo/web je fallback, keď 
 ## 3) Vygeneruj HP copy (Claude) — podľa pravidiel rules.json
 Surové odpovede nestačia; HP sloty vyžadujú marketingovú copy. Generuj takto:
 
+> **Štýl/štruktúra textov HP = `references/hp_copy_guide.md`** (zákazníkov copywriting štandard pre hlavnú
+> stránku — tón v 2. os. mn. č., osnova HERO → špecializácia → sekundárna → benefity → CTA sekcia →
+> CTA bublina → newsletter, SEO nadpisy, CTA ≤21 znakov, odporúčanie fontov). Slot-mapping nižšie určuje,
+> KAM text patrí; `hp_copy_guide.md` určuje, AKO ho napísať. Honesty pravidlá (nižšie) platia bez výnimky.
+
 ### Dĺžka textov a SEO (ZÁVÄZNÉ — platí pre HP, O nás aj Služby)
 - **Nedrž sa pôvodného krátkeho/„botovitého" nastavenia.** Texty píš ako plnohodnotný web copywriting,
   nie ako jednovetové odrážky. Cieľová dĺžka popisných blokov (cik-cak / value bloky / popisy služieb):
@@ -84,6 +89,10 @@ Surové odpovede nestačia; HP sloty vyžadujú marketingovú copy. Generuj takt
   konkrétne a so SEO kľúčovými slovami segmentu.
 - **cta_primary / cta_secondary**: default „Chcem cenovú ponuku" / „Chcem konzultáciu" (≤21 znakov).
   Nepoužívaj „Kliknite sem / Viac / Tu / Kúpte hneď".
+- **cta_target (+ _secondary)**: cieľ (link) CTA buttonov — klientova konverzná stránka, default `/kontakt/`
+  (príp. `tel:<phone>`). NIKDY agentúrny `/produktova-stranka/`. Sekundárny default = `cta_target`.
+- **sections.use_portfolio**: nechaj prázdne (default) → HP použije kartovú sekciu služieb a portfóliový variant skryje.
+  Vyplň iba, ak klient chce portfólio namiesto kariet (potom doplň fotky portfólia).
 - **video_section**: default nadpis „Pozrite si naše realizácie" + 1 veta k segmentu.
 - **contact**: prenes kontaktné osoby, adresy, telefóny 1:1 (needituj fakty).
 
@@ -108,6 +117,11 @@ Generuj IBA pre stránky v `brief.pages` (z dotazníka: Galéria/Blog/Cenník á
 HP, O nás, Služby, Kontakt). Rovnaké honesty pravidlá ako pri HP.
 
 ### content.about (O nás)
+> **Štýl/štruktúra textov O nás = `references/about_copy_guide.md`** (zákazníkov copywriting štandard pre
+> stránku O nás — tón v 2. os. mn. č., súvislý text BEZ odrážok s bodkami, osnova hero → 4 štatistiky →
+> 2–3 bloky → FAQ, SEO nadpisy, CTA ≤21 znakov). Slot-mapping nižšie určuje, KAM text patrí;
+> `about_copy_guide.md` určuje, AKO ho napísať. Honesty pravidlá platia bez výnimky.
+
 - **hero.title/text**: z „O nás – príbeh firmy" + „predstavenie biznisu". Nadpis ≤ ~8 slov.
 - **stats (presne 4)**: counter widgety — `number` = ČISTÉ číslo (bez medzier, napr. "1200"),
   `suffix` = **prednostne "+"** (príp. "%"/"★"/"r.") alebo null, `label` = **krátka konkrétna veta**

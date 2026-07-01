@@ -1,0 +1,35 @@
+{
+  "name": "wp-skills",
+  "owner": {
+    "name": "admSla99",
+    "email": "netovapomoc6@gmail.com"
+  },
+  "metadata": {
+    "description": "WordPress automatizácia pre Claude (Elementor MCP): autonómny builder webu z briefu a opravár živého webu podľa pripomienok.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "wp-autobuilder",
+      "source": "./plugins/wp-autobuilder",
+      "description": "Autonómne poskladá WordPress stránky (HP, O nás, Služby, Kontakt, Cenník, Galéria, produkty) z podkladov klienta na Google Drive cez Elementor MCP — intake → farby → sloty → texty → médiá → QA → publish.",
+      "version": "1.4.0",
+      "author": {
+        "name": "admSla99"
+      },
+      "keywords": ["wordpress", "elementor", "autobuilder", "website", "automation"],
+      "category": "automation"
+    },
+    {
+      "name": "wp-fixer",
+      "source": "./plugins/wp-fixer",
+      "description": "Autonómny opravár už postaveného WordPress webu podľa pripomienok klienta — changeset → snapshot → cielené úpravy → QA + diff gate → uloženie naživo / rollback. Vyžaduje nainštalovaný plugin wp-autobuilder (znovupoužíva jeho blueprinty a skripty).",
+      "version": "1.0.0",
+      "author": {
+        "name": "admSla99"
+      },
+      "keywords": ["wordpress", "elementor", "fixer", "revision", "automation"],
+      "category": "automation"
+    }
+  ]
+}

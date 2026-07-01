@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "wp-fixer changeset",
+  "_poznamka": "Znormalizovane pripomienky (co treba na webe zmenit) -> changeset.json. Claude ho vyrobi vo Faze 0 z GDrive dokumentu alebo z textu v chate; validate_changeset.py ho overi proti tomuto schema. Enumy citaju skripty priamo z tohto suboru ($defs.change.properties.<pole>.enum).",
+  "type": "object",
+  "required": ["changes"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "client": {"type": ["string", "null"], "_p": "meno klienta (na parovanie s echo identity vo Faze 1)"},
+        "source": {"type": ["string", "null"], "_p": "odkial pripomienky prisli: 'gdrive:<subor>' alebo 'chat'"},
+        "segment": {"type": ["string", "null"], "_p": "obor klienta (zamocnik, restauracia...) - pre kontext textov/obrazkov"},
+        "instance_expected": {"type": ["string", "null"], "_p": "ocakavana pracovna domena (ak existuje register instances.json); inak null"},
+        "created_hint": {"type": ["string", "null"], "_p": "datum (odovzda ho clovek/skill; skripty datum nepocitaju)"}
+      }
+    },
+    "changes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/change"}
+    }
+  },
+  "$defs": {
+    "change": {
+      "type": "object",
+      "required": ["id", "raw", "type", "scope"],
+      "properties": {
+        "id": {"type": "string", "_p": "unikatny kod pripomienky, napr. c1, c2"},
+        "raw": {"type": "string", "_p": "povodny text pripomienky DOSLOVA (pre report a spatnu kontrolu)"},
+        "priority": {
+          "type": "string",
+          "enum": ["priority", "normal", "low"],
+          "default": "normal",
+          "_p": "pripomienky.md ma sekcie PRIORITY / NIE SU PRIORITY -> priority|low; ostatne normal"
+        },
+        "page_hint": {"type": ["string", "null"], "_p": "URL / titul / slug stranky spomenuty v pripomienke; null ak nespomenuty"},
+        "page_type": {
+          "type": ["string", "null"],
+          "enum": ["hp", "about", "services", "contact", "pricing", "gallery", "products", "unknown", null],
+          "_p": "typ stranky = ktory blueprint pouzit; 'unknown' alebo null = hybrid fallback (find-element/struktura)"
+        },
+        "location_hint": {"type": ["string", "null"], "_p": "popis miesta v pripomienke: 'posledna sekcia', 'sekcia 4 obdlzniky', 'fotka vedla mapky', 'cik-cak mala fotka'"},
+        "type": {
+          "type": "string",
+          "enum": ["text", "link", "contact", "color", "image", "media_quality", "visibility", "structure", "global", "mixed"],
+          "_p": "text=copy; link=odkaz; contact=kontaktne fakty; color=brand farby(kit); image=vymena/generovanie obrazka; media_quality=vylepsenie/dedup/rozmer/pomer; visibility=skry/zmaz sekciu; structure=duplikuj/preusporadaj; global=footer/CTA bublina/popup/GDPR/cookies; mixed=viac naraz"
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["page", "kit", "global", "instance"],
+          "_p": "page=jedna stranka; kit=globalny Elementor kit(farby) RAZ; global=theme templaty(footer/popup...) RAZ; instance=pravidlo pre vsetky stranky (napr. dedup fotiek)"
+        },
+        "target_selector": {
+          "type": "object",
+          "_p": "napovede na lokalizaciu prvku (hybrid). Vyplnaj len co je zname; ostatne null.",
+          "properties": {
+            "slot_id": {"type": ["string", "null"], "_p": "ak miesto zodpoveda EXISTUJUCEMU pomenovanemu slotu v blueprinte (napr. 'hp.hero.h1', 'about.stat1.number'); over ze slot aj widget existuju, inak null"},
+            "search_text": {"type": ["string", "null"], "_p": "presny/blizky sucasny text -> find-element(search_text=...)"},
+            "section_index": {"type": ["integer", "null"], "_p": "index sekcie od 0; -1 = posledna sekcia"},
+            "widget": {"type": ["string", "null"], "_p": "ocakavany typ widgetu: heading|text-editor|button|image|icon-list|nested-accordion|container"}
+          }
+        },
+        "intent": {"type": ["string", "null"], "_p": "znormalizovany ciel zmeny (co sa ma stat) 1 vetou"},
+        "desired": {
+          "type": "object",
+          "_p": "cielova hodnota alebo pravidlo. Bud konkretna 'value', alebo 'rule' (napr. dlzka/SEO/match_width), alebo 'text_spec'.",
+          "properties": {
+            "value": {"type": ["string", "null"], "_p": "konkretna cielova hodnota (text/URL/HEX/aspect_ratio...)"},
+            "rule": {"type": ["string", "null"], "_p": "pravidlo bez literalu: 'len_3_4_riadky', 'more_seo', 'match_other_sections', 'enhance', 'remove_clutter', 'dedupe', 'transparent_primary_bg', 'person_ratio_50'"},
+            "text_spec": {"type": ["object", "null"], "_p": "pre text zmeny: {contains:[...], max_chars:int, tone:str}"}
+          }
+        },
+        "client_inputs_needed": {
+          "type": "array",
+          "items": {"type": "string"},
+          "_p": "co treba od klienta, aby sa dalo splnit (loga referencii, google_url, ceny, foto osoby...). Ak nepradzne -> status needs_input."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "applied", "verified", "unresolved", "needs_input", "skipped"],
+          "default": "pending",
+          "_p": "zivotny cyklus: pending->applied->verified; unresolved=nenaslo sa/nejednoznacne; needs_input=chyba klientsky vstup; skipped=vedome preskocene"
+        }
+      }
+    }
+  }
+}

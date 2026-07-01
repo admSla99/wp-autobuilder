@@ -1,0 +1,9 @@
+{
+  "name": "wp-autobuilder",
+  "description": "Autonómne poskladá WordPress stránky z podkladov klienta na Google Drive cez Elementor MCP — intake → farby → sloty → texty → médiá → QA → publish.",
+  "version": "1.4.0",
+  "author": {
+    "name": "admSla99",
+    "email": "netovapomoc6@gmail.com"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "wp-fixer",
+  "description": "Autonómny opravár už postaveného WordPress webu podľa pripomienok klienta — changeset → snapshot → cielené úpravy → QA + diff gate → uloženie naživo / rollback. Vyžaduje plugin wp-autobuilder.",
+  "version": "1.0.0",
+  "author": {
+    "name": "admSla99",
+    "email": "netovapomoc6@gmail.com"
+  }
+}
